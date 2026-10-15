@@ -1,0 +1,4 @@
+model,n,rmse,mae,r2,bias
+FAO-56 ET0,561,1.6439,1.1133,0.4736,0.9175
+Random Forest ML-only,561,0.5885,0.4116,0.8791,0.1252
+XGBoost ML-only,561,0.5955,0.3985,0.8793,0.1189
