@@ -48,11 +48,15 @@ def bias(obs, pred):
 
 
 def r2(obs, pred):
-    """Coefficient of determination as the squared Pearson correlation of obs and pred.
+    """Squared Pearson correlation between obs and pred, r^2.
 
-    This is not 1 - SS_res / SS_tot: that form equals NSE and is kept for a
-    separate metric. Returns NaN if fewer than two pairs remain or either
-    series is constant.
+    This is NOT sklearn.metrics.r2_score and NOT the Nash-Sutcliffe efficiency
+    (NSE): both of those are 1 - SS_res / SS_tot, which will be a separate
+    metric. r^2 only measures linear association and ignores systematic offset
+    or scale error (pred = obs + 5 gives r^2 = 1); use bias for the offset.
+
+    Returns NaN, without raising, if fewer than two pairs remain or either
+    series is constant (zero variance).
     """
     obs, pred = _valid_pairs(obs, pred)
     if obs.size < 2:
