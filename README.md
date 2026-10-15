@@ -65,9 +65,29 @@ tests/      automated tests
 config/     configuration examples (placeholders only)
 ```
 
-## Run and test
+## Train ML-only ET models
 
-Not available yet. Instructions will be added with the first runnable module (FAO-56, `src/ml`).
+From the repository root, reproduce the Random Forest and XGBoost training run with:
+
+```bash
+source .venv/bin/activate && pip install -r requirements.txt && python src/ml/train_ml.py
+```
+
+The script directly predicts daily `et_obs_mm` from meteorological features. It uses
+nested `TimeSeriesSplit` cross-validation without shuffling, tunes both models only on
+`data/processed/train.csv` from 2015--2022, and saves models under `models/` and CV
+reports under `reports/`. The held-out 2023--2024 test period is neither loaded nor
+used during training. The script stops with an error if the training data extends past
+2022-12-31.
+
+`precip_mm` comes from the AmeriFlux BASE `P_PI_F_1_1_1` hourly amounts, summed
+by day. The old FLUXNET `P_F` is not used because its 2015--2024 values were
+filled entirely from the unsuitable `P_ERA` series. `ws_ms` is the original
+mean FLUXNET `WS_F` measured at 6.2 m; conversion to 2 m belongs only to a
+FAO-56 ET0 calculation, not to this ML-only training pipeline. See
+[`data/README.md`](data/README.md) for provenance and rebuild instructions.
+
+## Other development commands
 
 Rebuild diagrams:
 
