@@ -23,8 +23,8 @@ The method is validated against eddy-covariance measurements (AmeriFlux US-Ne2).
 | | Role |
 |---|---|
 | Madiyar Amanzhol | FAO-56 model, evaluation |
-| [Teammate full name] | Data pipeline, ML models |
-| [Supervisor name] | Supervisor |
+| Aldiyar Amangeldi | Data pipeline, ML models |
+| Kuralay Makhmetova ] | Supervisor |
 
 ## Stack
 
