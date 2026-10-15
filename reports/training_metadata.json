@@ -1,0 +1,29 @@
+{
+  "seed": 42,
+  "features": [
+    "tmax_c",
+    "tmin_c",
+    "rh_mean_pct",
+    "ws_ms",
+    "rn_mj_m2_day",
+    "p_kpa",
+    "precip_mm",
+    "doy"
+  ],
+  "target": "et_obs_mm",
+  "actual_start_date": "2015-01-01",
+  "actual_end_date": "2022-12-31",
+  "row_count": 2407,
+  "cv_type": "nested TimeSeriesSplit",
+  "outer_folds": 5,
+  "inner_folds": 4,
+  "hyperparameter_search": "RandomizedSearchCV",
+  "search_iterations": 16,
+  "selection_metric": "MAE",
+  "uses_corrected_base_precipitation": true,
+  "precipitation_source": "AmeriFlux BASE P_PI_F_1_1_1",
+  "wind_speed_source": "FLUXNET WS_F",
+  "wind_measurement_height_m": 6.2,
+  "net_radiation_source": "FLUXNET NETRAD",
+  "integrated_variables_require_full_day": true
+}
