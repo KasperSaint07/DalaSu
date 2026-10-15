@@ -89,6 +89,17 @@ FAO-56 ET0 calculation, not to this ML-only training pipeline. See
 
 ## Other development commands
 
+Reproduce the held-out FAO-56 ET0 versus ML-only comparison, including model
+training and the generated report:
+
+```bash
+PYTHONPATH=src python3 -m ml.evaluation.compare_models --retrain
+```
+
+This writes `reports/comparison_metrics.csv` and
+`reports/fao56_ml_comparison.md`. The report documents decision D-1 and uses
+measured actual ET as the common target.
+
 Rebuild diagrams:
 
 ```
