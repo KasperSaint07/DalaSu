@@ -8,9 +8,9 @@ Machine learning irrigation advisor for small farms in Kazakhstan.
 
 ## About
 
-DalaSu estimates how much water a field loses to evapotranspiration and recommends when and how much to irrigate. It combines the FAO-56 Penman-Monteith water balance with machine learning (Random Forest, XGBoost), using Sentinel-2 NDVI and weather data. No soil-moisture sensors are needed.
+DalaSu estimates how much water a field loses to evapotranspiration and recommends when and how much to irrigate. It combines the FAO-56 Penman-Monteith water balance with machine learning (Random Forest, XGBoost), using weather data now and Sentinel-2 NDVI in the next phase. No soil-moisture sensors are needed.
 
-The method is validated against eddy-covariance measurements (AmeriFlux US-Ne2). The application targets smallholder farmers in southern Kazakhstan.
+The method is being validated against eddy-covariance measurements (AmeriFlux US-Ne2). The application targets smallholder farmers in southern Kazakhstan.
 
 ## Problem and users
 
