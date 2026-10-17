@@ -3,7 +3,7 @@
 Run from the repository root with:
     PYTHONPATH=src python3 -m ml.evaluation.compare_models
 
-Add ``--retrain`` to rebuild the deterministic ML artifacts before evaluation.
+Add ``--retrain`` to rebuild the ML artifacts before evaluation.
 """
 
 from __future__ import annotations
@@ -13,6 +13,7 @@ from pathlib import Path
 
 import joblib
 import pandas as pd
+from xgboost import XGBRegressor
 
 from ..fao56.baseline import WIND_HEIGHT_M, add_et0
 from ..train_ml import FEATURES, main as train_ml
@@ -29,7 +30,7 @@ EXPECTED_TEST_END = pd.Timestamp("2024-12-31")
 MODEL_FILES = {
     "FAO-56 ET0": None,
     "Random Forest ML-only": "random_forest.joblib",
-    "XGBoost ML-only": "xgboost.joblib",
+    "XGBoost ML-only": "xgboost.json",
 }
 
 
@@ -70,7 +71,12 @@ def compare_models(
                 raise FileNotFoundError(
                     f"Model not found: {model_path}. Re-run with --retrain."
                 )
-            predictions[label] = joblib.load(model_path).predict(test[FEATURES])
+            if filename == "xgboost.json":
+                model = XGBRegressor()
+                model.load_model(model_path)
+            else:
+                model = joblib.load(model_path)
+            predictions[label] = model.predict(test[FEATURES])
 
     rows = []
     for label in MODEL_FILES:
@@ -143,9 +149,21 @@ trained models, metrics CSV and this report with one command:
 PYTHONPATH=src python3 -m ml.evaluation.compare_models --retrain
 ```
 
+Windows PowerShell:
+
+```powershell
+$env:PYTHONPATH="src"; python -m ml.evaluation.compare_models --retrain
+```
+
+XGBoost reproduces within a tolerance of ±0.003 mm/day MAE; Random Forest
+matches exactly at the reported precision in the cross-environment audit.
+The audit observed XGBoost MAE 0.4014 versus 0.3985; this tolerance describes
+that observation, not a guarantee across every platform. XGBoost already uses
+`n_jobs=1`; the cause of the difference has not been established.
+
 The run uses fixed seed 42 and chronological nested time-series CV for model
 selection. Without retraining, omit `--retrain` to reproduce the table from the
-committed deterministic model artifacts. Outputs are
+committed model artifacts (`random_forest.joblib` and `xgboost.json`). Outputs are
 `reports/comparison_metrics.csv` and `reports/fao56_ml_comparison.md`.
 """
 

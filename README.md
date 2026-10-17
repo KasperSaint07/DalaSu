@@ -96,6 +96,16 @@ training and the generated report:
 PYTHONPATH=src python3 -m ml.evaluation.compare_models --retrain
 ```
 
+Windows PowerShell (after installing `requirements.txt`):
+
+```powershell
+$env:PYTHONPATH="src"; python -m ml.evaluation.compare_models --retrain
+```
+
+Omit `--retrain` to evaluate the committed `random_forest.joblib` and native
+`xgboost.json` models. XGBoost retraining has an observed MAE tolerance of
+±0.003 mm/day; Random Forest matches at the reported precision.
+
 This writes `reports/comparison_metrics.csv` and
 `reports/fao56_ml_comparison.md`. The report documents decision D-1 and uses
 measured actual ET as the common target.

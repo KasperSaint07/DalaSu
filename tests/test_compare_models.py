@@ -6,6 +6,7 @@ import joblib
 import numpy as np
 import pandas as pd
 import pytest
+from xgboost import XGBRegressor
 
 from ml.evaluation.compare_models import compare_models, render_report
 from ml.train_ml import FEATURES
@@ -37,11 +38,10 @@ def sample_test() -> pd.DataFrame:
 
 
 def test_compare_models_uses_same_observations(tmp_path: Path):
-    for filename, value in [
-        ("random_forest.joblib", 1.0),
-        ("xgboost.joblib", 3.0),
-    ]:
-        joblib.dump(ConstantModel(value), tmp_path / filename)
+    joblib.dump(ConstantModel(1.0), tmp_path / "random_forest.joblib")
+    xgb = XGBRegressor(n_estimators=1, max_depth=1, n_jobs=1, base_score=3.0)
+    xgb.fit(sample_test()[FEATURES], np.full(2, 3.0))
+    xgb.save_model(tmp_path / "xgboost.json")
 
     metrics = compare_models(sample_test(), tmp_path).set_index("model")
 
@@ -73,3 +73,12 @@ def test_report_states_d1_and_reproduction_command(tmp_path: Path):
     assert "ET0 without a crop coefficient" in report
     assert "PYTHONPATH=src python3 -m ml.evaluation.compare_models --retrain" in report
     assert "46.7% reduction" in report
+    assert '$env:PYTHONPATH="src"; python -m ml.evaluation.compare_models --retrain' in report
+    assert "±0.003" in report
+    assert "xgboost.json" in report
+
+
+def test_missing_native_xgboost_suggests_retraining(tmp_path: Path):
+    joblib.dump(ConstantModel(1.0), tmp_path / "random_forest.joblib")
+    with pytest.raises(FileNotFoundError, match=r"xgboost.json.*--retrain"):
+        compare_models(sample_test(), tmp_path)
