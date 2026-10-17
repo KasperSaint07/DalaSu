@@ -46,7 +46,19 @@ trained models, metrics CSV and this report with one command:
 PYTHONPATH=src python3 -m ml.evaluation.compare_models --retrain
 ```
 
+Windows PowerShell:
+
+```powershell
+$env:PYTHONPATH="src"; python -m ml.evaluation.compare_models --retrain
+```
+
+XGBoost reproduces within a tolerance of ±0.003 mm/day MAE; Random Forest
+matches exactly at the reported precision in the cross-environment audit.
+The audit observed XGBoost MAE 0.4014 versus 0.3985; this tolerance describes
+that observation, not a guarantee across every platform. XGBoost already uses
+`n_jobs=1`; the cause of the difference has not been established.
+
 The run uses fixed seed 42 and chronological nested time-series CV for model
 selection. Without retraining, omit `--retrain` to reproduce the table from the
-committed deterministic model artifacts. Outputs are
+committed model artifacts (`random_forest.joblib` and `xgboost.json`). Outputs are
 `reports/comparison_metrics.csv` and `reports/fao56_ml_comparison.md`.

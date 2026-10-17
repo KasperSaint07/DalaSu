@@ -267,7 +267,10 @@ def main() -> None:
         )
         final_search.fit(frame[FEATURES], frame[TARGET])
         final_best_params[model_name] = to_json_compatible(final_search.best_params_)
-        joblib.dump(final_search.best_estimator_, MODELS_DIR / f"{model_name}.joblib")
+        if model_name == "xgboost":
+            final_search.best_estimator_.save_model(MODELS_DIR / "xgboost.json")
+        else:
+            joblib.dump(final_search.best_estimator_, MODELS_DIR / f"{model_name}.joblib")
 
     fold_metrics = pd.DataFrame(all_fold_results)
     summary_metrics = aggregate_metrics(fold_metrics)
