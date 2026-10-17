@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dalasu"
+version = "0.1.0"
+description = "Machine learning irrigation advisor for small farms in Kazakhstan"
+readme = "README.md"
+requires-python = ">=3.11"
+# Pinned versions live in requirements.txt only.
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
