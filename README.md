@@ -4,7 +4,7 @@ Machine learning irrigation advisor for small farms in Kazakhstan.
 
 > Development of a machine learning-based application to optimize irrigation and assist small-scale farmers in Kazakhstan.
 
-**Status:** pre-defense 1 (analysis, design, planning). No runnable code yet.
+**Status:** pre-defense 1. FAO-56 baseline and ML-only models are implemented and compared on a held-out test period; documentation is being added to `docs/`.
 
 ## About
 
@@ -14,7 +14,7 @@ The method is validated against eddy-covariance measurements (AmeriFlux US-Ne2).
 
 ## Problem and users
 
-- **Problem:** small farms often irrigate by schedule or by eye, which wastes water or costs yield. Existing tools rely on sensors or paid subscriptions. Local practice is being confirmed through interviews (`docs/02-evidence-of-relevance.md`).
+- **Problem:** small farms often irrigate by schedule or by eye, which wastes water or costs yield. Existing tools rely on sensors or paid subscriptions.
 - **Users:** smallholder and medium farmers (primary); advisors and cooperatives (secondary).
 - **Expected outcomes:** a validated comparison of FAO-56, ML-only and hybrid models; a backend and mobile prototype; documentation and a paper draft.
 
@@ -24,53 +24,78 @@ The method is validated against eddy-covariance measurements (AmeriFlux US-Ne2).
 |---|---|
 | Madiyar Amanzhol | FAO-56 model, evaluation |
 | Aldiyar Amangeldi | Data pipeline, ML models |
-| Kuralay Makhmetova ] | Supervisor |
+| Kuralay Makhmetova | Supervisor |
 
-## Stack
+## Planned stack
 
 Python, FastAPI, PostgreSQL + PostGIS, Flutter, scikit-learn, XGBoost, Google Earth Engine, Open-Meteo, SoilGrids.
-Rationale: `docs/05-technology-comparison.md`, `docs/adr/`.
 
 ## Links
 
 - [Task tracker (YouTrack)](https://dalasu.youtrack.cloud/projects/DAL)
-- Prototype: [Figma link TBD] · wireframes in `docs/prototype/`
-- Diagrams: `diagrams/export/`
 
 ## Documentation
 
-| | | |
-|---|---|---|
-| 1 | Proposal | `docs/01-project-proposal.md` |
-| 2 | Evidence of relevance | `docs/02-evidence-of-relevance.md` |
-| 3 | Literature review | `docs/03-literature-review.md` |
-| 4 | Existing systems | `docs/04-existing-systems-comparison.md` |
-| 5 | Technology comparison | `docs/05-technology-comparison.md` |
-| 6 | Requirements | `docs/06-requirements.md` |
-| 7 | Architecture and diagrams | `docs/07-architecture.md` |
-| 8 | UX and prototype | `docs/08-ux-prototype.md` |
-| 9 | Verification plan | `docs/09-verification-and-evaluation-plan.md` |
-| 10 | Project management | `docs/10-project-management-and-risks.md` |
-| 11 | Supervisor feedback | `docs/11-supervisor-feedback.md` |
-
-Current status and known limitations: `docs/00-pre-defense-1-submission.md`.
+Documentation for pre-defense 1 is being added to `docs/`. Decision records are in `docs/adr/`.
 
 ## Structure
 
 ```
-docs/       documentation and ADRs
-diagrams/   src/ (PlantUML), export/ (PNG, SVG)
-src/        backend/, mobile/, ml/
-tests/      automated tests
-config/     configuration examples (placeholders only)
+data/              data provenance (README.md) and processed daily splits
+models/            trained ML-only models (random_forest.joblib, xgboost.json)
+reports/           generated metrics and comparison report
+src/ml/data/       daily dataset builder
+src/ml/evaluation/ metrics and FAO-56 vs ML comparison
+src/ml/fao56/      FAO-56 Penman-Monteith ET0 and baseline
+tests/             automated tests
+docs/adr/          architecture decision records
+requirements.txt   pinned dependencies
+pyproject.toml     package metadata for an editable install
 ```
+
+## Setup and tests
+
+Run all commands from the repository root.
+
+Windows PowerShell:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+pip install -e .
+python -m pytest
+```
+
+bash / macOS:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install -e .
+python -m pytest
+```
+
+After `pip install -e .` the commands below are the same on every OS and need no
+`PYTHONPATH`.
+
+## Run FAO-56 baseline
+
+```
+python -m ml.fao56.baseline
+```
+
+The metrics are written to `reports/baseline_metrics.csv`. Decision D-1 (ET0
+without a crop coefficient compared with measured actual ET) is described in
+[ADR 0004](docs/adr/0004-compare-et0-with-observed-et.md).
 
 ## Train ML-only ET models
 
-From the repository root, reproduce the Random Forest and XGBoost training run with:
+Reproduce the Random Forest and XGBoost training run with:
 
-```bash
-source .venv/bin/activate && pip install -r requirements.txt && python src/ml/train_ml.py
+```
+python -m ml.train_ml
 ```
 
 The script directly predicts daily `et_obs_mm` from meteorological features. It uses
@@ -87,34 +112,23 @@ mean FLUXNET `WS_F` measured at 6.2 m; conversion to 2 m belongs only to a
 FAO-56 ET0 calculation, not to this ML-only training pipeline. See
 [`data/README.md`](data/README.md) for provenance and rebuild instructions.
 
-## Other development commands
+## Compare FAO-56 and ML-only models
 
 Reproduce the held-out FAO-56 ET0 versus ML-only comparison, including model
 training and the generated report:
 
-```bash
-PYTHONPATH=src python3 -m ml.evaluation.compare_models --retrain
+```
+python -m ml.evaluation.compare_models --retrain
 ```
 
-Windows PowerShell (after installing `requirements.txt`):
-
-```powershell
-$env:PYTHONPATH="src"; python -m ml.evaluation.compare_models --retrain
-```
-
-Omit `--retrain` to evaluate the committed `random_forest.joblib` and native
-`xgboost.json` models. XGBoost retraining has an observed MAE tolerance of
-±0.003 mm/day; Random Forest matches at the reported precision.
+`--retrain` takes about 18 minutes. Omit `--retrain` to evaluate the committed
+`random_forest.joblib` and native `xgboost.json` models. XGBoost retraining has
+an observed MAE tolerance of ±0.003 mm/day; Random Forest matches at the
+reported precision.
 
 This writes `reports/comparison_metrics.csv` and
 `reports/fao56_ml_comparison.md`. The report documents decision D-1 and uses
 measured actual ET as the common target.
-
-Rebuild diagrams:
-
-```
-cd diagrams && java -jar plantuml.jar -tpng -o ../export src/*.puml
-```
 
 ## Contributing
 
