@@ -6,7 +6,42 @@ The processed daily dataset covers 2015--2024 and is split chronologically:
 - `train.csv`: 2015--2022, used for model selection and fitting;
 - `test.csv`: 2023--2024, held out from training and hyperparameter tuning.
 
+## Source, license and citation
+
+Source: [AmeriFlux US-Ne2 — Mead irrigated maize-soybean rotation site](https://ameriflux.lbl.gov/sites/siteinfo/US-Ne2).
+Data are licensed under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/).
+The station page lists these dataset citations (checked 2026-10-17):
+
+- Andy Suyker (2026), *AmeriFlux FLUXNET-1F US-Ne2 Mead - irrigated maize-soybean rotation site*, Ver. v1.3_r1, AmeriFlux AMP, Dataset. [DOI: 10.17190/AMF/2574638](https://doi.org/10.17190/AMF/2574638).
+- Andy Suyker (2025), *AmeriFlux BASE US-Ne2 Mead - irrigated maize-soybean rotation site*, Ver. 19-5, AmeriFlux AMP, Dataset. [DOI: 10.17190/AMF/1246085](https://doi.org/10.17190/AMF/1246085).
+
+These are the citations currently published by the station; original download
+version metadata is not committed. Retain the downloaded product metadata when
+rebuilding. Daily aggregation and chronological splitting are project transformations.
+
 ## Source variables
+
+| Source column | Product | Use in daily output |
+|---|---|---|
+| `LE_F_MDS` | FLUXNET | Latent heat flux (W/m²), integrated and divided by 2.45 MJ/kg to obtain `et_obs_mm` |
+| `NETRAD` | FLUXNET | Net radiation (W/m²), integrated to `rn_mj_m2_day` |
+| `TA_F_MDS` | FLUXNET | Air temperature (°C), daily extrema `tmax_c`, `tmin_c` |
+| `RH` | FLUXNET | Relative humidity (%), time-weighted mean `rh_mean_pct` |
+| `PA_F` | FLUXNET | Air pressure (kPa), time-weighted mean `p_kpa` |
+| `WS_F` | FLUXNET | Wind speed (m/s), time-weighted mean `ws_ms` |
+| `P_PI_F_1_1_1` | BASE | Hourly precipitation (mm), daily sum `precip_mm` |
+
+Both products also use `TIMESTAMP_START` and `TIMESTAMP_END` to calculate
+interval duration and daily coverage; `date` and `doy` are derived from timestamps.
+
+## Quality flags
+
+The builder does not read or filter on `*_QC`: it retains supplied filled values
+and rejects days by valid temporal coverage (≥80% for means and extrema;
+100% for LE, NETRAD and precipitation). This checks completeness, not measurement
+quality, and does not distinguish measured intervals from gap-filled intervals.
+
+## Aggregation details
 
 Daily evapotranspiration and meteorological variables are aggregated from the
 AmeriFlux US-Ne2 FLUXNET hourly file. Precipitation is sourced separately from
