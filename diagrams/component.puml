@@ -1,0 +1,54 @@
+@startuml
+title Component Diagram — DalaSu
+
+top to bottom direction
+skinparam shadowing false
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam defaultTextAlignment center
+
+rectangle "«actor»\nFarmer / Agronomist" as Farmer #F5F5F5
+rectangle "«actor»\nResearcher" as Researcher #F5F5F5
+
+package "DalaSu" {
+  component "User Interface\nKZ/RU localization [optional FR-13]" as UI
+  component "Application Service\nfield [FR-09] · journal [optional FR-10]\nalerts and season view [optional FR-11–FR-12]" as App
+
+  component "Irrigation Calculation Core [FR-05–FR-08]\nFAO-56 · Kc · Dr · fallback" as Core
+  component "ML Research Pipeline [FR-01–FR-04, optional FR-14]\nRF · XGBoost · hybrid residual correction\ntime-aware CV · evaluation · SHAP" as ML
+
+  component "Data Gateway\nvalidation · daily aggregation · source adapters" as Gateway
+  database "Operational Data\nfields · crops · irrigation log" as OperationalData
+  folder "Research Artifacts\ndatasets · models · metrics" as Artifacts
+}
+
+cloud "Environmental Sources\nOpen-Meteo · Sentinel-2 · SoilGrids" as Sources
+cloud "AmeriFlux US-Ne2" as AmeriFlux
+cloud "Push Provider" as Push
+
+Farmer --> UI : Uses application
+Researcher --> UI : Runs experiments
+UI ..> App : Requests
+
+App ..> Core : Calculate recommendation
+App ..> ML : Train / compare models
+App ..> OperationalData : Manage field data
+App ..> Push : Send alert
+
+Core ..> Gateway : Weather, NDVI and soil
+Core ..> OperationalData : Field and irrigation history
+Core ..> Artifacts : Approved model
+
+ML ..> Gateway : Training and validation data
+ML ..> Artifacts : Models, RMSE/R² and SHAP
+
+Gateway ..> Sources
+Gateway ..> AmeriFlux
+
+note bottom of Artifacts
+  Technology-neutral architecture.
+  Fixed seed; test data excluded from tuning.
+  FR-15 is outside the current release.
+end note
+
+@enduml

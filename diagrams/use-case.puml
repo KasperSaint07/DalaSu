@@ -1,0 +1,61 @@
+@startuml
+title Use Case Diagram — DalaSu
+
+left to right direction
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor #F7F9FC
+  BorderColor #455A64
+  BackgroundColor<<optional>> #FFF8E1
+  BorderColor<<optional>> #B28704
+}
+
+rectangle "«actor»\nFarmer / Agronomist" as Farmer #F5F5F5
+rectangle "«actor»\nResearcher" as Researcher #F5F5F5
+
+rectangle "DalaSu" {
+  usecase "Manage field profile\nFR-09" as ManageField
+  usecase "Record irrigation\nFR-10" as IrrigationLog <<optional>>
+  usecase "Get irrigation\nrecommendation\nFR-05–FR-08" as Recommend
+  usecase "Receive irrigation alert\nFR-11" as Alert <<optional>>
+  usecase "View season analytics\nFR-12" as Season <<optional>>
+  usecase "Select KZ/RU language\nFR-13" as Language <<optional>>
+
+  usecase "Run and compare ET models\nFAO-56 · RF/XGBoost · hybrid\nFR-01–FR-04" as Experiment
+  usecase "Explain model result\nFR-14" as Explain <<optional>>
+}
+
+Farmer --> ManageField
+Farmer --> IrrigationLog
+Farmer --> Recommend
+Farmer --> Alert
+Farmer --> Season
+Farmer --> Language
+
+Researcher --> Experiment
+Researcher --> Explain
+
+Explain ..> Experiment : <<extend>>\n[explanation requested]
+
+note right of Recommend
+  Includes ET₀, ETc, root-zone balance
+  and FAO-56 fallback if Sentinel-2
+  is older than five days.
+end note
+
+note bottom of Experiment
+  FAO-56 baseline, ML-only RF/XGBoost and
+  hybrid residual correction;
+  time-aware validation with RMSE and R².
+end note
+
+legend left
+  Must: FR-01–FR-04
+  Should: FR-05–FR-09
+  Could: FR-10–FR-14
+  Won't: FR-15
+  Yellow use cases are optional.
+endlegend
+
+@enduml
