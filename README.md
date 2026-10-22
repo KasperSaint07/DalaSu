@@ -28,7 +28,9 @@ The method is being validated against eddy-covariance measurements (AmeriFlux US
 
 ## Planned stack
 
-Python, FastAPI, PostgreSQL + PostGIS, Flutter, scikit-learn, XGBoost, Google Earth Engine, Open-Meteo, SoilGrids.
+Python, FastAPI, PostgreSQL, Flutter, scikit-learn, XGBoost, Google Earth Engine, Open-Meteo, SoilGrids. PostGIS is an optional extension for future field geometry and spatial queries.
+
+FastAPI, PostgreSQL, and Flutter were confirmed on 2026-10-22; application implementation is pending. See the [technology comparison](docs/05-technology-comparison.md) for alternatives and tradeoffs.
 
 ## Links
 
@@ -37,6 +39,12 @@ Python, FastAPI, PostgreSQL + PostGIS, Flutter, scikit-learn, XGBoost, Google Ea
 ## Documentation
 
 Documentation for pre-defense 1 is being added to `docs/`. Decision records are in `docs/adr/`.
+
+- [Technology comparison](docs/05-technology-comparison.md)
+- [ADR 0001: FastAPI backend](docs/adr/0001-use-fastapi-for-backend.md)
+- [ADR 0002: PostgreSQL storage](docs/adr/0002-use-postgresql-for-storage.md)
+- [ADR 0003: Flutter mobile client](docs/adr/0003-use-flutter-for-mobile.md)
+- [ADR 0004: ET0 versus observed actual ET](docs/adr/0004-compare-et0-with-observed-et.md)
 
 ## Structure
 
