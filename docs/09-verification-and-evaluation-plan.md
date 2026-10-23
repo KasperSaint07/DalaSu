@@ -123,4 +123,4 @@ Proposed design:
 | Response time measurement | Madiyar (backend) | After the API exists |
 | Field pilot | Both | After a pilot field is found |
 
-Owners follow the roles in [the proposal](../project-proposal.md) and are to be confirmed by the team.
+Owners follow the roles in [the proposal](01-project-proposal.md) and are to be confirmed and are to be confirmed by the team.
