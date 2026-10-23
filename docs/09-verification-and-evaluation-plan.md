@@ -11,7 +11,7 @@ This plan states how the project aim will be shown to be achieved: which checks 
 1. **Verification:** is the software built correctly (unit tests, reproducibility, requirement checks).
 2. **Evaluation:** does the method work well enough (model accuracy against the baseline, and later, usefulness to farmers).
 
-The scientific hypothesis from [the proposal](../project-proposal.md) is that a model using weather data predicts evapotranspiration more accurately than the plain FAO-56 calculation when compared with direct eddy covariance measurements (US-Ne2). It is a hypothesis, not a promise. If the result is different, it is reported as it is.
+The scientific hypothesis from [the proposal](01-project-proposal.md) is that a model using weather data predicts evapotranspiration more accurately than the plain FAO-56 calculation when compared with direct eddy covariance measurements (US-Ne2). It is a hypothesis, not a promise. If the result is different, it is reported as it is.
 
 ## 2. Baselines
 
