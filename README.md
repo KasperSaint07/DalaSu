@@ -52,7 +52,7 @@ Pre-defense 1 documents are in `docs/`. Diagram sources are in `diagrams/`. Deci
 | 4 | [Existing systems comparison](docs/04-existing-systems-comparison.md) |
 | 5 | [Technology comparison](docs/05-technology-comparison.md) |
 | 6 | [Requirements specification](docs/06-requirements.md) |
-| 7 | [Architecture and diagrams](docs/07-architecture.md) |
+| 7 | Architecture and diagrams |
 | 8 | [UX and prototype](docs/08-prototype.md) |
 | 9 | [Verification and evaluation plan](docs/09-verification-and-evaluation-plan.md) |
 | 10 | [Project management and risks](docs/10-project-management-and-risks.md) |
