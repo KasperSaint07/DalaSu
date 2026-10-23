@@ -59,15 +59,6 @@ Pre-defense 1 documents are in `docs/`. Diagram sources are in `diagrams/`. Deci
 | 11 | [Supervisor feedback](docs/11-supervisor-feedback.md) |
 
 
-Design file:
-https://www.figma.com/design/LNJk5OnjblriAknZx3etPN/
-
-Mobile prototype:
-https://www.figma.com/proto/LNJk5OnjblriAknZx3etPN/DalaSu?node-id=2-3324&starting-point-node-id=2%3A3324&scaling=scale-down
-
-Web prototype:
-https://www.figma.com/proto/LNJk5OnjblriAknZx3etPN/DalaSu?node-id=2-3660&starting-point-node-id=2%3A3660&scaling=scale-down
-
 Diagram sources (PlantUML) are in [`diagrams/`](diagrams/).
 
 - [ADR 0001: FastAPI backend](docs/adr/0001-use-fastapi-for-backend.md)
