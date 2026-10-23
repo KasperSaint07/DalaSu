@@ -10,7 +10,7 @@ This folder contains the PlantUML sources and current PNG/SVG exports for the pr
 
 ## Requirement coverage
 
-The source of truth is `16-requirementsRQ.md`. The incorrect system name in its heading (`SuAqyl`) is interpreted as **DalaSu** in these diagrams.
+The source of truth is `../docs/06-requirements.md`. The incorrect system name in its heading (`SuAqyl`) is interpreted as **DalaSu** in these diagrams.
 
 | ID | Priority | Requirement | Diagram coverage |
 |---|---|---|---|
