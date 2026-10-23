@@ -42,7 +42,7 @@ FastAPI, PostgreSQL, and Flutter were confirmed on 2026-10-22; application imple
 
 ## Documentation
 
-Pre-defense 1 documents are in `docs/` , `diagrams/` and figma links. Decision records are in `docs/adr/`.
+Pre-defense 1 documents are in `docs/`. Diagram sources are in `diagrams/`. Decision records are in `docs/adr/`.
 
 | # | Document |
 |---|---|
@@ -52,11 +52,11 @@ Pre-defense 1 documents are in `docs/` , `diagrams/` and figma links. Decision r
 | 4 | [Existing systems comparison](docs/04-existing-systems-comparison.md) |
 | 5 | [Technology comparison](docs/05-technology-comparison.md) |
 | 6 | [Requirements specification](docs/06-requirements.md) |
-| 7 | Architecture and diagrams |
-| 8 | UX and prototype |
+| 7 | [Architecture and diagrams](docs/07-architecture.md) |
+| 8 | [UX and prototype](docs/08-prototype.md) |
 | 9 | [Verification and evaluation plan](docs/09-verification-and-evaluation-plan.md) |
-| 10 | Project management and risks |
-| 11 | Supervisor feedback |
+| 10 | [Project management and risks](docs/10-project-management-and-risks.md) |
+| 11 | [Supervisor feedback](docs/11-supervisor-feedback.md) |
 
 
 Design file:
