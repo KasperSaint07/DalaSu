@@ -10,7 +10,7 @@ This document compares three technology choices for the planned DalaSu applicati
 
 The project owner confirmed **FastAPI + PostgreSQL + Flutter** on 2026-10-22. This records the agreed architecture, not a completed application. The repository currently contains Python data processing, FAO-56 calculations, trained Random Forest and XGBoost models, and evaluation code. The API, database integration, and mobile client remain planned.
 
-The assessment uses the [project proposal](../project-proposal.md), [requirements](../16-requirementsRQ.md), [README](../README.md), and official documentation listed below. Framework capabilities are documented facts; judgments about project fit and implementation effort are engineering assessments. No comparative latency, cost, or development-time benchmark was performed. There are no numerical rankings implying measured superiority.
+The assessment uses the [project proposal](01-project-proposal.md), [requirements](06-requirements.md), [README](../README.md), and official documentation listed below. Framework capabilities are documented facts; judgments about project fit and implementation effort are engineering assessments. No comparative latency, cost, or development-time benchmark was performed. There are no numerical rankings implying measured superiority.
 
 ## 2. Decision criteria
 
