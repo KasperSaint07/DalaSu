@@ -7,7 +7,13 @@ AmeriFlux US-Ne2. The evaluation uses the untouched 2023-01-01--2024-12-31 test 
 all models are scored on the same 561 daily observations. Random Forest
 and XGBoost were fitted on 2015--2022 only. Metrics use observations first and
 predictions second; positive bias means overestimation. Here `r²` is squared
-Pearson correlation, as implemented in `src/ml/evaluation/metrics.py`.
+Pearson correlation, as implemented in `src/ml/evaluation/metrics.py`; NSE is
+the Nash--Sutcliffe efficiency and KGE the Kling--Gupta efficiency (Gupta et
+al. 2009).
+
+Each model is read from `reports/predictions_<model>.csv` with columns
+`date,y_obs,y_pred`; the comparison stops with an error unless all files cover
+identical dates.
 
 **D-1: actual ET is the comparison target.** FAO-56 Penman--Monteith produces
 grass reference evapotranspiration ET0, not crop actual ET. We deliberately use
@@ -18,39 +24,38 @@ itself. Wind measured at 6.2 m is converted to 2 m with FAO-56 Eq. 47.
 
 ## Held-out metrics
 
-| Model | n | RMSE, mm/day | MAE, mm/day | r² | Bias, mm/day |
-|---|---:|---:|---:|---:|---:|
-| FAO-56 ET0 | 561 | 1.644 | 1.113 | 0.474 | 0.917 |
-| Random Forest ML-only | 561 | 0.588 | 0.412 | 0.879 | 0.125 |
-| XGBoost ML-only | 561 | 0.595 | 0.398 | 0.879 | 0.119 |
+| Model | File | n | RMSE, mm/day | MAE, mm/day | r² | Bias, mm/day | NSE | KGE |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| FAO-56 ET0 | `predictions_fao56_et0.csv` | 561 | 1.644 | 1.113 | 0.474 | 0.917 | -0.022 | 0.290 |
+| Random Forest ML-only | `predictions_random_forest.csv` | 561 | 0.588 | 0.412 | 0.879 | 0.125 | 0.869 | 0.894 |
+| XGBoost ML-only | `predictions_xgboost.csv` | 561 | 0.595 | 0.398 | 0.879 | 0.119 | 0.866 | 0.894 |
 
-Lower RMSE, MAE and absolute bias are better; higher `r²` is better.
+Lower RMSE, MAE and absolute bias are better; higher `r²`, NSE and KGE are
+better (NSE = KGE = 1 is a perfect fit). NSE below 0 means the model is worse
+than predicting the observed mean.
 
 ## Conclusion
 
 On the held-out period, **XGBoost ML-only** has the lowest MAE
 (0.398 mm/day), a 64.2% reduction relative to
-the FAO-56 ET0 baseline (1.113 mm/day). Both ML-only models
-also have substantially lower RMSE and bias and higher correlation with actual
-ET. FAO-56 ET0 overestimates actual ET on average (bias
-+0.917 mm/day), which is consistent with using reference ET0
-without seasonal crop coefficients. For this dataset, ML-only is the stronger
-predictor of actual ET; ET0 remains an interpretable physical reference.
+the FAO-56 ET0 baseline (1.113 mm/day). Models with lower RMSE
+than the baseline: Random Forest ML-only, XGBoost ML-only. FAO-56 ET0 overestimates actual ET on
+average (bias +0.917 mm/day, NSE -0.022), which
+is consistent with using reference ET0 without seasonal crop coefficients. ET0
+remains an interpretable physical reference.
 
 ## Reproduction
 
-From the repository root, after installing `requirements.txt`, regenerate the
-trained models, metrics CSV and this report with one command:
+From the repository root, after `pip install -r requirements.txt` and
+`pip install -e .`, regenerate the built-in prediction files, metrics CSV and
+this report from the committed models with one command:
 
-```bash
-PYTHONPATH=src python3 -m ml.evaluation.compare_models --retrain
+```
+python -m ml.evaluation.compare_models
 ```
 
-Windows PowerShell:
-
-```powershell
-$env:PYTHONPATH="src"; python -m ml.evaluation.compare_models --retrain
-```
+Add `--retrain` to retrain both ML-only models first (about 18 minutes), or
+`--from-files` to only read the existing `reports/predictions_*.csv` files.
 
 XGBoost reproduces within a tolerance of ±0.003 mm/day MAE; Random Forest
 matches exactly at the reported precision in the cross-environment audit.
@@ -59,6 +64,8 @@ that observation, not a guarantee across every platform. XGBoost already uses
 `n_jobs=1`; the cause of the difference has not been established.
 
 The run uses fixed seed 42 and chronological nested time-series CV for model
-selection. Without retraining, omit `--retrain` to reproduce the table from the
-committed model artifacts (`random_forest.joblib` and `xgboost.json`). Outputs are
-`reports/comparison_metrics.csv` and `reports/fao56_ml_comparison.md`.
+selection. Without `--retrain` the table comes from the committed model
+artifacts (`random_forest.joblib` and `xgboost.json`). Outputs are
+`reports/predictions_fao56_et0.csv`, `reports/predictions_random_forest.csv`,
+`reports/predictions_xgboost.csv`, `reports/comparison_metrics.csv` and
+`reports/fao56_ml_comparison.md`.
