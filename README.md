@@ -144,17 +144,30 @@ FAO-56 ET0 calculation, not to this ML-only training pipeline. See
 
 ## Compare FAO-56 and ML-only models
 
-Reproduce the held-out FAO-56 ET0 versus ML-only comparison, including model
-training and the generated report:
+Reproduce the held-out comparison from the committed
+`random_forest.joblib` and native `xgboost.json` models with one command:
 
 ```
-python -m ml.evaluation.compare_models --retrain
+python -m ml.evaluation.compare_models
 ```
 
-`--retrain` takes about 18 minutes. Omit `--retrain` to evaluate the committed
-`random_forest.joblib` and native `xgboost.json` models. XGBoost retraining has
-an observed MAE tolerance of ±0.003 mm/day; Random Forest matches at the
-reported precision.
+**Predictions contract.** Every model writes
+`reports/predictions_<model>.csv` with columns `date,y_obs,y_pred`: ISO dates
+(`YYYY-MM-DD`), observed `et_obs_mm` and the prediction in mm/day, one row per
+valid test day (561 rows for 2023–2024). The built-in files are
+`predictions_fao56_et0.csv`, `predictions_random_forest.csv` and
+`predictions_xgboost.csv`; create only them with
+`python -m ml.evaluation.predictions`. A new model, such as the hybrid, adds its
+own `predictions_<model>.csv` to `reports/` and is picked up automatically.
+
+`compare_models` first regenerates the three built-in files, then reads every
+`reports/predictions_*.csv`, stops with an error unless all files have the same
+dates and `y_obs`, and computes RMSE, MAE, r², bias, NSE and KGE per model.
+
+- `--retrain` retrains both ML-only models first (about 18 minutes) and then
+  regenerates their prediction files. XGBoost retraining has an observed MAE
+  tolerance of ±0.003 mm/day; Random Forest matches at the reported precision.
+- `--from-files` skips regeneration and only reads the existing files.
 
 This writes `reports/comparison_metrics.csv` and
 `reports/fao56_ml_comparison.md`. The report documents decision D-1 and uses
