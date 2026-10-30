@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "model_file": "hybrid_rf.joblib",
+  "use_et0_feature": false,
+  "features": [
+    "tmax_c",
+    "tmin_c",
+    "rh_mean_pct",
+    "ws_ms",
+    "rn_mj_m2_day",
+    "p_kpa",
+    "precip_mm",
+    "doy"
+  ],
+  "wind_height_m": 6.2,
+  "target": "et_obs_mm - et0_mm",
+  "prediction": "et0_mm + residual_pred_mm"
+}
