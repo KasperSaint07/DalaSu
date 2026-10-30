@@ -127,8 +127,11 @@ def test_training_pipeline_targets_residuals_and_exports_same_dates(tmp_path, mo
     training.run(models_dir=tmp_path / "models", reports_dir=tmp_path / "reports", use_et0_feature=enabled)
     assert len(fits) == 12  # Five outer searches plus final search, for both models.
     reference = pd.read_csv(PROJECT_ROOT / "data/processed/test.csv")
+    prefix = "hybrid_with_et0" if enabled else "hybrid"
     for name in ["rf", "xgb"]:
-        output = pd.read_csv(tmp_path / "reports" / f"predictions_hybrid_{name}.csv")
+        output = pd.read_csv(tmp_path / "reports" / f"predictions_{prefix}_{name}.csv")
         assert len(output) == 561
         pd.testing.assert_series_equal(output.date, reference.date)
-        np.testing.assert_allclose(output.et_pred_mm, output.et0_mm + output.residual_pred_mm)
+        assert list(output.columns) == ["date", "y_obs", "y_pred"]
+        components = pd.read_csv(tmp_path / "reports" / f"components_{prefix}_{name}.csv")
+        np.testing.assert_allclose(output.y_pred, components.et0_mm + components.residual_pred_mm)

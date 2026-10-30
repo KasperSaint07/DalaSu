@@ -1,4 +1,4 @@
-# FAO-56 baseline and ML-only comparison
+# FAO-56, ML-only and Hybrid comparison
 
 ## Setup and decision D-1
 
@@ -29,6 +29,10 @@ itself. Wind measured at 6.2 m is converted to 2 m with FAO-56 Eq. 47.
 | FAO-56 ET0 | `predictions_fao56_et0.csv` | 561 | 1.644 | 1.113 | 0.474 | 0.917 | -0.022 | 0.290 |
 | Random Forest ML-only | `predictions_random_forest.csv` | 561 | 0.588 | 0.412 | 0.879 | 0.125 | 0.869 | 0.894 |
 | XGBoost ML-only | `predictions_xgboost.csv` | 561 | 0.595 | 0.398 | 0.879 | 0.119 | 0.866 | 0.894 |
+| Hybrid + NDVI RF | `predictions_hybrid_ndvi_rf.csv` | 561 | 0.601 | 0.414 | 0.874 | 0.113 | 0.863 | 0.898 |
+| Hybrid + NDVI XGBoost | `predictions_hybrid_ndvi_xgb.csv` | 561 | 0.557 | 0.388 | 0.895 | 0.107 | 0.883 | 0.902 |
+| Hybrid v0 RF | `predictions_hybrid_rf.csv` | 561 | 0.624 | 0.432 | 0.863 | 0.104 | 0.852 | 0.899 |
+| Hybrid v0 XGBoost | `predictions_hybrid_xgb.csv` | 561 | 0.600 | 0.412 | 0.873 | 0.088 | 0.864 | 0.910 |
 
 Lower RMSE, MAE and absolute bias are better; higher `r²`, NSE and KGE are
 better (NSE = KGE = 1 is a perfect fit). NSE below 0 means the model is worse
@@ -36,10 +40,10 @@ than predicting the observed mean.
 
 ## Conclusion
 
-On the held-out period, **XGBoost ML-only** has the lowest MAE
-(0.398 mm/day), a 64.2% reduction relative to
+On the held-out period, **Hybrid + NDVI XGBoost** has the lowest MAE
+(0.388 mm/day), a 65.2% reduction relative to
 the FAO-56 ET0 baseline (1.113 mm/day). Models with lower RMSE
-than the baseline: Random Forest ML-only, XGBoost ML-only. FAO-56 ET0 overestimates actual ET on
+than the baseline: Random Forest ML-only, XGBoost ML-only, Hybrid + NDVI RF, Hybrid + NDVI XGBoost, Hybrid v0 RF, Hybrid v0 XGBoost. FAO-56 ET0 overestimates actual ET on
 average (bias +0.917 mm/day, NSE -0.022), which
 is consistent with using reference ET0 without seasonal crop coefficients. ET0
 remains an interpretable physical reference.

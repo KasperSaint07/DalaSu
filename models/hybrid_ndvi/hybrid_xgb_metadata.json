@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "extra_features": [
+    "ndvi_last",
+    "ndvi_age_days"
+  ],
+  "serialization": "joblib",
+  "model_file": "hybrid_xgb.joblib",
+  "use_et0_feature": false,
+  "features": [
+    "tmax_c",
+    "tmin_c",
+    "rh_mean_pct",
+    "ws_ms",
+    "rn_mj_m2_day",
+    "p_kpa",
+    "precip_mm",
+    "doy",
+    "ndvi_last",
+    "ndvi_age_days"
+  ],
+  "wind_height_m": 6.2,
+  "target": "et_obs_mm - et0_mm",
+  "prediction": "et0_mm + residual_pred_mm"
+}

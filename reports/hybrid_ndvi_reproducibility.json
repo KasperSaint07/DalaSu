@@ -1,0 +1,113 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "model": "hybrid_ndvi_rf",
+      "metric": "mae",
+      "first": 0.41445869930608303,
+      "second": 0.41445869930608303,
+      "absolute_difference": 0.0,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "model": "hybrid_ndvi_rf",
+      "metric": "rmse",
+      "first": 0.6010380002871447,
+      "second": 0.6010380002871447,
+      "absolute_difference": 0.0,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "model": "hybrid_ndvi_rf",
+      "metric": "bias",
+      "first": 0.11297020149099588,
+      "second": 0.11297020149099588,
+      "absolute_difference": 0.0,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "model": "hybrid_ndvi_rf",
+      "metric": "r2",
+      "first": 0.8741585777651182,
+      "second": 0.8741585777651182,
+      "absolute_difference": 0.0,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "model": "hybrid_ndvi_rf",
+      "metric": "nse",
+      "first": 0.8633402501657255,
+      "second": 0.8633402501657255,
+      "absolute_difference": 0.0,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "model": "hybrid_ndvi_rf",
+      "metric": "kge",
+      "first": 0.8981761964462837,
+      "second": 0.8981761964462837,
+      "absolute_difference": 0.0,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "model": "hybrid_ndvi_xgb",
+      "metric": "mae",
+      "first": 0.38775323187613314,
+      "second": 0.38775323187613314,
+      "absolute_difference": 0.0,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "model": "hybrid_ndvi_xgb",
+      "metric": "rmse",
+      "first": 0.556918011420801,
+      "second": 0.556918011420801,
+      "absolute_difference": 0.0,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "model": "hybrid_ndvi_xgb",
+      "metric": "bias",
+      "first": 0.10687216347635713,
+      "second": 0.10687216347635713,
+      "absolute_difference": 0.0,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "model": "hybrid_ndvi_xgb",
+      "metric": "r2",
+      "first": 0.8949979663448204,
+      "second": 0.8949979663448204,
+      "absolute_difference": 0.0,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "model": "hybrid_ndvi_xgb",
+      "metric": "nse",
+      "first": 0.8826672398809481,
+      "second": 0.8826672398809481,
+      "absolute_difference": 0.0,
+      "tolerance": 1e-06,
+      "passed": true
+    },
+    {
+      "model": "hybrid_ndvi_xgb",
+      "metric": "kge",
+      "first": 0.9023710757544933,
+      "second": 0.9023710757544933,
+      "absolute_difference": 0.0,
+      "tolerance": 1e-06,
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "seed": 42,
+  "features": [
+    "tmax_c",
+    "tmin_c",
+    "rh_mean_pct",
+    "ws_ms",
+    "rn_mj_m2_day",
+    "p_kpa",
+    "precip_mm",
+    "doy",
+    "ndvi_last",
+    "ndvi_age_days"
+  ],
+  "use_ndvi": true,
+  "missing_policy": "fold-local median",
+  "use_et0_feature": false,
+  "training_start": "2015-01-01",
+  "training_end": "2022-12-31",
+  "training_rows": 2407,
+  "test_rows": 561,
+  "outer_splits": 5,
+  "inner_splits": 4,
+  "search_iterations": 16,
+  "selection_metric": "MAE",
+  "best_params": {
+    "rf": {
+      "model__n_estimators": 200,
+      "model__min_samples_split": 4,
+      "model__min_samples_leaf": 1,
+      "model__max_features": "sqrt",
+      "model__max_depth": 24
+    },
+    "xgb": {
+      "model__subsample": 0.85,
+      "model__reg_lambda": 5.0,
+      "model__n_estimators": 400,
+      "model__min_child_weight": 8,
+      "model__max_depth": 8,
+      "model__learning_rate": 0.03,
+      "model__colsample_bytree": 0.85
+    }
+  },
+  "wind_height_m": 6.2,
+  "versions": {
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.4.1",
+    "joblib": "1.6.0"
+  },
+  "data_sha256": {
+    "train": "b2acc3e75521d5b727c2f72abf6874311d27040f3ae1c6c82b2d1cefc91573b3",
+    "test": "659b707ea19772a83eee90211bbae9b066768f309c292a56f0ba4fca1dda5f8d"
+  },
+  "r2_definition": "Squared Pearson correlation; r2_score is sklearn coefficient of determination"
+}
