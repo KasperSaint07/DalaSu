@@ -100,3 +100,18 @@ coverage; this prevents missing intervals from being treated as zero. Duplicate
 source intervals are rejected. The builder converts `-9999` to missing values
 in memory, orders output by date, and creates the train/test split without
 overlap.
+
+## Backward-only NDVI features (DAL-30)
+
+Build the enriched dataset in one command from the repository root:
+
+```bash
+python src/ml/data/build_ndvi.py
+```
+
+Outputs are `data/processed/ndvi/daily.csv`, `train.csv`, `test.csv`, and
+`ndvi_build_report.json`. The original daily data remain unchanged. Added columns
+are `ndvi_last`, `ndvi_age_days`, `snapshot_date`, and `ndvi_image_id`.
+Before 2015-01-16 these fields are empty; 13 retained rows lack a prior snapshot.
+No future filling or interpolation is used. The maximum observed age is 207 days.
+See [DAL-30 policy, architecture and full rebuild](../docs/13-ndvi-features.md).

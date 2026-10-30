@@ -1,0 +1,17 @@
+{
+  "policy_version": "DAL-30-v1",
+  "site_id": "US-Ne2",
+  "utc_offset_hours": -6,
+  "inputs": {
+    "data/processed/daily.csv": "d2ad1faa34ca4785a2cc1cc9999fd92683dd7361383e828165dd2c2a874309cd",
+    "data/raw/ndvi_us-ne2_landsat_2015_2024.csv": "f76e598175f43141b512ec3e9380ee60a78a6cabe1838afb3a56f168e243d798"
+  },
+  "rows": {
+    "daily": 2968,
+    "train": 2407,
+    "test": 561
+  },
+  "missing_ndvi_rows": 13,
+  "first_usable_snapshot": "2015-01-16",
+  "max_age_days": 207
+}

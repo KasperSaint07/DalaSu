@@ -241,10 +241,10 @@ def build_daily(
     return output, stats
 
 
-def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
+def write_csv(path: Path, rows: list[dict[str, str]], columns=None) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=OUTPUT_COLUMNS, lineterminator="\n")
+        writer = csv.DictWriter(handle, fieldnames=columns or OUTPUT_COLUMNS, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
@@ -266,9 +266,31 @@ def main() -> None:
         help="AmeriFlux BASE_HR CSV containing P_PI_F_1_1_1",
     )
     parser.add_argument("--output-dir", type=Path, default=Path("data/processed"))
+    parser.add_argument("--ndvi-input", type=Path)
+    parser.add_argument("--site-id", default="US-Ne2")
+    parser.add_argument("--utc-offset-hours", type=float, default=-6)
     args = parser.parse_args()
 
+    if __package__:
+        from .validation import validate_output_paths
+    else:
+        from validation import validate_output_paths
+    validate_output_paths(
+        [args.fluxnet_input, args.precip_input] + ([args.ndvi_input] if args.ndvi_input else []),
+        [args.output_dir / name for name in ("daily.csv", "train.csv", "test.csv")],
+    )
     rows, stats = build_daily(args.fluxnet_input, args.precip_input)
+    columns = list(OUTPUT_COLUMNS)
+    if args.ndvi_input:
+        if __package__:
+            from .ndvi import FEATURE_COLUMNS, attach_ndvi, load_observations
+        else:
+            from ndvi import FEATURE_COLUMNS, attach_ndvi, load_observations
+        observations = load_observations(args.ndvi_input, utc_offset_hours=args.utc_offset_hours)
+        if not any(obs.site_id == args.site_id for obs in observations):
+            raise ValueError(f"No usable NDVI observations for {args.site_id}")
+        rows = attach_ndvi(rows, observations, site_id=args.site_id)
+        columns += FEATURE_COLUMNS
     train = [row for row in rows if START_DATE <= row["date"] <= TRAIN_END]
     test = [row for row in rows if TEST_START <= row["date"] <= END_DATE]
 
@@ -277,9 +299,9 @@ def main() -> None:
     if train and test and train[-1]["date"] >= test[0]["date"]:
         raise RuntimeError("Train/test date ranges overlap")
 
-    write_csv(args.output_dir / "daily.csv", rows)
-    write_csv(args.output_dir / "train.csv", train)
-    write_csv(args.output_dir / "test.csv", test)
+    write_csv(args.output_dir / "daily.csv", rows, columns)
+    write_csv(args.output_dir / "train.csv", train, columns)
+    write_csv(args.output_dir / "test.csv", test, columns)
 
     print(f"candidate_days={stats['candidate_days']}")
     print(f"retained_days={stats['retained_days']}")
