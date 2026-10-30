@@ -1,5 +1,19 @@
 # US-Ne2 processed data
 
+## Satellite NDVI (DAL-29)
+
+The Landsat 8/9 export script is `scripts/gee/export_ndvi_us_ne2.js`.
+See [source selection and reproduction instructions](../docs/12-ndvi-source-selection.md).
+The script uses the user-supplied US-Ne2 point and a 100 m approximate buffer,
+exports per-scene NDVI for 2015–2024, annual coverage and geometry/run metadata.
+The export completed on 2026-10-30: 475 scenes, 280 usable scenes and 142 unique
+usable dates. The unchanged scene CSV is `data/raw/ndvi_us-ne2_landsat_2015_2024.csv`;
+annual coverage is `reports/ndvi_coverage_by_year.csv` and geometry/run metadata is
+`data/geo/ndvi_us_ne2_run_metadata.geojson`. See `reports/ndvi_coverage.md` for results
+and limitations. Recheck with `python3 scripts/validate_ndvi.py` (standard library).
+The existing daily weather/ET files below are unchanged; no NDVI interpolation or
+model integration is performed by this export.
+
 The processed daily dataset covers 2015--2024 and is split chronologically:
 
 - `daily.csv`: all retained daily records from 2015--2024;
