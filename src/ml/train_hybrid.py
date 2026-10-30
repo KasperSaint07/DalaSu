@@ -11,10 +11,13 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import r2_score
 from sklearn.model_selection import TimeSeriesSplit
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
 
-from .evaluation.compare_models import load_test_data
 from .evaluation.metrics import evaluate
-from .hybrid import HybridPredictor, prepare_features
+from .hybrid_experiment import HybridExperiment
+from .hybrid import HybridPredictor, prepare_features, NDVI_FEATURES
+from .evaluation.predictions import load_test_data, write_predictions
 from .train_ml import (
     FEATURES, SEED, N_OUTER_SPLITS, N_INNER_SPLITS, N_SEARCH_ITERATIONS,
     PROJECT_ROOT, TRAIN_PATH, assert_chronological_split,
@@ -29,8 +32,12 @@ def checked_splits(dates, n_splits):
     return splits
 
 
-def train_model(frame, estimator, parameter_space, use_et0_feature=False):
-    features, et0 = prepare_features(frame, use_et0_feature)
+def train_model(frame, estimator, parameter_space, use_et0_feature=False, extra_features=()):
+    features, et0 = prepare_features(frame, use_et0_feature, extra_features)
+    if extra_features:
+        estimator = Pipeline([("imputer", SimpleImputer(strategy="median", keep_empty_features=True)),
+                              ("model", estimator)])
+        parameter_space = {f"model__{key}": value for key, value in parameter_space.items()}
     residual = frame["et_obs_mm"] - et0
     dates = frame["date"]
     folds = []
@@ -51,7 +58,7 @@ def train_model(frame, estimator, parameter_space, use_et0_feature=False):
     print("  Final four-fold search on all training data", flush=True)
     final = make_search(estimator, parameter_space, checked_splits(dates, N_INNER_SPLITS))
     final.fit(features, residual)
-    return HybridPredictor(final.best_estimator_, use_et0_feature), folds, final.best_params_
+    return HybridPredictor(final.best_estimator_, use_et0_feature, extra_features), folds, final.best_params_
 
 
 def validate_test(frame, reference):
@@ -62,18 +69,29 @@ def validate_test(frame, reference):
         raise ValueError("Test observations must be finite")
 
 
-def run(train_path=TRAIN_PATH, test_path=PROJECT_ROOT / "data/processed/test.csv",
-        models_dir=PROJECT_ROOT / "models", reports_dir=PROJECT_ROOT / "reports",
-        use_et0_feature=False):
-    train_path, test_path = Path(train_path), Path(test_path)
-    models_dir, reports_dir = Path(models_dir), Path(reports_dir)
+def run(train_path=None, test_path=None,
+        models_dir=None, reports_dir=None,
+        use_et0_feature=False, use_ndvi=False):
+    experiment = HybridExperiment(use_ndvi=use_ndvi, use_et0_feature=use_et0_feature)
+    data_dir = experiment.data_dir(PROJECT_ROOT)
+    train_path = Path(train_path) if train_path is not None else data_dir / "train.csv"
+    test_path = Path(test_path) if test_path is not None else data_dir / "test.csv"
+    models_dir = Path(models_dir) if models_dir is not None else experiment.models_dir(PROJECT_ROOT)
+    reports_dir = (Path(reports_dir) if reports_dir is not None else
+                   experiment.reports_dir(PROJECT_ROOT))
+    extra_features = NDVI_FEATURES if use_ndvi else ()
+    prefix = experiment.name
     frame = load_and_validate_training_data(train_path)
+    if use_ndvi:
+        canonical = load_and_validate_training_data(TRAIN_PATH)
+        pd.testing.assert_frame_equal(frame[canonical.columns], canonical, check_exact=True)
+        prepare_features(frame, use_et0_feature, extra_features)
     reports_dir.mkdir(parents=True, exist_ok=True)
     folds, parameters, fitted = [], {}, {}
     for model_name, (estimator, space) in model_specs().items():
         name = {"random_forest": "rf", "xgboost": "xgb"}[model_name]
         print(f"Training hybrid {name}", flush=True)
-        model, results, best = train_model(frame, estimator, space, use_et0_feature)
+        model, results, best = train_model(frame, estimator, space, use_et0_feature, extra_features)
         model.save(models_dir, name)
         fitted[name] = model
         parameters[name] = to_json_compatible(best)
@@ -82,22 +100,25 @@ def run(train_path=TRAIN_PATH, test_path=PROJECT_ROOT / "data/processed/test.csv
     test = load_test_data(test_path)
     reference = load_test_data(PROJECT_ROOT / "data/processed/test.csv")
     validate_test(test, reference)
+    pd.testing.assert_frame_equal(test[reference.columns], reference, check_exact=True)
     metrics = []
     for name, model in fitted.items():
         restored = HybridPredictor.load(models_dir, name)
         components = restored.predict_components(test)
         np.testing.assert_allclose(components["et_pred_mm"], model.predict(test), rtol=1e-7, atol=1e-7)
         output = pd.concat([test[["date", "et_obs_mm"]], components], axis=1)
-        output.to_csv(reports_dir / f"predictions_hybrid_{name}.csv", index=False)
-        metrics.append({"model": f"Hybrid {name}", **evaluate(test["et_obs_mm"], components["et_pred_mm"])})
+        output.to_csv(reports_dir / f"components_{prefix}_{name}.csv", index=False)
+        write_predictions(test, {f"{prefix}_{name}": components["et_pred_mm"]}, reports_dir)
+        metrics.append({"model": f"{prefix}_{name}", **evaluate(test["et_obs_mm"], components["et_pred_mm"])})
     fold_frame = pd.DataFrame(folds)
-    fold_frame.to_csv(reports_dir / "hybrid_cv_fold_metrics.csv", index=False)
+    fold_frame.to_csv(reports_dir / f"{prefix}_cv_fold_metrics.csv", index=False)
     summary = fold_frame.groupby("model")[["mae", "rmse", "r2", "r2_score", "bias"]].agg(["mean", "std"])
     summary.columns = ["_".join(column) for column in summary.columns]
-    summary.to_csv(reports_dir / "hybrid_cv_metrics.csv")
+    summary.to_csv(reports_dir / f"{prefix}_cv_metrics.csv")
     metrics = pd.DataFrame(metrics)
-    metrics.to_csv(reports_dir / "hybrid_test_metrics.csv", index=False)
-    metadata = {"seed": SEED, "features": FEATURES + (["et0_mm"] if use_et0_feature else []),
+    metrics.to_csv(reports_dir / f"{prefix}_test_metrics.csv", index=False)
+    metadata = {"seed": SEED, "features": FEATURES + (["et0_mm"] if use_et0_feature else []) + list(extra_features),
+                "use_ndvi": use_ndvi, "missing_policy": "fold-local median" if use_ndvi else "reject",
                 "use_et0_feature": use_et0_feature, "training_start": str(frame.date.min().date()),
                 "training_end": str(frame.date.max().date()), "training_rows": len(frame),
                 "test_rows": len(test), "outer_splits": N_OUTER_SPLITS, "inner_splits": N_INNER_SPLITS,
@@ -115,13 +136,12 @@ def run(train_path=TRAIN_PATH, test_path=PROJECT_ROOT / "data/processed/test.csv
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--use-et0-feature", action="store_true")
+    parser.add_argument("--use-ndvi", action="store_true")
     parser.add_argument("--models-dir", type=Path)
     parser.add_argument("--reports-dir", type=Path)
     args = parser.parse_args(argv)
-    suffix = "hybrid_with_et0" if args.use_et0_feature else ""
-    run(models_dir=args.models_dir or PROJECT_ROOT / "models" / suffix,
-        reports_dir=args.reports_dir or PROJECT_ROOT / "reports" / suffix,
-        use_et0_feature=args.use_et0_feature)
+    run(models_dir=args.models_dir, reports_dir=args.reports_dir,
+        use_et0_feature=args.use_et0_feature, use_ndvi=args.use_ndvi)
 
 
 if __name__ == "__main__":

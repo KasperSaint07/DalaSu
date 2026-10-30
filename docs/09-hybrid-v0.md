@@ -61,7 +61,8 @@ Default artifacts:
 - `models/hybrid_metadata.json`: run dates, seed, search settings, best parameters,
   dependency versions and input SHA-256 hashes.
 - `reports/predictions_hybrid_rf.csv`, `reports/predictions_hybrid_xgb.csv`:
-  `date, et_obs_mm, et0_mm, residual_pred_mm, et_pred_mm`, one row per test day.
+  `date,y_obs,y_pred`, one row per test day (DAL-31 aligns export with DAL-25).
+  Diagnostic ET0 and residual components are in `reports/components_hybrid_*.csv`.
 - `reports/hybrid_cv_fold_metrics.csv`, `reports/hybrid_cv_metrics.csv`:
   fold metrics/parameters and aggregate mean/sample standard deviation.
 - `reports/hybrid_test_metrics.csv`: held-out scores.
@@ -85,3 +86,9 @@ Tests cover reconstruction without observed ET, negative residuals, wind
 conversion, feature modes, RF/XGBoost serialization, cutoff rejection, both
 levels of temporal CV, holdout dates and nonfinite inputs. Full hyperparameter
 searches are deliberately excluded from the fast unit test suite.
+
+ET0-feature exports use the experiment prefix `hybrid_with_et0` (for example,
+`predictions_hybrid_with_et0_rf.csv`) both during training and when using
+`python -m ml.evaluation.export_hybrid --models-dir models/hybrid_with_et0`.
+The exporter selects `reports/hybrid_with_et0/` by default from model metadata.
+An explicit reports-directory override preserves the distinct filenames.

@@ -40,6 +40,10 @@ MODEL_LABELS = {
     BASELINE_MODEL: "FAO-56 ET0",
     "random_forest": "Random Forest ML-only",
     "xgboost": "XGBoost ML-only",
+    "hybrid_rf": "Hybrid v0 RF",
+    "hybrid_xgb": "Hybrid v0 XGBoost",
+    "hybrid_ndvi_rf": "Hybrid + NDVI RF",
+    "hybrid_ndvi_xgb": "Hybrid + NDVI XGBoost",
 }
 
 __all__ = ["compare_models", "load_test_data", "render_report", "run", "main"]
@@ -86,7 +90,7 @@ def render_report(metrics: pd.DataFrame, dates: pd.Series) -> str:
     start = dates.min().date().isoformat()
     end = dates.max().date().isoformat()
 
-    return f"""# FAO-56 baseline and ML-only comparison
+    return f"""# FAO-56, ML-only and Hybrid comparison
 
 ## Setup and decision D-1
 

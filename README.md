@@ -179,3 +179,103 @@ measured actual ET as the common target.
 - Commits: `DAL-<n>: <description>`
 - Pull requests reference the task ID, describe how the change was checked, and are reviewed by the other team member.
 - No secrets or personal data in the repository.
+
+## DAL-31: Hybrid + NDVI
+
+The residual RF and XGBoost use the original eight features plus `ndvi_last`
+and `ndvi_age_days`. ET0 computation and the DAL-28 training procedure are
+unchanged: 2015–2022 training, nested chronological CV (5 outer / 4 inner
+folds), 16 randomized candidates, seed 42, selection by MAE. The 561 held-out
+2023–2024 dates are read after both models have been fitted. NDVI is joined
+backward only by DAL-30; provenance columns are not predictors.
+
+Thirteen initial training rows have missing NDVI. A median imputer is fitted
+inside each search fold, then saved with the final estimator. No rows are
+removed and no test statistics are used. Weather and target values must match
+the canonical data exactly. ET0 is not an additional feature in this experiment.
+
+From the repository root, using the environment with `requirements.txt` installed:
+
+```bash
+python src/ml/data/build_ndvi.py
+PYTHONPATH=src python -m ml.train_hybrid --use-ndvi
+# Re-export existing v0 models to the common predictions contract:
+PYTHONPATH=src python -m ml.evaluation.export_hybrid
+PYTHONPATH=src python -m ml.evaluation.compare_models
+python -m pytest -q
+```
+
+Models and preprocessing are stored together in `models/hybrid_ndvi/`.
+The v0 artifacts remain in `models/`; old schema-v1 models remain loadable.
+Schema-v2 metadata records feature order and serialization format. NDVI
+pipelines use joblib for both estimators; only load trusted artifacts.
+`reports/predictions_hybrid_ndvi_{rf,xgb}.csv` contain exactly
+`date,y_obs,y_pred`, as required by DAL-25. Diagnostic components are separate
+`components_hybrid_ndvi_*.csv` files. The v0 export now follows this same
+contract. CV fold scores, selected parameters, aggregate scores and test
+metrics use the `hybrid_ndvi_` prefix. Input hashes and library versions are
+recorded in `models/hybrid_ndvi/hybrid_metadata.json`.
+
+To regenerate NDVI predictions without training:
+
+```bash
+PYTHONPATH=src python -m ml.evaluation.export_hybrid \
+  --models-dir models/hybrid_ndvi --test-path data/processed/ndvi/test.csv
+PYTHONPATH=src python -m ml.evaluation.compare_models --from-files
+```
+
+### Repeat-training acceptance check
+
+Run a second complete search and fit into separate directories:
+
+```bash
+PYTHONPATH=src python -m ml.train_hybrid --use-ndvi \
+  --models-dir /tmp/dal31-repeat/models --reports-dir /tmp/dal31-repeat/reports
+PYTHONPATH=src python -m ml.evaluation.check_reproducibility \
+  reports /tmp/dal31-repeat/reports \
+  --output reports/hybrid_ndvi_reproducibility.json
+```
+
+The acceptance tolerance is **absolute difference <= 1e-6 for each of MAE,
+RMSE, bias, r², NSE and KGE**, separately for RF and XGBoost, with identical
+input data, seed and dependency versions in the same environment. MAE, RMSE
+and bias use mm/day; the other metrics are dimensionless. Dates and observed
+values must match exactly. The checker recomputes metrics from full-precision
+predictions, writes every difference and exits nonzero on failure. This is a
+repeat-training check, not merely a reload of an existing estimator; it is
+not a cross-platform guarantee. The older ML-only XGBoost tolerance is not
+used for this experiment. Here r² is squared Pearson correlation, not sklearn
+R²; NSE equals the latter for these complete observations.
+
+See [DAL-31 results](reports/hybrid_ndvi_validation.md) for the measured NDVI
+contribution and repeat-run evidence. Feature preparation, training, inference,
+export and reproducibility checking are separate reusable components; future
+feature groups should extend the explicit feature contract and validation,
+without duplicating the training/CV loop.
+
+### Measured result
+
+На 561 общей тестовой дате US-Ne2 за 2023–2024 добавление ndvi_last и ndvi_age_days улучшило Hybrid относительно v0: MAE RF снизилась с 0,431587 до 0,414459 мм/день (на 3,97%), MAE XGBoost — с 0,412442 до 0,387753 мм/день (на 5,99%); RMSE снизилась соответственно с 0,624450 до 0,601038 и с 0,600067 до 0,556918 мм/день. При этом положительный bias вырос у обеих моделей, а KGE немного снизился, поэтому улучшение не охватывает все метрики. Hybrid + NDVI XGBoost также превзошёл сохранённый ML-only XGBoost по MAE и RMSE, тогда как RF остался немного хуже ML-only RF. Результат показывает полезный вклад двух NDVI-признаков в этом эксперименте с повторным подбором параметров, но не доказывает статистическую значимость или переносимость на другие станции и годы; настройки не выбирались по тестовым метрикам.
+
+Two independent full runs passed all 12 metric checks; maximum absolute difference was 0 (tolerance 1e-6).
+
+### Isolated ET0 feature experiments
+
+Training and export share the same experiment identity. Optional ET0-feature
+runs use `hybrid_with_et0` or `hybrid_ndvi_with_et0` in prediction/component
+filenames and default to the corresponding subdirectory under `reports/`.
+The exporter reads this mode from the saved model metadata, not the directory
+name. For example:
+
+```bash
+PYTHONPATH=src python -m ml.evaluation.export_hybrid \
+  --models-dir models/hybrid_with_et0
+PYTHONPATH=src python -m ml.evaluation.export_hybrid \
+  --models-dir models/hybrid_ndvi_with_et0
+```
+
+The second command automatically selects the NDVI test data. Explicit
+`--test-path` and `--reports-dir` overrides remain available. Even when all
+experiments are explicitly exported into the same reports directory, their
+prediction names remain distinct, so an ET0-feature export does not replace
+Hybrid v0 or Hybrid + NDVI predictions.
