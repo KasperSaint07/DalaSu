@@ -1,0 +1,5 @@
+{
+  "data/raw/ndvi_us-ne2_landsat_2015_2024.csv": "f76e598175f43141b512ec3e9380ee60a78a6cabe1838afb3a56f168e243d798",
+  "reports/ndvi_coverage_by_year.csv": "2bb2a675ebb163815796e17611a133ada11b754d1cea68e7dc636232b367d229",
+  "data/geo/ndvi_us_ne2_run_metadata.geojson": "fa3026518ae22c0674e090cb424637bb7aa711309201c425a68ae8a806aabffb"
+}
