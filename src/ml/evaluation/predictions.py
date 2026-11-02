@@ -146,6 +146,10 @@ def read_prediction_file(path: Path | str) -> pd.DataFrame:
         raise ValueError(f"{path.name}: duplicate dates")
     if frame[["y_obs", "y_pred"]].isna().any().any():
         raise ValueError(f"{path.name}: missing y_obs or y_pred; write valid test days only")
+    if frame["date"].isna().any():
+        raise ValueError(f"{path.name}: missing date")
+    if not np.isfinite(frame[["y_obs", "y_pred"]].to_numpy(dtype=float)).all():
+        raise ValueError(f"{path.name}: non-finite y_obs or y_pred")
     return frame.sort_values("date", kind="stable").reset_index(drop=True)
 
 

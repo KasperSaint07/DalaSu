@@ -47,7 +47,7 @@ def bias(obs, pred):
     return float(np.mean(pred - obs))
 
 
-def r2(obs, pred):
+def pearson_r2(obs, pred):
     """Squared Pearson correlation between obs and pred, r^2.
 
     This is NOT sklearn.metrics.r2_score and NOT the Nash-Sutcliffe efficiency
@@ -67,6 +67,25 @@ def r2(obs, pred):
         return np.nan
     r = np.sum(obs_dev * pred_dev) / denominator
     return float(r ** 2)
+
+
+def r2(obs, pred):
+    """Compatibility alias for pearson_r2; never the coefficient of determination.
+
+    Historical training/CV artifacts use the key ``r2`` for squared Pearson
+    correlation. Keep their meaning unchanged; new comparison exports use
+    explicit ``pearson_r2`` and ``r2_score`` columns.
+    """
+    return pearson_r2(obs, pred)
+
+
+def r2_score(obs, pred):
+    """Coefficient of determination, identical to NSE for these paired values.
+
+    Constant observations return NaN, including perfect predictions (no
+    force-finite substitution). NaN pairs follow the same policy as NSE.
+    """
+    return nse(obs, pred)
 
 
 def nse(obs, pred):

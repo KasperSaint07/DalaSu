@@ -142,14 +142,28 @@ mean FLUXNET `WS_F` measured at 6.2 m; conversion to 2 m belongs only to a
 FAO-56 ET0 calculation, not to this ML-only training pipeline. See
 [`data/README.md`](data/README.md) for provenance and rebuild instructions.
 
-## Compare FAO-56 and ML-only models
+## Compare FAO-56, ML-only and hybrid models (phase 3)
 
-Reproduce the held-out comparison from the committed
-`random_forest.joblib` and native `xgboost.json` models with one command:
+Reproduce the final seven-model comparison on the 561 canonical holdout dates
+from saved predictions, without inference, retraining or hyperparameter tuning:
 
 ```
-python -m ml.evaluation.compare_models
+PYTHONPATH=src python -m ml.evaluation.compare_models --from-files --phase3
 ```
+
+The phase-3 check requires exactly FAO-56, RF/XGBoost ML-only, RF/XGBoost
+Hybrid v0 and RF/XGBoost Hybrid + NDVI. It validates every date and observation
+against `data/processed/test.csv` (absolute observation tolerance 1e-6 mm/day).
+Missing models, changed dates/observations and non-finite values fail explicitly.
+
+**Metric naming:** the final CSV uses `pearson_r2` for squared Pearson
+correlation and `r2_score` for the coefficient of determination. `r2_score`
+equals `nse` for these paired, single-output observations. Historical CV and
+training artifacts retain `r2` = squared Pearson correlation; the Python
+`r2()` function is a compatibility alias for `pearson_r2()`, not R².
+Downstream readers of the final CSV must use `pearson_r2` instead of its former
+`r2` column. Definitions, undefined-value policies and winners by metric are
+included in `reports/fao56_ml_comparison.md`.
 
 **Predictions contract.** Every model writes
 `reports/predictions_<model>.csv` with columns `date,y_obs,y_pred`: ISO dates
@@ -162,7 +176,7 @@ own `predictions_<model>.csv` to `reports/` and is picked up automatically.
 
 `compare_models` first regenerates the three built-in files, then reads every
 `reports/predictions_*.csv`, stops with an error unless all files have the same
-dates and `y_obs`, and computes RMSE, MAE, r², bias, NSE and KGE per model.
+dates and `y_obs`, and computes RMSE, MAE, Pearson r², R², bias, NSE and KGE per model.
 
 - `--retrain` retrains both ML-only models first (about 18 minutes) and then
   regenerates their prediction files. XGBoost retraining has an observed MAE

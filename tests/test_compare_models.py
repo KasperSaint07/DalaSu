@@ -85,7 +85,7 @@ def test_metrics_table_has_all_six_metrics(tmp_path: Path):
     write_sample_predictions(tmp_path)
     metrics = compare_models(tmp_path)
 
-    assert list(metrics.columns) == ["model", "n", "rmse", "mae", "r2", "bias", "nse", "kge"]
+    assert list(metrics.columns) == ["model", "n", "rmse", "mae", "pearson_r2", "r2_score", "bias", "nse", "kge"]
     # obs = [1, 3], FAO-56 pred = [2, 2]: errors [1, -1], SS_tot = 2.
     row = metrics.set_index("model").loc["fao56_et0"]
     assert row["rmse"] == pytest.approx(1.0)
@@ -150,11 +150,11 @@ def test_wrong_columns_raise(tmp_path: Path):
 def test_report_states_d1_contract_and_reproduction_command():
     metrics = pd.DataFrame(
         [
-            ["fao56_et0", 2, 2.0, 1.5, 0.5, 1.0, -0.1, 0.2],
-            ["random_forest", 2, 1.0, 0.8, 0.8, 0.1, 0.7, 0.8],
-            ["xgboost", 2, 1.1, 0.9, 0.8, 0.2, 0.6, 0.7],
+            ["fao56_et0", 2, 2.0, 1.5, 0.5, -0.1, 1.0, -0.1, 0.2],
+            ["random_forest", 2, 1.0, 0.8, 0.8, 0.7, 0.1, 0.7, 0.8],
+            ["xgboost", 2, 1.1, 0.9, 0.8, 0.6, 0.2, 0.6, 0.7],
         ],
-        columns=["model", "n", "rmse", "mae", "r2", "bias", "nse", "kge"],
+        columns=["model", "n", "rmse", "mae", "pearson_r2", "r2_score", "bias", "nse", "kge"],
     )
 
     report = render_report(metrics, sample_test()["date"])
@@ -168,7 +168,8 @@ def test_report_states_d1_contract_and_reproduction_command():
     assert "`predictions_fao56_et0.csv`" in report
     assert "date,y_obs,y_pred" in report
     assert "±0.003" in report
-    assert "xgboost.json" in report
+    assert "--from-files --phase3" in report
+    assert "Best model by metric" in report
 
 
 def test_run_from_files_writes_outputs(tmp_path: Path):
@@ -189,3 +190,53 @@ def test_missing_native_xgboost_suggests_retraining(tmp_path: Path):
     joblib.dump(ConstantModel(1.0), tmp_path / "random_forest.joblib")
     with pytest.raises(FileNotFoundError, match=r"xgboost.json.*--retrain"):
         predict_builtin(sample_test(), tmp_path)
+
+
+@pytest.mark.parametrize("column,value", [("y_pred", np.inf), ("y_obs", -np.inf), ("date", None)])
+def test_invalid_prediction_values_rejected(tmp_path, column, value):
+    write_sample_predictions(tmp_path)
+    path = tmp_path / "predictions_xgboost.csv"
+    frame = pd.read_csv(path)
+    frame.loc[0, column] = value
+    frame.to_csv(path, index=False)
+    with pytest.raises(ValueError, match="non-finite|missing date"):
+        compare_models(tmp_path)
+
+
+def test_phase3_saved_predictions_reproducible_without_inference(tmp_path, monkeypatch):
+    import importlib
+    module = importlib.import_module("ml.evaluation.compare_models")
+    def forbidden(*args, **kwargs):
+        raise AssertionError("No inference or training allowed")
+    monkeypatch.setattr(module, "write_builtin_predictions", forbidden)
+    monkeypatch.setattr(module, "train_ml", forbidden)
+    kwargs = dict(metrics_path=tmp_path / "metrics.csv", report_path=tmp_path / "report.md",
+                  write_predictions=False, phase3=True)
+    metrics = run(**kwargs)
+    assert set(metrics.model) == set(module.MODEL_LABELS)
+    assert (metrics.n == 561).all()
+    np.testing.assert_array_equal(metrics.r2_score, metrics.nse)
+    before = [(tmp_path / name).read_bytes() for name in ("metrics.csv", "report.md")]
+    run(**kwargs)
+    assert before == [(tmp_path / name).read_bytes() for name in ("metrics.csv", "report.md")]
+
+
+@pytest.mark.parametrize("mutation", ["missing_model", "shared_date", "shared_obs"])
+def test_phase3_rejects_incomplete_or_noncanonical_data(tmp_path, mutation):
+    import shutil
+    from ml.evaluation.predictions import DEFAULT_PREDICTIONS_DIR
+    for source in DEFAULT_PREDICTIONS_DIR.glob("predictions_*.csv"):
+        shutil.copyfile(source, tmp_path / source.name)
+    if mutation == "missing_model":
+        (tmp_path / "predictions_hybrid_ndvi_rf.csv").unlink()
+    else:
+        for path in tmp_path.glob("predictions_*.csv"):
+            frame = pd.read_csv(path)
+            if mutation == "shared_date":
+                frame.loc[0, "date"] = "2022-12-31"
+            else:
+                frame.loc[0, "y_obs"] += 1
+            frame.to_csv(path, index=False)
+    with pytest.raises((ValueError, FileNotFoundError), match="Missing prediction|canonical test"):
+        run(predictions_dir=tmp_path, metrics_path=tmp_path / "metrics.csv",
+            report_path=tmp_path / "report.md", write_predictions=False, phase3=True)
