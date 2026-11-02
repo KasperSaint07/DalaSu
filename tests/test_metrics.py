@@ -149,3 +149,23 @@ def test_fao56_et0_test_split_regression():
     assert result["mae"] == pytest.approx(1.1133, abs=5e-5)
     assert result["r2"] == pytest.approx(0.4736, abs=5e-5)
     assert result["bias"] == pytest.approx(0.9175, abs=5e-5)
+
+
+
+def test_explicit_r_squared_names_and_systematic_offset():
+    from ml.evaluation.metrics import pearson_r2, r2_score
+    obs = np.array([1., 2., 3.])
+    pred = obs + 5
+    assert pearson_r2(obs, pred) == pytest.approx(1)
+    assert r2(obs, pred) == pearson_r2(obs, pred)
+    assert r2_score(obs, pred) == pytest.approx(-36.5)
+    assert r2_score(obs, pred) == nse(obs, pred)
+    assert mae(obs, pred) == rmse(obs, pred) == bias(obs, pred) == 5
+
+
+@pytest.mark.parametrize("pred", [[2., 2., 2.], [1., 2., 3.]])
+def test_explicit_r_squared_constant_observations(pred):
+    from ml.evaluation.metrics import pearson_r2, r2_score
+    with np.errstate(all="raise"):
+        assert math.isnan(pearson_r2([2., 2., 2.], pred))
+        assert math.isnan(r2_score([2., 2., 2.], pred))

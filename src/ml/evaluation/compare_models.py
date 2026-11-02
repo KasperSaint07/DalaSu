@@ -17,12 +17,14 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 from ..train_ml import main as train_ml
 from .metrics import evaluate
 from .predictions import (
     BASELINE_MODEL,
+    Y_OBS_TOLERANCE,
     DEFAULT_MODELS_DIR,
     DEFAULT_PREDICTIONS_DIR,
     DEFAULT_TEST_PATH,
@@ -35,7 +37,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_METRICS_PATH = PROJECT_ROOT / "reports" / "comparison_metrics.csv"
 DEFAULT_REPORT_PATH = PROJECT_ROOT / "reports" / "fao56_ml_comparison.md"
 
-METRIC_COLUMNS = ["model", "n", "rmse", "mae", "r2", "bias", "nse", "kge"]
+METRIC_COLUMNS = ["model", "n", "rmse", "mae", "pearson_r2", "r2_score", "bias", "nse", "kge"]
 MODEL_LABELS = {
     BASELINE_MODEL: "FAO-56 ET0",
     "random_forest": "Random Forest ML-only",
@@ -56,6 +58,9 @@ def compare_models(predictions_dir: Path | str = DEFAULT_PREDICTIONS_DIR) -> pd.
         {"model": model, **evaluate(frame["y_obs"], frame["y_pred"])}
         for model, frame in frames.items()
     ]
+    for row in rows:
+        row["pearson_r2"] = row.pop("r2")
+        row["r2_score"] = row["nse"]
     return pd.DataFrame(rows, columns=METRIC_COLUMNS)
 
 
@@ -66,15 +71,15 @@ def _label(model: str) -> str:
 def render_report(metrics: pd.DataFrame, dates: pd.Series) -> str:
     """Render the concise comparison report from computed metrics and test dates."""
     rounded = metrics.copy()
-    for column in ["rmse", "mae", "r2", "bias", "nse", "kge"]:
+    for column in ["rmse", "mae", "pearson_r2", "r2_score", "bias", "nse", "kge"]:
         rounded[column] = rounded[column].map(lambda value: f"{value:.3f}")
     table_rows = [
-        "| Model | File | n | RMSE, mm/day | MAE, mm/day | r² | Bias, mm/day | NSE | KGE |",
-        "|---|---|---:|---:|---:|---:|---:|---:|---:|",
+        "| Model | File | n | RMSE, mm/day | MAE, mm/day | Pearson r² | R² | Bias, mm/day | NSE | KGE |",
+        "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     table_rows.extend(
         f"| {_label(row.model)} | `predictions_{row.model}.csv` | {row.n} | {row.rmse} "
-        f"| {row.mae} | {row.r2} | {row.bias} | {row.nse} | {row.kge} |"
+        f"| {row.mae} | {row.pearson_r2} | {row.r2_score} | {row.bias} | {row.nse} | {row.kge} |"
         for row in rounded.itertuples(index=False)
     )
 
@@ -87,6 +92,16 @@ def render_report(metrics: pd.DataFrame, dates: pd.Series) -> str:
         if row.model != BASELINE_MODEL and row.rmse < baseline["rmse"]
     ]
     better_rmse_text = ", ".join(better_rmse) if better_rmse else "none"
+    winner_rows = []
+    for key, label, minimize in [
+        ("mae", "MAE", True), ("rmse", "RMSE", True),
+        ("bias", "Absolute bias", True), ("pearson_r2", "Pearson r²", False),
+        ("r2_score", "R² / NSE", False), ("kge", "KGE", False),
+    ]:
+        values = metrics[key].abs() if key == "bias" else metrics[key]
+        best = values.min() if minimize else values.max()
+        winners = metrics.loc[values == best, "model"].map(_label)
+        winner_rows.append(f"| {label} | {', '.join(winners) or 'Undefined'} | {best:.6f} |")
     start = dates.min().date().isoformat()
     end = dates.max().date().isoformat()
 
@@ -105,7 +120,7 @@ al. 2009).
 
 Each model is read from `reports/predictions_<model>.csv` with columns
 `date,y_obs,y_pred`; the comparison stops with an error unless all files cover
-identical dates.
+identical dates and observations (absolute tolerance 1e-6 mm/day).
 
 **D-1: actual ET is the comparison target.** FAO-56 Penman--Monteith produces
 grass reference evapotranspiration ET0, not crop actual ET. We deliberately use
@@ -113,6 +128,37 @@ ET0 without a crop coefficient (`Kc`) as the physical baseline and compare it
 with measured actual ET. Therefore its error includes the ET0-to-actual-ET
 mismatch and should not be interpreted as a validation of the FAO-56 equation
 itself. Wind measured at 6.2 m is converted to 2 m with FAO-56 Eq. 47.
+
+## Metric definitions
+
+For observations y, predictions p and errors e = p - y on the same n dates:
+
+| CSV column | Definition | Preferred value |
+|---|---|---|
+| `rmse` | sqrt(mean(e²)) | Lower; mm/day |
+| `mae` | mean(abs(e)) | Lower; mm/day; primary metric |
+| `pearson_r2` | corr(y, p)² | Higher; linear association only |
+| `r2_score` | 1 - sum(e²) / sum((y - mean(y))²) | Higher; coefficient of determination |
+| `bias` | mean(e) | Closer to zero; mm/day |
+| `nse` | 1 - sum(e²) / sum((y - mean(y))²) | Higher; Nash–Sutcliffe efficiency |
+| `kge` | 1 - sqrt((r-1)² + (alpha-1)² + (beta-1)²) | Higher; Kling–Gupta efficiency (2009) |
+
+For KGE, r = corr(y,p), alpha = std(p)/std(y), beta = mean(p)/mean(y);
+standard deviations use ddof=0. R² and NSE are numerically identical for this
+single-output evaluation on the same observations; they are not independent
+evidence. Pearson r² is different: p = y + 5 gives Pearson r² = 1 despite
+bias = +5 mm/day and potentially negative R²/NSE.
+
+Constant observations make Pearson r², R²/NSE and KGE undefined (NaN), even
+for perfect predictions. Constant predictions make Pearson r² and KGE
+undefined, but R²/NSE can remain defined. KGE is also undefined for zero
+observed mean. The comparison rejects missing/non-finite values rather than
+silently dropping different dates per model. The low-level metric functions
+allow paired NaN removal for other callers.
+
+Historical training/CV CSVs and the compatibility function `r2()` retain their
+original squared-Pearson meaning. The final comparison uses explicit column
+names `pearson_r2` and `r2_score`; historical artifacts are not relabelled as R².
 
 ## Held-out metrics
 
@@ -132,18 +178,31 @@ average (bias {baseline['bias']:+.3f} mm/day, NSE {baseline['nse']:.3f}), which
 is consistent with using reference ET0 without seasonal crop coefficients. ET0
 remains an interpretable physical reference.
 
+### Best model by metric
+
+| Metric | Best model(s), before rounding | Value |
+|---|---|---:|
+{chr(10).join(winner_rows)}
+
+The overall MAE winner need not minimize bias or maximize KGE. Conclusions
+are descriptive for one station and the 2023–2024 holdout; statistical
+significance and transfer to other stations have not been established.
+No model or hyperparameter is selected or refitted by this comparison.
+
 ## Reproduction
 
-From the repository root, after `pip install -r requirements.txt` and
-`pip install -e .`, regenerate the built-in prediction files, metrics CSV and
-this report from the committed models with one command:
+From the repository root, reproduce the final seven-model CSV and report
+from saved predictions without inference or training:
 
 ```
-python -m ml.evaluation.compare_models
+PYTHONPATH=src python -m ml.evaluation.compare_models --from-files --phase3
 ```
 
-Add `--retrain` to retrain both ML-only models first (about 18 minutes), or
-`--from-files` to only read the existing `reports/predictions_*.csv` files.
+`--phase3` requires all seven specified models and validates their dates and
+observations against `data/processed/test.csv`, including its 561-row size.
+The general command without `--phase3` also supports additional model files.
+Without `--from-files`, built-in predictions are regenerated from saved models;
+`--retrain` explicitly retrains ML-only models and is not part of this audit.
 
 XGBoost reproduces within a tolerance of ±0.003 mm/day MAE; Random Forest
 matches exactly at the reported precision in the cross-environment audit.
@@ -151,12 +210,11 @@ The audit observed XGBoost MAE 0.4014 versus 0.3985; this tolerance describes
 that observation, not a guarantee across every platform. XGBoost already uses
 `n_jobs=1`; the cause of the difference has not been established.
 
-The run uses fixed seed 42 and chronological nested time-series CV for model
-selection. Without `--retrain` the table comes from the committed model
-artifacts (`random_forest.joblib` and `xgboost.json`). Outputs are
-`reports/predictions_fao56_et0.csv`, `reports/predictions_random_forest.csv`,
-`reports/predictions_xgboost.csv`, `reports/comparison_metrics.csv` and
-`reports/fao56_ml_comparison.md`.
+The original training used seed 42 and chronological nested time-series CV.
+The command above only writes `reports/comparison_metrics.csv` and
+`reports/fao56_ml_comparison.md`. Saved predictions and model artifacts remain
+unchanged. The cross-environment audit above concerns regenerated predictions,
+not recomputation of metrics from the fixed CSV files.
 """
 
 
@@ -167,10 +225,23 @@ def run(
     metrics_path: Path | str = DEFAULT_METRICS_PATH,
     report_path: Path | str = DEFAULT_REPORT_PATH,
     write_predictions: bool = True,
+    phase3: bool = False,
 ) -> pd.DataFrame:
     """Write built-in predictions (optional), then the metrics CSV and report."""
     if write_predictions:
         write_builtin_predictions(test_path, models_dir, predictions_dir)
+    if phase3:
+        frames = load_predictions(predictions_dir, required=tuple(MODEL_LABELS))
+        if set(frames) != set(MODEL_LABELS):
+            raise ValueError("Phase 3 requires exactly the seven specified models")
+        test = load_test_data(test_path)
+        if len(test) != 561:
+            raise ValueError("Phase 3 requires 561 canonical test dates")
+        for model, frame in frames.items():
+            if not frame["date"].reset_index(drop=True).equals(test["date"].reset_index(drop=True)):
+                raise ValueError(f"{model}: dates differ from canonical test data")
+            if not np.allclose(frame["y_obs"], test["et_obs_mm"], rtol=0, atol=Y_OBS_TOLERANCE):
+                raise ValueError(f"{model}: observations differ from canonical test data")
     metrics = compare_models(predictions_dir)
     dates = load_predictions(predictions_dir)[BASELINE_MODEL]["date"]
     metrics_path = Path(metrics_path)
@@ -195,10 +266,11 @@ def main(argv: list[str] | None = None) -> None:
         action="store_true",
         help="only read the existing reports/predictions_*.csv files",
     )
+    parser.add_argument("--phase3", action="store_true", help="validate the final seven-model, 561-day comparison")
     args = parser.parse_args(argv)
     if args.retrain:
         train_ml()
-    metrics = run(write_predictions=not args.from_files)
+    metrics = run(write_predictions=not args.from_files, phase3=args.phase3)
     print("Model predictions vs measured actual ET (test 2023-2024)")
     print(metrics.to_string(index=False, float_format=lambda value: f"{value:.3f}"))
     print(f"\nSaved: {DEFAULT_METRICS_PATH}")
