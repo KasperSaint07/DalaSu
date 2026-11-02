@@ -324,3 +324,29 @@ Optional `--predictions-dir`, `--test-path` and `--output-dir` support isolated
 reproduction; the fixed seven-model/561-date validation remains enabled.
 Tests check month boundaries, leap days, identical samples, undefined groups,
 hand-computed deltas, weighted recovery of overall errors and byte-stable outputs.
+
+## Crop-stage evidence and NDVI proxies
+
+```bash
+PYTHONPATH=src python -m ml.data.build_phenology
+```
+
+See [phenology method and source audit](docs/14-phenology-labels.md). The builder
+uses the DAL-29 raw NDVI export and DAL-30 scene-selection rules. Unique usable
+2015–2022 snapshots determine fixed percentile thresholds; test ET, predictions
+and model errors are not used. Policy, source registry, annual crop context and
+an intentionally empty observed-interval template live in
+`data/metadata/phenology/`.
+
+Outputs in `data/processed/phenology/` include all 731 calendar labels, the 561
+canonical test labels, non-overlapping intervals, fitted policy/provenance and
+coverage reports. Every label carries observed/approximate/unknown status and
+separate actual-stage and NDVI-proxy fields. Missing/stale/ambiguous NDVI is
+explicitly unknown, not filled from future scenes.
+
+**Evidence limit:** no verified 2023–2024 field-stage intervals were obtained.
+All actual stages remain unknown; 2023 maize/2024 soybean are annual rotation
+inferences, not day-specific observations. Low NDVI is not verified off-season.
+Proxy labels may support descriptive vegetation-phase analysis, but do not
+complete an analysis by actual agronomic stage. Registered field records can be
+added later using the validated observed-interval contract.
