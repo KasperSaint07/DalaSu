@@ -17,18 +17,17 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 
 from ..train_ml import main as train_ml
 from .metrics import evaluate
 from .predictions import (
     BASELINE_MODEL,
-    Y_OBS_TOLERANCE,
     DEFAULT_MODELS_DIR,
     DEFAULT_PREDICTIONS_DIR,
     DEFAULT_TEST_PATH,
     load_predictions,
+    load_canonical_predictions,
     load_test_data,
     write_builtin_predictions,
 )
@@ -231,17 +230,7 @@ def run(
     if write_predictions:
         write_builtin_predictions(test_path, models_dir, predictions_dir)
     if phase3:
-        frames = load_predictions(predictions_dir, required=tuple(MODEL_LABELS))
-        if set(frames) != set(MODEL_LABELS):
-            raise ValueError("Phase 3 requires exactly the seven specified models")
-        test = load_test_data(test_path)
-        if len(test) != 561:
-            raise ValueError("Phase 3 requires 561 canonical test dates")
-        for model, frame in frames.items():
-            if not frame["date"].reset_index(drop=True).equals(test["date"].reset_index(drop=True)):
-                raise ValueError(f"{model}: dates differ from canonical test data")
-            if not np.allclose(frame["y_obs"], test["et_obs_mm"], rtol=0, atol=Y_OBS_TOLERANCE):
-                raise ValueError(f"{model}: observations differ from canonical test data")
+        load_canonical_predictions(predictions_dir, test_path, required=tuple(MODEL_LABELS))
     metrics = compare_models(predictions_dir)
     dates = load_predictions(predictions_dir)[BASELINE_MODEL]["date"]
     metrics_path = Path(metrics_path)

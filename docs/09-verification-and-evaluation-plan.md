@@ -91,7 +91,7 @@ Held-out results (561 days):
 | Random Forest ML-only | 0.588 | 0.412 | 0.879 | +0.125 |
 | XGBoost ML-only | 0.595 | 0.398 | 0.879 | +0.119 |
 
-By season, FAO-56 ET₀ is weakest in spring (test period, March–May: RMSE 2.46 mm/day, bias +1.90). A seasonal breakdown for the ML models is not yet in `reports/` and is **Proposed**.
+By season, FAO-56 ET₀ is weakest in spring (test period, March–May: RMSE 2.46 mm/day, bias +1.90). A seasonal breakdown for all seven models is now available in `reports/seasonal_comparison.md`, with metrics, hybrid-minus-ML-only deltas and a shared date audit. Crop-growth-stage analysis remains separate.
 
 ## 7. Evaluation with users (planned)
 
@@ -115,7 +115,7 @@ Proposed design:
 
 | Step | Owner | When |
 |---|---|---|
-| Seasonal breakdown for ML models | Aldiyar (ML models) | After pre-defense 1 |
+| Seasonal breakdown for all seven models | Aldiyar (ML models) | Implemented; see `reports/seasonal_comparison.md` |
 | Baseline B2 (needs crop and growth stage per day) | Madiyar (FAO-56 baseline) | After pre-defense 1, if data allows |
 | Response time measurement | Madiyar (backend) | After the API exists |
 | Field pilot | Both | After a pilot agreement is concluded |

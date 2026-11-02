@@ -293,3 +293,34 @@ The second command automatically selects the NDVI test data. Explicit
 experiments are explicitly exported into the same reports directory, their
 prediction names remain distinct, so an ET0-feature export does not replace
 Hybrid v0 or Hybrid + NDVI predictions.
+
+## Seasonal comparison (phase 4)
+
+Run the seven-model analysis directly from saved predictions, without inference
+or retraining:
+
+```bash
+PYTHONPATH=src python -m ml.evaluation.seasonal
+```
+
+The same canonical validation as phase 3 checks all 561 test dates and observed
+values before grouping. DJF (Dec–Feb), MAM (Mar–May), JJA (Jun–Aug) and SON
+(Sep–Nov) pool calendar months across 2023–2024; incomplete winters are retained.
+This is calendar-season analysis, not crop-growth-stage analysis.
+
+Outputs in `reports/`:
+
+- `seasonal_dates.csv`: shared date-to-season audit (one row per test date).
+- `seasonal_metrics.csv`: 28 model/season rows with sample counts, all phase-3
+  metrics and explicit `undefined_metrics`; undefined numeric values use `NaN`.
+- `seasonal_deltas.csv`: 16 hybrid/season rows; ΔMAE and ΔRMSE are hybrid minus
+  matching ML-only (RF vs RF, XGBoost vs XGBoost), so negative means improvement.
+- `seasonal_errors.svg`: standalone numeric heatmaps of MAE and RMSE, generated
+  without extra dependencies; each panel has its own colour scale.
+- `seasonal_comparison.md`: complete tables, lowest/highest-MAE seasons per
+  model, hybrid findings and limitations. Undefined metrics appear as N/A.
+
+Optional `--predictions-dir`, `--test-path` and `--output-dir` support isolated
+reproduction; the fixed seven-model/561-date validation remains enabled.
+Tests check month boundaries, leap days, identical samples, undefined groups,
+hand-computed deltas, weighted recovery of overall errors and byte-stable outputs.
