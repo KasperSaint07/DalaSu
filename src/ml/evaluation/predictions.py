@@ -212,6 +212,28 @@ def load_predictions(
     return frames
 
 
+def load_canonical_predictions(
+    predictions_dir: Path | str = DEFAULT_PREDICTIONS_DIR,
+    test_path: Path | str = DEFAULT_TEST_PATH,
+    *,
+    required: tuple[str, ...],
+    expected_count: int = 561,
+) -> dict[str, pd.DataFrame]:
+    """Validate a fixed model cohort against the canonical holdout, without inference."""
+    frames = load_predictions(predictions_dir, required=required)
+    if set(frames) != set(required):
+        raise ValueError(f"Expected exactly {len(required)} specified models")
+    test = load_test_data(test_path)
+    if len(test) != expected_count:
+        raise ValueError(f"Expected {expected_count} canonical test dates")
+    for model, frame in frames.items():
+        if not frame["date"].reset_index(drop=True).equals(test["date"].reset_index(drop=True)):
+            raise ValueError(f"{model}: dates differ from canonical test data")
+        if not np.allclose(frame["y_obs"], test["et_obs_mm"], rtol=0, atol=Y_OBS_TOLERANCE):
+            raise ValueError(f"{model}: observations differ from canonical test data")
+    return frames
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.parse_args(argv)

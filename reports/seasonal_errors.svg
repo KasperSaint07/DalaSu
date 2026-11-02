@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="680" viewBox="0 0 1080 680">
+<title>Seasonal MAE and RMSE on US-Ne2, 2023–2024</title>
+<desc>Seven models, four calendar seasons; lower errors are better. Each panel has its own scale.</desc>
+<rect width="100%" height="100%" fill="white"/>
+<text x="30" y="38" font-family="Arial, sans-serif" font-size="24" text-anchor="start" fill="#16324a">Seasonal prediction errors · US-Ne2 · 2023–2024</text>
+<text x="30" y="66" font-family="Arial, sans-serif" font-size="15" text-anchor="start" fill="#16324a">Lower is better. Values in mm/day; separate colour scales for MAE and RMSE.</text>
+<text x="440" y="108" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" fill="#16324a">MAE</text>
+<text x="321" y="140" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">DJF</text>
+<text x="321" y="162" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#16324a">n=166</text>
+<text x="409" y="140" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">MAM</text>
+<text x="409" y="162" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#16324a">n=119</text>
+<text x="497" y="140" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">JJA</text>
+<text x="497" y="162" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#16324a">n=105</text>
+<text x="585" y="140" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">SON</text>
+<text x="585" y="162" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#16324a">n=171</text>
+<text x="24" y="211" font-family="Arial, sans-serif" font-size="15" text-anchor="start" fill="#16324a">FAO-56 ET0</text>
+<rect x="280" y="180" width="82" height="50" rx="4" fill="rgb(202, 226, 243)"/>
+<text x="321" y="211" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.469</text>
+<rect x="368" y="180" width="82" height="50" rx="4" fill="rgb(80, 159, 202)"/>
+<text x="409" y="211" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">1.994</text>
+<rect x="456" y="180" width="82" height="50" rx="4" fill="rgb(168, 207, 231)"/>
+<text x="497" y="211" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.887</text>
+<rect x="544" y="180" width="82" height="50" rx="4" fill="rgb(138, 191, 221)"/>
+<text x="585" y="211" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">1.265</text>
+<text x="24" y="267" font-family="Arial, sans-serif" font-size="15" text-anchor="start" fill="#16324a">Random Forest ML-only</text>
+<rect x="280" y="236" width="82" height="50" rx="4" fill="rgb(222, 237, 249)"/>
+<text x="321" y="267" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.217</text>
+<rect x="368" y="236" width="82" height="50" rx="4" fill="rgb(201, 225, 242)"/>
+<text x="409" y="267" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.482</text>
+<rect x="456" y="236" width="82" height="50" rx="4" fill="rgb(190, 219, 239)"/>
+<text x="497" y="267" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.613</text>
+<rect x="544" y="236" width="82" height="50" rx="4" fill="rgb(205, 227, 244)"/>
+<text x="585" y="267" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.429</text>
+<text x="24" y="323" font-family="Arial, sans-serif" font-size="15" text-anchor="start" fill="#16324a">XGBoost ML-only</text>
+<rect x="280" y="292" width="82" height="50" rx="4" fill="rgb(223, 237, 250)"/>
+<text x="321" y="323" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.206</text>
+<rect x="368" y="292" width="82" height="50" rx="4" fill="rgb(204, 227, 243)"/>
+<text x="409" y="323" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.444</text>
+<rect x="456" y="292" width="82" height="50" rx="4" fill="rgb(192, 220, 239)"/>
+<text x="497" y="323" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.589</text>
+<rect x="544" y="292" width="82" height="50" rx="4" fill="rgb(204, 227, 243)"/>
+<text x="585" y="323" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.437</text>
+<text x="24" y="379" font-family="Arial, sans-serif" font-size="15" text-anchor="start" fill="#16324a">Hybrid v0 RF</text>
+<rect x="280" y="348" width="82" height="50" rx="4" fill="rgb(222, 237, 249)"/>
+<text x="321" y="379" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.207</text>
+<rect x="368" y="348" width="82" height="50" rx="4" fill="rgb(199, 224, 242)"/>
+<text x="409" y="379" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.505</text>
+<rect x="456" y="348" width="82" height="50" rx="4" fill="rgb(188, 218, 238)"/>
+<text x="497" y="379" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.639</text>
+<rect x="544" y="348" width="82" height="50" rx="4" fill="rgb(201, 225, 242)"/>
+<text x="585" y="379" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.471</text>
+<text x="24" y="435" font-family="Arial, sans-serif" font-size="15" text-anchor="start" fill="#16324a">Hybrid v0 XGBoost</text>
+<rect x="280" y="404" width="82" height="50" rx="4" fill="rgb(223, 237, 250)"/>
+<text x="321" y="435" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.203</text>
+<rect x="368" y="404" width="82" height="50" rx="4" fill="rgb(202, 226, 243)"/>
+<text x="409" y="435" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.460</text>
+<rect x="456" y="404" width="82" height="50" rx="4" fill="rgb(190, 219, 239)"/>
+<text x="497" y="435" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.611</text>
+<rect x="544" y="404" width="82" height="50" rx="4" fill="rgb(202, 226, 243)"/>
+<text x="585" y="435" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.461</text>
+<text x="24" y="491" font-family="Arial, sans-serif" font-size="15" text-anchor="start" fill="#16324a">Hybrid + NDVI RF</text>
+<rect x="280" y="460" width="82" height="50" rx="4" fill="rgb(224, 238, 250)"/>
+<text x="321" y="491" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.190</text>
+<rect x="368" y="460" width="82" height="50" rx="4" fill="rgb(197, 223, 241)"/>
+<text x="409" y="491" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.521</text>
+<rect x="456" y="460" width="82" height="50" rx="4" fill="rgb(197, 223, 241)"/>
+<text x="497" y="491" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.529</text>
+<rect x="544" y="460" width="82" height="50" rx="4" fill="rgb(200, 225, 242)"/>
+<text x="585" y="491" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.488</text>
+<text x="24" y="547" font-family="Arial, sans-serif" font-size="15" text-anchor="start" fill="#16324a">Hybrid + NDVI XGBoost</text>
+<rect x="280" y="516" width="82" height="50" rx="4" fill="rgb(224, 238, 250)"/>
+<text x="321" y="547" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.194</text>
+<rect x="368" y="516" width="82" height="50" rx="4" fill="rgb(203, 226, 243)"/>
+<text x="409" y="547" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.455</text>
+<rect x="456" y="516" width="82" height="50" rx="4" fill="rgb(199, 224, 242)"/>
+<text x="497" y="547" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.496</text>
+<rect x="544" y="516" width="82" height="50" rx="4" fill="rgb(202, 226, 243)"/>
+<text x="585" y="547" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.462</text>
+<text x="280" y="601" font-family="Arial, sans-serif" font-size="13" text-anchor="start" fill="#16324a">Colour scale: 0 (light) → 1.994 (dark)</text>
+<text x="840" y="108" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" fill="#16324a">RMSE</text>
+<text x="721" y="140" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">DJF</text>
+<text x="721" y="162" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#16324a">n=166</text>
+<text x="809" y="140" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">MAM</text>
+<text x="809" y="162" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#16324a">n=119</text>
+<text x="897" y="140" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">JJA</text>
+<text x="897" y="162" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#16324a">n=105</text>
+<text x="985" y="140" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">SON</text>
+<text x="985" y="162" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#16324a">n=171</text>
+<rect x="680" y="180" width="82" height="50" rx="4" fill="rgb(192, 220, 239)"/>
+<text x="721" y="211" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.723</text>
+<rect x="768" y="180" width="82" height="50" rx="4" fill="rgb(80, 159, 202)"/>
+<text x="809" y="211" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">2.461</text>
+<rect x="856" y="180" width="82" height="50" rx="4" fill="rgb(146, 195, 224)"/>
+<text x="897" y="211" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">1.437</text>
+<rect x="944" y="180" width="82" height="50" rx="4" fill="rgb(129, 186, 218)"/>
+<text x="985" y="211" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">1.696</text>
+<rect x="680" y="236" width="82" height="50" rx="4" fill="rgb(220, 236, 249)"/>
+<text x="721" y="267" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.292</text>
+<rect x="768" y="236" width="82" height="50" rx="4" fill="rgb(199, 224, 242)"/>
+<text x="809" y="267" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.620</text>
+<rect x="856" y="236" width="82" height="50" rx="4" fill="rgb(185, 216, 237)"/>
+<text x="897" y="267" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.838</text>
+<rect x="944" y="236" width="82" height="50" rx="4" fill="rgb(201, 225, 242)"/>
+<text x="985" y="267" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.596</text>
+<rect x="680" y="292" width="82" height="50" rx="4" fill="rgb(220, 236, 249)"/>
+<text x="721" y="323" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.294</text>
+<rect x="768" y="292" width="82" height="50" rx="4" fill="rgb(201, 225, 242)"/>
+<text x="809" y="323" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.594</text>
+<rect x="856" y="292" width="82" height="50" rx="4" fill="rgb(185, 217, 237)"/>
+<text x="897" y="323" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.833</text>
+<rect x="944" y="292" width="82" height="50" rx="4" fill="rgb(198, 223, 241)"/>
+<text x="985" y="323" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.639</text>
+<rect x="680" y="348" width="82" height="50" rx="4" fill="rgb(221, 236, 249)"/>
+<text x="721" y="379" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.278</text>
+<rect x="768" y="348" width="82" height="50" rx="4" fill="rgb(197, 223, 241)"/>
+<text x="809" y="379" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.657</text>
+<rect x="856" y="348" width="82" height="50" rx="4" fill="rgb(182, 215, 236)"/>
+<text x="897" y="379" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.878</text>
+<rect x="944" y="348" width="82" height="50" rx="4" fill="rgb(197, 223, 241)"/>
+<text x="985" y="379" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.656</text>
+<rect x="680" y="404" width="82" height="50" rx="4" fill="rgb(221, 236, 249)"/>
+<text x="721" y="435" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.277</text>
+<rect x="768" y="404" width="82" height="50" rx="4" fill="rgb(199, 224, 242)"/>
+<text x="809" y="435" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.613</text>
+<rect x="856" y="404" width="82" height="50" rx="4" fill="rgb(183, 216, 236)"/>
+<text x="897" y="435" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.862</text>
+<rect x="944" y="404" width="82" height="50" rx="4" fill="rgb(199, 224, 242)"/>
+<text x="985" y="435" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.624</text>
+<rect x="680" y="460" width="82" height="50" rx="4" fill="rgb(222, 237, 249)"/>
+<text x="721" y="491" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.265</text>
+<rect x="768" y="460" width="82" height="50" rx="4" fill="rgb(195, 222, 240)"/>
+<text x="809" y="491" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.676</text>
+<rect x="856" y="460" width="82" height="50" rx="4" fill="rgb(193, 221, 240)"/>
+<text x="897" y="491" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.718</text>
+<rect x="944" y="460" width="82" height="50" rx="4" fill="rgb(194, 221, 240)"/>
+<text x="985" y="491" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.694</text>
+<rect x="680" y="516" width="82" height="50" rx="4" fill="rgb(222, 236, 249)"/>
+<text x="721" y="547" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.270</text>
+<rect x="768" y="516" width="82" height="50" rx="4" fill="rgb(199, 224, 242)"/>
+<text x="809" y="547" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.615</text>
+<rect x="856" y="516" width="82" height="50" rx="4" fill="rgb(196, 223, 241)"/>
+<text x="897" y="547" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.661</text>
+<rect x="944" y="516" width="82" height="50" rx="4" fill="rgb(197, 223, 241)"/>
+<text x="985" y="547" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#16324a">0.645</text>
+<text x="680" y="601" font-family="Arial, sans-serif" font-size="13" text-anchor="start" fill="#16324a">Colour scale: 0 (light) → 2.461 (dark)</text>
+<text x="30" y="637" font-family="Arial, sans-serif" font-size="13" text-anchor="start" fill="#16324a">Same observed dates within each season for all models. DJF pools Jan, Feb and Dec from both years.</text>
+<text x="30" y="660" font-family="Arial, sans-serif" font-size="13" text-anchor="start" fill="#16324a">FAO-56 predicts reference ET₀; all errors are measured against actual ET. N/A = undefined.</text>
+</svg>
