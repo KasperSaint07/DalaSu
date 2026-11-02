@@ -1,0 +1,117 @@
+{
+  "policy_version": "US-Ne2-phenology-proxy-v1",
+  "calendar_days": 731,
+  "test_days": 561,
+  "calendar_days_without_et_test_observation": 170,
+  "calendar_coverage": {
+    "2023": {
+      "n": 365,
+      "status": {
+        "approximate": 217,
+        "unknown": 148
+      },
+      "stage": {
+        "proxy_decline": 40,
+        "proxy_greenup": 32,
+        "proxy_high_vegetation": 88,
+        "proxy_low_vegetation": 57,
+        "unknown": 148
+      },
+      "proxy_reason": {
+        "ambiguous_midrange": 72,
+        "high_training_quantile": 88,
+        "low_training_quantile": 57,
+        "negative_ndvi_change": 40,
+        "positive_ndvi_change": 32,
+        "stale_snapshot": 14,
+        "trend_gap_too_large": 62
+      },
+      "actual_stage_unknown": 365
+    },
+    "2024": {
+      "n": 366,
+      "status": {
+        "approximate": 255,
+        "unknown": 111
+      },
+      "stage": {
+        "proxy_decline": 24,
+        "proxy_greenup": 32,
+        "proxy_high_vegetation": 56,
+        "proxy_low_vegetation": 143,
+        "unknown": 111
+      },
+      "proxy_reason": {
+        "ambiguous_midrange": 104,
+        "high_training_quantile": 56,
+        "low_training_quantile": 143,
+        "negative_ndvi_change": 24,
+        "positive_ndvi_change": 32,
+        "stale_snapshot": 7
+      },
+      "actual_stage_unknown": 366
+    }
+  },
+  "test_coverage": {
+    "2023": {
+      "n": 279,
+      "status": {
+        "approximate": 149,
+        "unknown": 130
+      },
+      "stage": {
+        "proxy_decline": 35,
+        "proxy_greenup": 19,
+        "proxy_high_vegetation": 65,
+        "proxy_low_vegetation": 30,
+        "unknown": 130
+      },
+      "proxy_reason": {
+        "ambiguous_midrange": 68,
+        "high_training_quantile": 65,
+        "low_training_quantile": 30,
+        "negative_ndvi_change": 35,
+        "positive_ndvi_change": 19,
+        "stale_snapshot": 12,
+        "trend_gap_too_large": 50
+      },
+      "actual_stage_unknown": 279
+    },
+    "2024": {
+      "n": 282,
+      "status": {
+        "approximate": 202,
+        "unknown": 80
+      },
+      "stage": {
+        "proxy_decline": 23,
+        "proxy_greenup": 17,
+        "proxy_high_vegetation": 43,
+        "proxy_low_vegetation": 119,
+        "unknown": 80
+      },
+      "proxy_reason": {
+        "ambiguous_midrange": 74,
+        "high_training_quantile": 43,
+        "low_training_quantile": 119,
+        "negative_ndvi_change": 23,
+        "positive_ndvi_change": 17,
+        "stale_snapshot": 6
+      },
+      "actual_stage_unknown": 282
+    }
+  },
+  "observed_interval_count": 0,
+  "label_interval_count": 25,
+  "input_sha256": {
+    "policy.json": "c073519a69ab649a7746421e76f3ac6e8e8cbb321e3285413ef31a2ab6d948e2",
+    "sources.json": "a94e2ebe0952d6a5fccb5415d884fb43a95f70e68ed4c915df2076932141d8de",
+    "crop_context.csv": "5414509608bedf523c7e78e3989d8e57e0c72537e473b7cf47329f9008784252",
+    "observed_intervals.csv": "524cf7f46c8c20d656c22d6b3f62a777a7ed40d7062fe306df20b90374dc82d2",
+    "ndvi_us-ne2_landsat_2015_2024.csv": "f76e598175f43141b512ec3e9380ee60a78a6cabe1838afb3a56f168e243d798",
+    "test.csv": "f983a3a7ae800c31ec0fbe3032f9d99eb5b74e861bc736cbf1652da37110e89c"
+  },
+  "labelling_code_sha256": "50a7461e464b711ba0077bd4f2881ea568094dcf6c1f45e8705ed57e81d64e6f",
+  "numpy_version": "2.5.4",
+  "actual_stage_analysis_ready": false
+}

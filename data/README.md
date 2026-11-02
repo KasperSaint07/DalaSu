@@ -115,3 +115,20 @@ are `ndvi_last`, `ndvi_age_days`, `snapshot_date`, and `ndvi_image_id`.
 Before 2015-01-16 these fields are empty; 13 retained rows lack a prior snapshot.
 No future filling or interpolation is used. The maximum observed age is 207 days.
 See [DAL-30 policy, architecture and full rebuild](../docs/13-ndvi-features.md).
+
+## Phenology labels and evidence status
+
+Run `PYTHONPATH=src python -m ml.data.build_phenology` from the repository root.
+Metadata inputs are in `data/metadata/phenology/`; outputs are in
+`data/processed/phenology/`. Neither ET datasets nor NDVI exports are modified.
+
+- `daily_labels.csv`: 731 calendar days for 2023–2024.
+- `test_labels.csv`: 561 canonical ET test dates with date/crop/stage/source/status.
+- `label_intervals.csv`: non-overlapping calendar runs including unknown runs.
+- `fitted_policy.json`: training-only NDVI thresholds and frozen policy.
+- `coverage.json` / `coverage.md`: coverage, missing evidence, hashes and limitations.
+
+Actual stages remain unknown without field records. The approximate NDVI labels
+are kept separately and explicitly prefixed `proxy_`. The annual crop is inferred
+from documented rotation, not confirmed daily crop presence. See
+[full method and sources](../docs/14-phenology-labels.md).

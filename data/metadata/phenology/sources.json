@@ -1,0 +1,63 @@
+{
+  "checked_on": "2026-11-02",
+  "sources": [
+    {
+      "id": "ameriflux_rotation",
+      "url": "https://ameriflux.lbl.gov/doi/FLUXNET/US-Ne2/",
+      "kind": "site_description",
+      "finding": "Official site description reports maize in odd years and soybean in even years, with rotation restored after 2014. Used only to infer annual crop context for 2023/2024, not daily crop presence or measured phenology.",
+      "access": "Indexed official page retrieved; direct opening returned HTTP 403."
+    },
+    {
+      "id": "ameriflux_badm",
+      "url": "https://ameriflux.lbl.gov/data/aboutdata/badm-data-product/",
+      "kind": "metadata_documentation",
+      "finding": "BADM is distributed with flux products and may contain ancillary measurements as supplied by each site. No site-specific 2023/2024 BIF file is present in this repository or was retrieved in this audit.",
+      "access": "Indexed official documentation retrieved; download endpoint returned HTTP 403."
+    },
+    {
+      "id": "badm_planting",
+      "url": "https://ameriflux.lbl.gov/data/badm/badm-standards/DM_PLANTING",
+      "kind": "schema",
+      "finding": "Defines planting-event date fields and uncertainty. A schema is not evidence of a planting event at US-Ne2.",
+      "access": "Indexed official standard retrieved."
+    },
+    {
+      "id": "unl_csp",
+      "url": "http://csp.unl.edu/Public/sites.htm",
+      "kind": "potential_records",
+      "finding": "Potential management-record source; not accessible in this audit. No dates imported.",
+      "access": "Browser retrieval unavailable."
+    },
+    {
+      "id": "historical_management",
+      "url": "https://doi.org/10.1029/2022WR032967",
+      "kind": "primary_research",
+      "finding": "Reports field management data for Mead for 2001–2012. Does not establish dates for 2023–2024.",
+      "access": "Indexed publisher article retrieved."
+    },
+    {
+      "id": "historical_spectra",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10883924/",
+      "kind": "primary_research",
+      "finding": "Ground spectra dataset covers 2016–2021; older US-Ne2 crop-season dates cannot be transferred to 2023/2024.",
+      "access": "Indexed primary article retrieved."
+    },
+    {
+      "id": "landsat_dal29",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/LANDSAT_LC08_C02_T1_L2",
+      "kind": "local_satellite_export",
+      "finding": "Local DAL-29 Landsat 8/9 export and DAL-30 scene-selection rules provide NDVI only, not observed agronomic stages. See docs/12-ndvi-source-selection.md and docs/13-ndvi-features.md.",
+      "access": "Local export used; sensor details documented in DAL-29."
+    },
+    {
+      "id": "evidence_audit",
+      "url": "docs/14-phenology-labels.md",
+      "kind": "project_audit",
+      "finding": "No year-specific observed stage intervals retrieved. Unknown does not mean no crop or no vegetation.",
+      "access": "Local evidence review."
+    }
+  ],
+  "search_scope": "Official AmeriFlux site/DOI pages, BADM documentation and planting standard, UNL CSP, and primary studies with queries for US-Ne2 2023/2024 planting, harvest and phenology. Search failure is not evidence that records do not exist.",
+  "actual_stage_status": "insufficient_evidence"
+}

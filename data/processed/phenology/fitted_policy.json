@@ -1,0 +1,27 @@
+{
+  "policy": {
+    "version": "US-Ne2-phenology-proxy-v1",
+    "site_id": "US-Ne2",
+    "utc_offset_hours": -6,
+    "train_start": "2015-01-01",
+    "train_end": "2022-12-31",
+    "label_start": "2023-01-01",
+    "label_end": "2024-12-31",
+    "low_quantile": 0.25,
+    "high_quantile": 0.75,
+    "max_snapshot_age_days": 32,
+    "max_trend_gap_days": 32,
+    "trend_delta_ndvi": 0.05,
+    "quantile_method": "linear",
+    "policy_basis": "Exploratory project rule fixed before stage-specific ET error analysis; not an agronomic standard or prospective preregistration. Quantiles use unique usable training-date scenes only. Age/gap limits and trend deadband are declared constants, not fitted to ET or test errors."
+  },
+  "fit": {
+    "low_ndvi": 0.2182991098440783,
+    "high_ndvi": 0.7015693338937269,
+    "n_training_snapshots": 98,
+    "first_training_snapshot": "2015-01-16",
+    "last_training_snapshot": "2022-12-29",
+    "training_snapshots_sha256": "229af6ccd2ec5c86af299430083973881ad32455fc5e7cd27a775838aacdac47",
+    "policy_sha256": "e6245d7b197e84686c7f57509529816cf1f15ce07b051b92152c615414d52867"
+  }
+}
