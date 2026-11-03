@@ -1,0 +1,97 @@
+period,dimension,comparison,metric,better_groups,worse_groups,tied_groups,undefined_groups
+2023–2024,season,algorithm_v0,mae,"DJF, MAM, JJA, SON",none,none,none
+2023–2024,season,algorithm_v0,rmse,"DJF, MAM, JJA, SON",none,none,none
+2023–2024,season,algorithm_v0,abs_bias,"DJF, MAM, JJA, SON",none,none,none
+2023–2024,season,algorithm_v0,kge,"MAM, JJA, SON",DJF,none,none
+2023–2024,season,algorithm_ndvi,mae,"MAM, JJA, SON",DJF,none,none
+2023–2024,season,algorithm_ndvi,rmse,"MAM, JJA, SON",DJF,none,none
+2023–2024,season,algorithm_ndvi,abs_bias,"MAM, SON","DJF, JJA",none,none
+2023–2024,season,algorithm_ndvi,kge,"MAM, JJA, SON",DJF,none,none
+2023–2024,season,ndvi_rf,mae,"DJF, JJA","MAM, SON",none,none
+2023–2024,season,ndvi_rf,rmse,"DJF, JJA","MAM, SON",none,none
+2023–2024,season,ndvi_rf,abs_bias,"DJF, JJA","MAM, SON",none,none
+2023–2024,season,ndvi_rf,kge,"DJF, MAM, JJA",SON,none,none
+2023–2024,season,ndvi_xgb,mae,"DJF, MAM, JJA",SON,none,none
+2023–2024,season,ndvi_xgb,rmse,"DJF, JJA","MAM, SON",none,none
+2023–2024,season,ndvi_xgb,abs_bias,none,"DJF, MAM, JJA, SON",none,none
+2023–2024,season,ndvi_xgb,kge,"DJF, MAM, JJA",SON,none,none
+2023–2024,proxy_stage,algorithm_v0,mae,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, proxy_decline, unknown",none,none,none
+2023–2024,proxy_stage,algorithm_v0,rmse,"proxy_low_vegetation, proxy_high_vegetation, proxy_decline, unknown",proxy_greenup,none,none
+2023–2024,proxy_stage,algorithm_v0,abs_bias,"proxy_low_vegetation, proxy_decline","proxy_greenup, proxy_high_vegetation, unknown",none,none
+2023–2024,proxy_stage,algorithm_v0,kge,"proxy_low_vegetation, proxy_high_vegetation, proxy_decline, unknown",proxy_greenup,none,none
+2023–2024,proxy_stage,algorithm_ndvi,mae,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, proxy_decline, unknown",none,none,none
+2023–2024,proxy_stage,algorithm_ndvi,rmse,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, proxy_decline, unknown",none,none,none
+2023–2024,proxy_stage,algorithm_ndvi,abs_bias,"proxy_low_vegetation, proxy_decline","proxy_greenup, proxy_high_vegetation, unknown",none,none
+2023–2024,proxy_stage,algorithm_ndvi,kge,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, proxy_decline, unknown",none,none,none
+2023–2024,proxy_stage,ndvi_rf,mae,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, unknown",proxy_decline,none,none
+2023–2024,proxy_stage,ndvi_rf,rmse,"proxy_greenup, unknown","proxy_low_vegetation, proxy_high_vegetation, proxy_decline",none,none
+2023–2024,proxy_stage,ndvi_rf,abs_bias,"proxy_low_vegetation, proxy_greenup","proxy_high_vegetation, proxy_decline, unknown",none,none
+2023–2024,proxy_stage,ndvi_rf,kge,"proxy_low_vegetation, proxy_greenup, unknown","proxy_high_vegetation, proxy_decline",none,none
+2023–2024,proxy_stage,ndvi_xgb,mae,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, proxy_decline, unknown",none,none,none
+2023–2024,proxy_stage,ndvi_xgb,rmse,"proxy_low_vegetation, proxy_greenup, proxy_decline, unknown",proxy_high_vegetation,none,none
+2023–2024,proxy_stage,ndvi_xgb,abs_bias,proxy_low_vegetation,"proxy_greenup, proxy_high_vegetation, proxy_decline, unknown",none,none
+2023–2024,proxy_stage,ndvi_xgb,kge,"proxy_low_vegetation, proxy_greenup, proxy_decline, unknown",proxy_high_vegetation,none,none
+2023,season,algorithm_v0,mae,"DJF, MAM, JJA",SON,none,none
+2023,season,algorithm_v0,rmse,"DJF, MAM, JJA, SON",none,none,none
+2023,season,algorithm_v0,abs_bias,"DJF, MAM, JJA, SON",none,none,none
+2023,season,algorithm_v0,kge,"MAM, JJA, SON",DJF,none,none
+2023,season,algorithm_ndvi,mae,"MAM, JJA, SON",DJF,none,none
+2023,season,algorithm_ndvi,rmse,"MAM, JJA, SON",DJF,none,none
+2023,season,algorithm_ndvi,abs_bias,"MAM, JJA, SON",DJF,none,none
+2023,season,algorithm_ndvi,kge,"MAM, JJA, SON",DJF,none,none
+2023,season,ndvi_rf,mae,"DJF, JJA","MAM, SON",none,none
+2023,season,ndvi_rf,rmse,"DJF, JJA","MAM, SON",none,none
+2023,season,ndvi_rf,abs_bias,JJA,"DJF, MAM, SON",none,none
+2023,season,ndvi_rf,kge,"DJF, MAM, JJA",SON,none,none
+2023,season,ndvi_xgb,mae,JJA,"DJF, MAM, SON",none,none
+2023,season,ndvi_xgb,rmse,JJA,"DJF, MAM, SON",none,none
+2023,season,ndvi_xgb,abs_bias,JJA,"DJF, MAM, SON",none,none
+2023,season,ndvi_xgb,kge,"DJF, MAM, JJA",SON,none,none
+2023,proxy_stage,algorithm_v0,mae,"proxy_low_vegetation, proxy_greenup, unknown","proxy_high_vegetation, proxy_decline",none,none
+2023,proxy_stage,algorithm_v0,rmse,"proxy_low_vegetation, proxy_high_vegetation, unknown","proxy_greenup, proxy_decline",none,none
+2023,proxy_stage,algorithm_v0,abs_bias,"proxy_low_vegetation, proxy_decline, unknown","proxy_greenup, proxy_high_vegetation",none,none
+2023,proxy_stage,algorithm_v0,kge,"proxy_low_vegetation, unknown","proxy_greenup, proxy_high_vegetation, proxy_decline",none,none
+2023,proxy_stage,algorithm_ndvi,mae,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, proxy_decline, unknown",none,none,none
+2023,proxy_stage,algorithm_ndvi,rmse,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, proxy_decline, unknown",none,none,none
+2023,proxy_stage,algorithm_ndvi,abs_bias,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, proxy_decline, unknown",none,none,none
+2023,proxy_stage,algorithm_ndvi,kge,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, proxy_decline, unknown",none,none,none
+2023,proxy_stage,ndvi_rf,mae,"proxy_greenup, proxy_decline","proxy_low_vegetation, proxy_high_vegetation, unknown",none,none
+2023,proxy_stage,ndvi_rf,rmse,proxy_greenup,"proxy_low_vegetation, proxy_high_vegetation, proxy_decline, unknown",none,none
+2023,proxy_stage,ndvi_rf,abs_bias,"proxy_low_vegetation, proxy_greenup, proxy_decline, unknown",proxy_high_vegetation,none,none
+2023,proxy_stage,ndvi_rf,kge,"proxy_greenup, unknown","proxy_low_vegetation, proxy_high_vegetation, proxy_decline",none,none
+2023,proxy_stage,ndvi_xgb,mae,"proxy_low_vegetation, proxy_greenup, proxy_decline","proxy_high_vegetation, unknown",none,none
+2023,proxy_stage,ndvi_xgb,rmse,"proxy_greenup, proxy_decline","proxy_low_vegetation, proxy_high_vegetation, unknown",none,none
+2023,proxy_stage,ndvi_xgb,abs_bias,"proxy_low_vegetation, proxy_greenup, unknown","proxy_high_vegetation, proxy_decline",none,none
+2023,proxy_stage,ndvi_xgb,kge,"proxy_greenup, proxy_decline, unknown","proxy_low_vegetation, proxy_high_vegetation",none,none
+2024,season,algorithm_v0,mae,"MAM, JJA, SON",DJF,none,none
+2024,season,algorithm_v0,rmse,"MAM, JJA, SON",DJF,none,none
+2024,season,algorithm_v0,abs_bias,"DJF, MAM, JJA",SON,none,none
+2024,season,algorithm_v0,kge,"MAM, JJA, SON",DJF,none,none
+2024,season,algorithm_ndvi,mae,"MAM, SON","DJF, JJA",none,none
+2024,season,algorithm_ndvi,rmse,"DJF, MAM, JJA, SON",none,none,none
+2024,season,algorithm_ndvi,abs_bias,"DJF, MAM","JJA, SON",none,none
+2024,season,algorithm_ndvi,kge,"MAM, JJA, SON",DJF,none,none
+2024,season,ndvi_rf,mae,"DJF, MAM, JJA, SON",none,none,none
+2024,season,ndvi_rf,rmse,"DJF, MAM, JJA, SON",none,none,none
+2024,season,ndvi_rf,abs_bias,"DJF, MAM, JJA, SON",none,none,none
+2024,season,ndvi_rf,kge,"DJF, MAM, JJA, SON",none,none,none
+2024,season,ndvi_xgb,mae,"DJF, MAM, JJA, SON",none,none,none
+2024,season,ndvi_xgb,rmse,"DJF, MAM, JJA, SON",none,none,none
+2024,season,ndvi_xgb,abs_bias,"DJF, MAM, JJA, SON",none,none,none
+2024,season,ndvi_xgb,kge,"DJF, MAM, JJA, SON",none,none,none
+2024,proxy_stage,algorithm_v0,mae,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, proxy_decline, unknown",none,none,none
+2024,proxy_stage,algorithm_v0,rmse,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, proxy_decline, unknown",none,none,none
+2024,proxy_stage,algorithm_v0,abs_bias,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, proxy_decline, unknown",none,none,none
+2024,proxy_stage,algorithm_v0,kge,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, proxy_decline, unknown",none,none,none
+2024,proxy_stage,algorithm_ndvi,mae,"proxy_low_vegetation, proxy_decline, unknown","proxy_greenup, proxy_high_vegetation",none,none
+2024,proxy_stage,algorithm_ndvi,rmse,"proxy_low_vegetation, proxy_greenup, proxy_decline, unknown",proxy_high_vegetation,none,none
+2024,proxy_stage,algorithm_ndvi,abs_bias,"proxy_low_vegetation, proxy_high_vegetation, proxy_decline, unknown",proxy_greenup,none,none
+2024,proxy_stage,algorithm_ndvi,kge,"proxy_low_vegetation, proxy_greenup, proxy_decline, unknown",proxy_high_vegetation,none,none
+2024,proxy_stage,ndvi_rf,mae,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, unknown",proxy_decline,none,none
+2024,proxy_stage,ndvi_rf,rmse,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, unknown",proxy_decline,none,none
+2024,proxy_stage,ndvi_rf,abs_bias,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, unknown",proxy_decline,none,none
+2024,proxy_stage,ndvi_rf,kge,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, unknown",proxy_decline,none,none
+2024,proxy_stage,ndvi_xgb,mae,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, proxy_decline, unknown",none,none,none
+2024,proxy_stage,ndvi_xgb,rmse,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, unknown",proxy_decline,none,none
+2024,proxy_stage,ndvi_xgb,abs_bias,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, unknown",proxy_decline,none,none
+2024,proxy_stage,ndvi_xgb,kge,"proxy_low_vegetation, proxy_greenup, unknown","proxy_high_vegetation, proxy_decline",none,none

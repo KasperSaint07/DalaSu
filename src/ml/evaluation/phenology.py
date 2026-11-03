@@ -61,7 +61,8 @@ def grouped_metrics(joined):
             context = '; '.join(f'{year}/{crop}/{status}: {len(g)}'
                                 for (year, crop, status), g in cohort.assign(year=cohort.date.dt.year).groupby(['year', 'crop', 'crop_status']))
             common = dict(period=period, stage=stage, n=len(cohort), share=len(cohort)/total if total else np.nan,
-                          crop_context=context or 'no observations', small_group=len(cohort) < SMALL_N,
+                          crop_context=context or 'no observations',
+                          crop_labels='; '.join(sorted({f'{r.crop} ({r.crop_status})' for r in cohort.itertuples()})), small_group=len(cohort) < SMALL_N,
                           date_hash=hashlib.sha256('\n'.join(cohort.date.sort_values().dt.strftime('%Y-%m-%d')).encode()).hexdigest())
             coverage.append({**common, 'actual_unknown_n': int(cohort.actual_stage.eq('unknown').sum())})
             for model in MODEL_LABELS:
@@ -111,6 +112,12 @@ def table(frame):
                      ['| ' + ' | '.join(fmt(x) for x in row) + ' |' for row in frame.itertuples(index=False, name=None)])
 
 
+def crop_summary(frame, period):
+    """Crop and evidence status from input labels, never assumed by year."""
+    values = frame.loc[frame.period == period, 'crop_labels'].dropna()
+    return '; '.join(sorted({part for value in values for part in value.split('; ') if part})) or 'no observations'
+
+
 def chart(metrics, deltas):
     """Comparable scales across years; exact values and sample sizes in SVG."""
     parts = ['<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1700" viewBox="0 0 1500 1700">',
@@ -122,7 +129,7 @@ def chart(metrics, deltas):
     text(25, 30, 'NDVI vegetation proxies · errors in mm/day · * n < 30 · N/A = undefined', 20)
     for panel, period in enumerate(PERIODS):
         y = 70 + panel*535
-        crop_label = {'2023': ' · maize (inferred)', '2024': ' · soybean (inferred)', '2023–2024': ' · mixed crops'}[period]
+        crop_label = ' · ' + crop_summary(metrics, period)
         text(25, y, period + crop_label + ' — MAE (shared colour scale)', 19)
         for col, stage in enumerate(STAGES): text(340+col*225, y+28, stage.replace('proxy_', ''), 14)
         for r, model in enumerate(MODEL_LABELS):
@@ -200,8 +207,8 @@ def report(metrics, deltas, coverage, context):
               'Различия требуют учёта культуры, погодного контекста и состава выборки; '
               'они не доказывают влияние стадии само по себе.', '']
     lines += ['## Контекст и интерпретация', '', table(context), '',
-              'Культура 2023 года — предположительно кукуруза, 2024 — соя (inferred_rotation), '
-              'а не подтверждённые записи по каждому году. Год и культура смешаны: их эффекты нельзя разделить на двух годах одной станции. '
+              'Культуры по входной разметке: ' + '; '.join(f'{p}: {crop_summary(metrics, p)}' for p in PERIODS[1:]) + '. '
+              'Статус inferred_rotation означает предположение по севообороту. Год и культура смешаны: их эффекты нельзя разделить на двух годах одной станции. '
               'Сводные метрики взвешены числом дат, а не одинаковым весом годов; состав групп показан в crop_context. '
               'Различия ошибок могут отражать уровень и изменчивость ET, погоду, культуру, возраст снимков и состав доступных дат. '
               'Таблица контекста описывает только сохранённые тестовые даты; она не доказывает причинность.', '',

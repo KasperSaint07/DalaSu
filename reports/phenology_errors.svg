@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1700" viewBox="0 0 1500 1700">
 <title>NDVI proxy errors and paired differences</title><rect width="100%" height="100%" fill="white"/>
 <text x="25" y="30" font-family="Arial" font-size="20" fill="#15324b">NDVI vegetation proxies · errors in mm/day · * n &lt; 30 · N/A = undefined</text>
-<text x="25" y="70" font-family="Arial" font-size="19" fill="#15324b">2023–2024 · mixed crops — MAE (shared colour scale)</text>
+<text x="25" y="70" font-family="Arial" font-size="19" fill="#15324b">2023–2024 · maize (inferred_rotation); soybean (inferred_rotation) — MAE (shared colour scale)</text>
 <text x="340" y="98" font-family="Arial" font-size="14" fill="#15324b">low_vegetation</text>
 <text x="565" y="98" font-family="Arial" font-size="14" fill="#15324b">greenup</text>
 <text x="790" y="98" font-family="Arial" font-size="14" fill="#15324b">high_vegetation</text>
@@ -129,7 +129,7 @@
 <text x="1015" y="539" font-family="Arial" font-size="13" fill="#15324b">+0.052 / +0.087</text>
 <rect x="1230" y="516" width="215" height="33" fill="hsl(205,65%,95.75554052593941%)"/>
 <text x="1240" y="539" font-family="Arial" font-size="13" fill="#15324b">-0.003 / -0.028</text>
-<text x="25" y="605" font-family="Arial" font-size="19" fill="#15324b">2023 · maize (inferred) — MAE (shared colour scale)</text>
+<text x="25" y="605" font-family="Arial" font-size="19" fill="#15324b">2023 · maize (inferred_rotation) — MAE (shared colour scale)</text>
 <text x="340" y="633" font-family="Arial" font-size="14" fill="#15324b">low_vegetation</text>
 <text x="565" y="633" font-family="Arial" font-size="14" fill="#15324b">greenup</text>
 <text x="790" y="633" font-family="Arial" font-size="14" fill="#15324b">high_vegetation</text>
@@ -257,7 +257,7 @@
 <text x="1015" y="1074" font-family="Arial" font-size="13" fill="#15324b">+0.041 / +0.070</text>
 <rect x="1230" y="1051" width="215" height="33" fill="hsl(205,65%,95.35013066417956%)"/>
 <text x="1240" y="1074" font-family="Arial" font-size="13" fill="#15324b">-0.008 / -0.017</text>
-<text x="25" y="1140" font-family="Arial" font-size="19" fill="#15324b">2024 · soybean (inferred) — MAE (shared colour scale)</text>
+<text x="25" y="1140" font-family="Arial" font-size="19" fill="#15324b">2024 · soybean (inferred_rotation) — MAE (shared colour scale)</text>
 <text x="340" y="1168" font-family="Arial" font-size="14" fill="#15324b">low_vegetation</text>
 <text x="565" y="1168" font-family="Arial" font-size="14" fill="#15324b">greenup</text>
 <text x="790" y="1168" font-family="Arial" font-size="14" fill="#15324b">high_vegetation</text>

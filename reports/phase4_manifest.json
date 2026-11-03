@@ -1,0 +1,120 @@
+{
+  "protocol": "saved predictions only; no training, tuning, or stage changes; small_n=30",
+  "python": "3.13.15",
+  "numpy": "2.5.4",
+  "pandas": "3.0.6",
+  "features": {
+    "hybrid_rf": {
+      "schema_version": 1,
+      "model_file": "hybrid_rf.joblib",
+      "use_et0_feature": false,
+      "features": [
+        "tmax_c",
+        "tmin_c",
+        "rh_mean_pct",
+        "ws_ms",
+        "rn_mj_m2_day",
+        "p_kpa",
+        "precip_mm",
+        "doy"
+      ],
+      "wind_height_m": 6.2,
+      "target": "et_obs_mm - et0_mm",
+      "prediction": "et0_mm + residual_pred_mm"
+    },
+    "hybrid_xgb": {
+      "schema_version": 1,
+      "model_file": "hybrid_xgb.json",
+      "use_et0_feature": false,
+      "features": [
+        "tmax_c",
+        "tmin_c",
+        "rh_mean_pct",
+        "ws_ms",
+        "rn_mj_m2_day",
+        "p_kpa",
+        "precip_mm",
+        "doy"
+      ],
+      "wind_height_m": 6.2,
+      "target": "et_obs_mm - et0_mm",
+      "prediction": "et0_mm + residual_pred_mm"
+    },
+    "hybrid_ndvi_rf": {
+      "schema_version": 2,
+      "extra_features": [
+        "ndvi_last",
+        "ndvi_age_days"
+      ],
+      "serialization": "joblib",
+      "model_file": "hybrid_rf.joblib",
+      "use_et0_feature": false,
+      "features": [
+        "tmax_c",
+        "tmin_c",
+        "rh_mean_pct",
+        "ws_ms",
+        "rn_mj_m2_day",
+        "p_kpa",
+        "precip_mm",
+        "doy",
+        "ndvi_last",
+        "ndvi_age_days"
+      ],
+      "wind_height_m": 6.2,
+      "target": "et_obs_mm - et0_mm",
+      "prediction": "et0_mm + residual_pred_mm"
+    },
+    "hybrid_ndvi_xgb": {
+      "schema_version": 2,
+      "extra_features": [
+        "ndvi_last",
+        "ndvi_age_days"
+      ],
+      "serialization": "joblib",
+      "model_file": "hybrid_xgb.joblib",
+      "use_et0_feature": false,
+      "features": [
+        "tmax_c",
+        "tmin_c",
+        "rh_mean_pct",
+        "ws_ms",
+        "rn_mj_m2_day",
+        "p_kpa",
+        "precip_mm",
+        "doy",
+        "ndvi_last",
+        "ndvi_age_days"
+      ],
+      "wind_height_m": 6.2,
+      "target": "et_obs_mm - et0_mm",
+      "prediction": "et0_mm + residual_pred_mm"
+    }
+  },
+  "label_policy_versions": [
+    "US-Ne2-phenology-proxy-v1"
+  ],
+  "objectives_status": "working mapping; exact Objective 4/5 wording not supplied",
+  "sha256": {
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/data/processed/test.csv": "f983a3a7ae800c31ec0fbe3032f9d99eb5b74e861bc736cbf1652da37110e89c",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/data/processed/phenology/test_labels.csv": "99eb723475c4f0c76f778bd5f18b3aa9bf62355d5238b2267324794ca3c776bf",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/models/hybrid_rf_metadata.json": "6f11d4a07af4e3a3efcc5b4bdc0c6ee4a272d65081eb0000611202b6ace799c9",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/models/hybrid_xgb_metadata.json": "41c263cdbb7ba4c10a3e348cd4e48a5096e5c1f5245354e8468d82648f9befc4",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/models/hybrid_ndvi/hybrid_rf_metadata.json": "7236332a0af5dadb53e4971e53e67725d9aa9f00377e3be6f49e3c878784aa75",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/models/hybrid_ndvi/hybrid_xgb_metadata.json": "05b34292f5b37d80ae4dbeb1d9756c99f32e9ed02a69e162c8d773db1dc5f3c2",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/reports/predictions_fao56_et0.csv": "f95fef509051a8aaf24889c0b5ca774018d058a617e43301fd99f2cc2b5b198a",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/reports/predictions_random_forest.csv": "98618ec82f4097dcacc60bcaef504f74bcc0200811c232ced9f466bb6f929b73",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/reports/predictions_xgboost.csv": "5747697110c034f3e121caf495a1dbde301f9ffdda04a67cda1fc3a7f86e115e",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/reports/predictions_hybrid_rf.csv": "d1e56681dc6c074fe93679408d14c80af49f92ca94045ba992c68670dc98f7b1",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/reports/predictions_hybrid_xgb.csv": "2b0bfdc14752b58fc49f4c566a86572366a039b994f8d98501bcc125a04392f3",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/reports/predictions_hybrid_ndvi_rf.csv": "b5631108b3110deed5346bff7cab981453fad34e85dff79310433cdfb94dcd9c",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/reports/predictions_hybrid_ndvi_xgb.csv": "ba3228ada918322ce3b2ca7ff43c7a84a6961cde3ea333e03bf965c28836e5b2",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/src/ml/evaluation/phase4.py": "6011212c3e962fde899e3c089db49bc63b5904977d95f49ebf6929e3403ec585",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/src/ml/evaluation/metrics.py": "6d22b0378c7354b38b859c495d5f3229972f1450ee5136d62b2a2e3348c4f510",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/src/ml/evaluation/predictions.py": "2e0ef074255422dfec751f525301bbadfa83688bb619982af50fec6004aab6ab",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/src/ml/evaluation/phenology.py": "c0d19fc5aa04011ae7b132febabda649f9ce351c41d39aafef1b17e35616e9d7",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/src/ml/evaluation/seasonal.py": "319546df306f09600f803f32531edfd1d1a2998fd7eeae3ea2f1b87a857f6325",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/src/ml/evaluation/compare_models.py": "5db1c45704bb2e69ed612b396233c484fe577a31aff5ac0b6119e450e0e42ec1",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/src/ml/data/validation.py": "d4acc1dcb411ddf39c778344a2f40b7211df640388ce47d39117a21a29a97795"
+  }
+}
