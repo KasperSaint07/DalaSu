@@ -350,3 +350,23 @@ inferences, not day-specific observations. Low NDVI is not verified off-season.
 Proxy labels may support descriptive vegetation-phase analysis, but do not
 complete an analysis by actual agronomic stage. Registered field records can be
 added later using the validated observed-interval contract.
+
+## Evaluation by frozen NDVI vegetation proxies
+
+```bash
+PYTHONPATH=src python -m ml.evaluation.phenology
+```
+
+Reads the seven saved prediction files and `data/processed/phenology/test_labels.csv`;
+no training, inference or stage-boundary adjustment. Produces
+[the report](reports/phenology_comparison.md), [SVG chart](reports/phenology_errors.svg),
+and `reports/phenology_{metrics,deltas,coverage,dates,joined,context}.csv` plus an
+input/code hash manifest. Results include pooled 2023–2024 and each year separately,
+crop provenance, unknown coverage, sample counts, small-group flags (`n < 30`),
+and explicit undefined metrics. NDVI groups are approximate vegetation phases;
+low greenness does not establish actual off-season. Missing or unequal date sets
+fail validation instead of silently reducing the cohort.
+
+```bash
+PYTHONPATH=src python -m pytest tests/test_phenology_evaluation.py -q
+```

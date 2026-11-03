@@ -1,0 +1,22 @@
+{
+  "policy": "frozen proxies; no training or tuning; small_n=30",
+  "label_policy_versions": [
+    "US-Ne2-phenology-proxy-v1"
+  ],
+  "numpy": "2.5.4",
+  "pandas": "3.0.6",
+  "sha256": {
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/data/processed/test.csv": "f983a3a7ae800c31ec0fbe3032f9d99eb5b74e861bc736cbf1652da37110e89c",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/data/processed/phenology/test_labels.csv": "99eb723475c4f0c76f778bd5f18b3aa9bf62355d5238b2267324794ca3c776bf",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/reports/predictions_fao56_et0.csv": "f95fef509051a8aaf24889c0b5ca774018d058a617e43301fd99f2cc2b5b198a",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/reports/predictions_random_forest.csv": "98618ec82f4097dcacc60bcaef504f74bcc0200811c232ced9f466bb6f929b73",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/reports/predictions_xgboost.csv": "5747697110c034f3e121caf495a1dbde301f9ffdda04a67cda1fc3a7f86e115e",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/reports/predictions_hybrid_rf.csv": "d1e56681dc6c074fe93679408d14c80af49f92ca94045ba992c68670dc98f7b1",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/reports/predictions_hybrid_xgb.csv": "2b0bfdc14752b58fc49f4c566a86572366a039b994f8d98501bcc125a04392f3",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/reports/predictions_hybrid_ndvi_rf.csv": "b5631108b3110deed5346bff7cab981453fad34e85dff79310433cdfb94dcd9c",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/reports/predictions_hybrid_ndvi_xgb.csv": "ba3228ada918322ce3b2ca7ff43c7a84a6961cde3ea333e03bf965c28836e5b2",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/src/ml/evaluation/phenology.py": "e96cf0e4635fd4b54c2484cec6af1fbe5ad8bec879b2f584507cf8f91e722641",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/src/ml/evaluation/metrics.py": "6d22b0378c7354b38b859c495d5f3229972f1450ee5136d62b2a2e3348c4f510",
+    "/Users/amangeldi/Desktop/Diploma/DalaSu/DalaSu/src/ml/evaluation/predictions.py": "2e0ef074255422dfec751f525301bbadfa83688bb619982af50fec6004aab6ab"
+  }
+}
