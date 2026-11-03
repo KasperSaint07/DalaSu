@@ -386,10 +386,33 @@ validated; no training, inference, or label adjustment is performed. All metrics
 are recalculated from prediction files rather than rounded report tables.
 Bias magnitude and KGE components expose tradeoffs hidden by MAE/RMSE alone.
 
-The report uses a **provisional mapping** to Objectives 4 and 5 because their exact
-wording has not been supplied. Actual growth-stage evaluation remains an open
-part of Objective 4; NDVI proxy evaluation is explicitly separate. Results apply
-only to US-Ne2, 2023–2024, without statistical-significance claims.
+**Accepted scope (2026-11-03):** the user chose the existing frozen NDVI phases.
+Objective 4 is now “Seasonal and NDVI-derived vegetation-phase analysis”; Objective
+5 remains “Random Forest vs XGBoost as residual-correction component”. This is an
+explicit refinement of the original growth-stage objective, not a claim that
+satellite proxies are field-observed agronomic stages.
+
+The agreed phase 4 is complete: seasonal comparison, seven-model evaluation by
+NDVI proxies (`phenology_comparison.md`), and RF/XGBoost residual-correction
+comparison. Of 561 test dates, 351 (62.57%) have one of four proxy labels; 210
+(37.43%) remain unknown and are evaluated separately. Labels, thresholds and
+models were not changed to improve test results. Small groups and per-year
+coverage remain explicit. `phase4_readiness.json` separates completion of this
+scope from actual-stage evidence, which remains unavailable (0/561 days).
+
+```bash
+PYTHONPATH=src python -m ml.evaluation.seasonal
+PYTHONPATH=src python -m ml.evaluation.phenology
+PYTHONPATH=src python -m ml.evaluation.phase4
+```
+
+Field-stage support is retained as an optional future extension. Its diagnostic
+CSV is separate from the main proxy report. `--require-complete-stages` is an
+optional check for that extension and still exits 2 without full field evidence;
+it is **not** the acceptance command for the agreed NDVI scope. Daily observed
+labels, if supplied, must match registered field intervals and provenance.
+See [optional field-data retrieval](docs/15-phase4-field-data.md).
+Results apply only to US-Ne2, 2023–2024, without statistical-significance claims.
 
 ```bash
 PYTHONPATH=src python -m pytest tests/test_phase4.py tests/test_phenology_evaluation.py -q

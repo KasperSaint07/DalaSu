@@ -1,0 +1,125 @@
+{
+  "objective_4": "implemented_with_ndvi_proxies",
+  "objective_5": "implemented",
+  "actual_stage_status": "unavailable",
+  "complete_test_stage_coverage": false,
+  "periods": {
+    "2023–2024": {
+      "n": 561,
+      "observed_n": 0,
+      "unknown_n": 561,
+      "observed_share": 0.0,
+      "stage_counts": {
+        "emergence": 0,
+        "vegetative": 0,
+        "reproductive": 0,
+        "maturation": 0,
+        "off_season": 0,
+        "unknown": 561
+      },
+      "missing_stages": [
+        "emergence",
+        "vegetative",
+        "reproductive",
+        "maturation",
+        "off_season"
+      ],
+      "small_observed_groups": []
+    },
+    "2023": {
+      "n": 279,
+      "observed_n": 0,
+      "unknown_n": 279,
+      "observed_share": 0.0,
+      "stage_counts": {
+        "emergence": 0,
+        "vegetative": 0,
+        "reproductive": 0,
+        "maturation": 0,
+        "off_season": 0,
+        "unknown": 279
+      },
+      "missing_stages": [
+        "emergence",
+        "vegetative",
+        "reproductive",
+        "maturation",
+        "off_season"
+      ],
+      "small_observed_groups": []
+    },
+    "2024": {
+      "n": 282,
+      "observed_n": 0,
+      "unknown_n": 282,
+      "observed_share": 0.0,
+      "stage_counts": {
+        "emergence": 0,
+        "vegetative": 0,
+        "reproductive": 0,
+        "maturation": 0,
+        "off_season": 0,
+        "unknown": 282
+      },
+      "missing_stages": [
+        "emergence",
+        "vegetative",
+        "reproductive",
+        "maturation",
+        "off_season"
+      ],
+      "small_observed_groups": []
+    }
+  },
+  "limitation": "NDVI phases are approximate vegetation states, not observed agronomic stages. Unknown dates remain a separate group; no statistical significance is claimed.",
+  "next_action": "Use seasonal, NDVI-proxy and RF/XGBoost comparisons in the report; field records are optional for a future actual-stage extension.",
+  "scope": "seasonal_and_frozen_ndvi_proxy_analysis",
+  "scope_agreed_on": "2026-11-03",
+  "phase4_status": "complete_for_agreed_proxy_scope",
+  "proxy_periods": {
+    "2023–2024": {
+      "n": 561,
+      "stage_counts": {
+        "proxy_low_vegetation": 149,
+        "proxy_greenup": 36,
+        "proxy_high_vegetation": 108,
+        "proxy_decline": 58,
+        "unknown": 210
+      },
+      "classified_n": 351,
+      "unknown_n": 210,
+      "small_groups": []
+    },
+    "2023": {
+      "n": 279,
+      "stage_counts": {
+        "proxy_low_vegetation": 30,
+        "proxy_greenup": 19,
+        "proxy_high_vegetation": 65,
+        "proxy_decline": 35,
+        "unknown": 130
+      },
+      "classified_n": 149,
+      "unknown_n": 130,
+      "small_groups": [
+        "proxy_greenup"
+      ]
+    },
+    "2024": {
+      "n": 282,
+      "stage_counts": {
+        "proxy_low_vegetation": 119,
+        "proxy_greenup": 17,
+        "proxy_high_vegetation": 43,
+        "proxy_decline": 23,
+        "unknown": 80
+      },
+      "classified_n": 202,
+      "unknown_n": 80,
+      "small_groups": [
+        "proxy_greenup",
+        "proxy_decline"
+      ]
+    }
+  }
+}

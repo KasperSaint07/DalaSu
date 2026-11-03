@@ -88,7 +88,7 @@ def test_saved_metrics_reconcile_and_repeat(tmp_path, monkeypatch):
     inputs = [p for p in inputs if p.is_file()]
     original = {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs}
     metrics, deltas = run(output_dir=tmp_path)
-    assert len(metrics) == len(deltas) == 120
+    assert len(metrics) == 246 and len(deltas) == 192
     frames = load_canonical_predictions(required=tuple(MODEL_LABELS))
     stage_metrics, _ = grouped_metrics(join_labels(frames, pd.read_csv(LABELS)))
     seasons = seasonal_metrics(frames)
@@ -105,6 +105,10 @@ def test_saved_metrics_reconcile_and_repeat(tmp_path, monkeypatch):
             assert row.n == other.n
             for key in ['mae', 'rmse', 'bias', 'kge', 'nse']:
                 assert getattr(row, key) == pytest.approx(other[key], nan_ok=True)
+        elif row.dimension == 'actual_stage':
+            assert row.n == (len(frame) if row.group == 'unknown' else 0)
+            if row.n:
+                assert row.mae == pytest.approx(np.abs(frame.y_pred-frame.y_obs).mean())
         elif row.period == PERIODS[0]:
             other = seasons[(seasons.season == row.group)&(seasons.model == row.model)].iloc[0]
             assert row.n == other.n
@@ -112,14 +116,24 @@ def test_saved_metrics_reconcile_and_repeat(tmp_path, monkeypatch):
         if np.isfinite(row.kge):
             assert row.kge == pytest.approx(1-np.sqrt((row.kge_r-1)**2+(row.kge_alpha-1)**2+(row.kge_beta-1)**2))
     for (period, model), group in metrics.groupby(['period', 'model']):
+        if model not in MODELS:
+            continue
         overall = group[group.dimension == 'overall'].iloc[0]
-        for dimension in ['season', 'proxy_stage']:
+        for dimension in ['season', 'proxy_stage', 'actual_stage']:
             subset = group[(group.dimension == dimension)&(group.n > 0)]
             assert subset.n.sum() == overall.n
             assert np.average(subset.mae, weights=subset.n) == pytest.approx(overall.mae)
             assert np.sqrt(np.average(subset.rmse**2, weights=subset.n)) == pytest.approx(overall.rmse)
     coverage = pd.read_csv(tmp_path/'phase4_coverage.csv')
-    assert coverage.query("group == 'unknown'").n.tolist() == [210, 130, 80]
+    assert coverage.query("dimension == 'proxy_stage' and group == 'unknown'").n.tolist() == [210, 130, 80]
+    readiness = json.loads((tmp_path/'phase4_readiness.json').read_text())
+    assert readiness['actual_stage_status'] == 'unavailable'
+    assert readiness['phase4_status'] == 'complete_for_agreed_proxy_scope'
+    assert readiness['objective_4'] == 'implemented_with_ndvi_proxies'
+    assert readiness['proxy_periods']['2023–2024']['classified_n'] == 351
+    assert readiness['proxy_periods']['2023–2024']['unknown_n'] == 210
+    assert not readiness['complete_test_stage_coverage']
+    assert readiness['periods']['2023–2024']['unknown_n'] == 561
     for row in deltas.itertuples():
         subset = metrics[(metrics.period == row.period)&(metrics.dimension == row.dimension)&(metrics.group == row.group)].set_index('model')
         for key in ['mae', 'rmse', 'bias', 'abs_bias', 'kge']:
@@ -151,7 +165,7 @@ def test_report_with_undefined_overall_kge(tmp_path, finite_model):
     overall = metrics.query("period == '2023–2024' and dimension == 'overall'")
     report = (output/'phase4_summary.md').read_text()
     assert 'N/A' in report
-    assert len(list(output.iterdir())) == 10
+    assert len(list(output.iterdir())) == 12
     for path in output.glob('*.svg'):
         ET.fromstring(path.read_text())
     if finite_model is None:

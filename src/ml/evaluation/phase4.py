@@ -13,6 +13,7 @@ import pandas as pd
 
 from ..data.validation import validate_output_paths
 from .compare_models import MODEL_LABELS
+from .actual_stages import ACTUAL_STAGES, DEFAULT_METADATA, stage_readiness, validate_stage_evidence
 from .metrics import evaluate
 from .phenology import LABELS, PERIODS, ROOT, SCORES, SMALL_N, STAGES, join_labels, table
 from .predictions import DEFAULT_PREDICTIONS_DIR, DEFAULT_TEST_PATH, load_canonical_predictions
@@ -25,8 +26,30 @@ PAIRS = (
     ('ndvi_rf', 'hybrid_ndvi_rf', 'hybrid_rf'),
     ('ndvi_xgb', 'hybrid_ndvi_xgb', 'hybrid_xgb'),
 )
-GROUPS = [('overall', 'all')] + [('season', s) for s in SEASON_ORDER] + [('proxy_stage', s) for s in STAGES]
+GROUPS = ([('overall', 'all')] + [('season', s) for s in SEASON_ORDER]
+          + [('proxy_stage', s) for s in STAGES] + [('actual_stage', s) for s in ACTUAL_STAGES])
 COMPONENTS = ('kge_r', 'kge_alpha', 'kge_beta')
+
+
+def phase4_readiness(dates):
+    """The accepted scope uses frozen NDVI proxies, not observed crop stages."""
+    result = stage_readiness(dates)
+    proxy_periods = {}
+    for period in PERIODS:
+        subset = dates if period == PERIODS[0] else dates[dates.date.dt.year == int(period)]
+        counts = {stage: int(subset.proxy_stage.eq(stage).sum()) for stage in STAGES}
+        proxy_periods[period] = dict(n=len(subset), stage_counts=counts,
+                                    classified_n=len(subset)-counts['unknown'],
+                                    unknown_n=counts['unknown'],
+                                    small_groups=[s for s in STAGES if 0 < counts[s] < SMALL_N])
+    available = all(proxy_periods[PERIODS[0]]['stage_counts'][s] > 0 for s in STAGES if s != 'unknown')
+    result.update(scope='seasonal_and_frozen_ndvi_proxy_analysis', scope_agreed_on='2026-11-03',
+                  objective_4='implemented_with_ndvi_proxies' if available else 'insufficient_proxy_groups',
+                  phase4_status='complete_for_agreed_proxy_scope' if available else 'incomplete_proxy_coverage',
+                  proxy_periods=proxy_periods,
+                  limitation='NDVI phases are approximate vegetation states, not observed agronomic stages. Unknown dates remain a separate group; no statistical significance is claimed.',
+                  next_action='Use seasonal, NDVI-proxy and RF/XGBoost comparisons in the report; field records are optional for a future actual-stage extension.')
+    return result
 
 
 def validate_features(models_dir):
@@ -102,7 +125,7 @@ def aggregate(joined):
                              'proxy_unknown_n': int(cohort.proxy_stage.eq('unknown').sum()),
                              'actual_unknown_n': int(cohort.actual_stage.eq('unknown').sum()),
                              'actual_observed_n': int((cohort.status.eq('observed') & cohort.actual_stage.ne('unknown')).sum())})
-            for model in MODELS:
+            for model in (MODEL_LABELS if dimension == 'actual_stage' else MODELS):
                 sub = data[(data.model == model) & data.date.isin(cohort.date)]
                 if len(sub) != len(cohort) or set(sub.date) != set(cohort.date):
                     raise ValueError('Unequal dates in group')
@@ -148,7 +171,9 @@ def stability(deltas):
 
 def render_chart(deltas, period):
     selected = deltas[deltas.period == period]
-    width, height = 1300, 1120
+    chart_groups = [(d, g) for d, g in GROUPS if d != 'actual_stage']
+    panel_height = 50 + ((len(chart_groups) + 4) // 5)*92
+    width, height = 1300, 110 + len(PAIRS)*panel_height
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}">',
              '<title>Phase 4 paired errors</title><rect width="100%" height="100%" fill="white"/>']
     def text(x, y, value, size=13):
@@ -157,29 +182,39 @@ def render_chart(deltas, period):
     text(25, 56, 'Algorithm: XGBoost − RF. NDVI: with NDVI − v0. Negative = lower error; * n < 30.')
     scale = max(float(deltas[['delta_mae', 'delta_rmse']].abs().max().max()), 1e-12)
     for panel, (comparison, _, _) in enumerate(PAIRS):
-        y = 90 + panel*250
+        y = 90 + panel*panel_height
         text(25, y, comparison, 18)
-        for index, (dimension, group) in enumerate(GROUPS):
+        for index, (dimension, group) in enumerate(chart_groups):
             col, row_index = index % 5, index // 5
             x, yy = 25 + col*255, y+20+row_index*92
             row = selected[(selected.dimension == dimension)&(selected.group == group)&(selected.comparison == comparison)].iloc[0]
-            text(x, yy+15, group.replace('proxy_', '')+f' · n={row.n}{"*" if row.small_group else ""}')
+            label = ('actual: ' if dimension == 'actual_stage' else '') + group.replace('proxy_', '')
+            text(x, yy+15, label+f' · n={row.n}{"*" if row.small_group else ""}')
             val = row.delta_mae
             fill = f'hsl({205 if val < 0 else 25},60%,{96-45*abs(val)/scale}%)' if np.isfinite(val) else '#eee'
             parts.append(f'<rect x="{x}" y="{yy+25}" width="240" height="42" fill="{fill}"/>')
             text(x+12, yy+51, f'{val:+.4f} / {row.delta_rmse:+.4f}' if np.isfinite(val) else 'N/A', 16)
-    text(25, 1090, 'Colour encodes ΔMAE only; common scale across years. NDVI proxies are not observed crop stages.')
+    text(25, height-15, 'Colour encodes ΔMAE only; common scale across years. NDVI proxies are not observed crop stages.')
     return '\n'.join(parts+['</svg>'])
 
 
-def render_report(metrics, deltas, coverage, stable, metadata):
+def render_report(metrics, deltas, coverage, stable, metadata, readiness):
     overall = metrics[(metrics.period == PERIODS[0]) & (metrics.dimension == 'overall')]
     overall_deltas = deltas[(deltas.period == PERIODS[0]) & (deltas.dimension == 'overall')]
     total = coverage[(coverage.period == PERIODS[0]) & (coverage.dimension == 'overall')].iloc[0]
     best = overall.loc[overall.mae.idxmin()]
+    # Field-stage diagnostics remain in CSV, outside the agreed proxy report.
+    stable = stable[stable.dimension != 'actual_stage']
+    deltas = deltas[deltas.dimension != 'actual_stage']
     lines = ['# Итоговый отчёт фазы 4 — коррекция остатка FAO-56', '',
              f'US-Ne2, тест 2023–2024, n={total.n}. Минимальная общая MAE: {MODEL_LABELS[best.model]}, '
              f'{best.mae:.6f} мм/день. Это описательный результат на сохранённой тестовой выборке, не доказательство статистического превосходства.', '',
+             f'**Статус фазы 4: {readiness["phase4_status"]}.** '
+             'По решению пользователя от 03.11.2026 используются сезонный анализ и уже зафиксированные NDVI-фазы. '
+             'Это уточнение исходного growth-stage analysis: NDVI-фазы — приближённые состояния растительности, '
+             'а не подтверждённые агрономические стадии. Полевые записи не являются условием завершения согласованного объёма. '
+             f'NDVI-фаза определена для {total.n-total.proxy_unknown_n}/{total.n} дней; остальные сохранены как unknown. '
+             'Статус и покрытие по годам: `phase4_readiness.json`.', '',
              '## Протокол', '',
              'Оценивается итоговая ET = FAO-56 ET₀ + прогноз остатка, а не остаток сам по себе. '
              'RF и XGBoost сравниваются внутри одинаковых наборов признаков; соответствие проверяется по метаданным. '
@@ -240,18 +275,19 @@ def render_report(metrics, deltas, coverage, stable, metadata):
                   table(deltas[deltas.period == period][['dimension', 'group', 'comparison', 'n', 'small_group',
                         'delta_mae', 'delta_rmse', 'delta_bias', 'delta_abs_bias', 'delta_kge']]), '']
     lines += ['## Покрытие, культура и неизвестные стадии', '',
-              table(coverage.drop(columns='date_hash')), '',
+              table(coverage[coverage.dimension != 'actual_stage'].drop(columns='date_hash')), '',
               f'Unknown NDVI: {total.proxy_unknown_n}/{total.n} ({100*total.proxy_unknown_n/total.n:.2f}%). '
               f'Неизвестные фактические стадии: {total.actual_unknown_n}/{total.n}; подтверждённые: {total.actual_observed_n}. '
               'Unknown включён в метрики отдельной группой. Культуры и статусы в таблице получены из разметки; '
               'inferred_rotation означает предположение по севообороту, а не полевое подтверждение.', '',
-              '## Objective 4 — рабочее соответствие: оценка по сезонам и стадиям', '',
-              '**Точная формулировка Objective 4 не предоставлена; соответствие основано на описании задачи.** '
-              'Сезонное сравнение и описательный анализ по приближённым NDVI-фазам выполнены. '
-              'Часть о фактических стадиях роста и подтверждённом вне вегетационном периоде остаётся незакрытой: '
-              'NDVI-фазы не заменяют полевые наблюдения. Низкий NDVI не доказывает отсутствие культуры.', '',
-              '## Objective 5 — рабочее соответствие: выбор алгоритма коррекции и вклад NDVI', '',
-              '**Точная формулировка Objective 5 не предоставлена; окончательная привязка требует её сверки.** '
+              '## Objective 4 — Seasonal and NDVI-derived vegetation-phase analysis', '',
+              'В согласованном объёме выполнены сезонный анализ и сравнение по фиксированным NDVI-фазам: '
+              'низкая растительность, рост NDVI, высокая растительность, снижение NDVI и отдельная группа unknown. '
+              'Правила разметки не подбирались по ошибкам holdout и в этой работе не менялись. '
+              'Низкий NDVI не доказывает отсутствие культуры; высокий NDVI не устанавливает цветение. '
+              'Фактические стадии остаются неподтверждёнными и не входят в критерий завершения выбранного варианта. '
+              'Покрытие и малые группы по годам перечислены в phase4_readiness.json.', '',
+              '## Objective 5 — Random Forest vs XGBoost as residual-correction component', '',
               f'По общей MAE среди четырёх гибридов лучший результат у {MODEL_LABELS[best.model]}. '
               'Попарные преимущества и исключения перечислены для каждой версии, сезона, NDVI-фазы и года. '
               'Вклад NDVI оценён отдельно для RF и XGBoost; вывод о пользе ограничен конкретными метриками, '
@@ -268,6 +304,8 @@ def render_report(metrics, deltas, coverage, stable, metadata):
               '- [Все метрики и KGE-компоненты](phase4_metrics.csv)',
               '- [Все попарные разности](phase4_deltas.csv)',
               '- [Устойчивость преимуществ](phase4_stability.csv)',
+              '- [Дополнительная диагностика фактических стадий (вне согласованного объёма)](phase4_actual_stage_metrics.csv)',
+              '- [Статус полноты и покрытие стадий](phase4_readiness.json)',
               '- [Аудит дат](phase4_dates.csv) и [покрытие](phase4_coverage.csv)',
               '- [Входы, метаданные и хеши кода](phase4_manifest.json)',
               '- [Общее сравнение фазы 3](fao56_ml_comparison.md)',
@@ -287,28 +325,32 @@ def render_report(metrics, deltas, coverage, stable, metadata):
 
 
 def run(predictions_dir=DEFAULT_PREDICTIONS_DIR, test_path=DEFAULT_TEST_PATH, labels_path=LABELS,
-        models_dir=ROOT/'models', output_dir=DEFAULT_PREDICTIONS_DIR):
+        models_dir=ROOT/'models', output_dir=DEFAULT_PREDICTIONS_DIR, metadata_dir=DEFAULT_METADATA):
     metadata, metadata_paths = validate_features(models_dir)
     frames = load_canonical_predictions(predictions_dir, test_path, required=tuple(MODEL_LABELS))
     joined = join_labels({m: frames[m] for m in MODEL_LABELS}, pd.read_csv(labels_path))
+    evidence_paths = validate_stage_evidence(joined.drop_duplicates('date'), metadata_dir)
     metrics, coverage = aggregate(joined)
     deltas = differences(metrics)
     stable = stability(deltas)
     dates = joined.drop_duplicates('date').drop(columns=['model', 'y_pred']).sort_values('date')
     dates['season'] = assign_seasons(dates.date)
+    readiness = phase4_readiness(dates)
     output = Path(output_dir)
     products = {f'phase4_{name}.csv': frame.to_csv(index=False, na_rep='NaN', date_format='%Y-%m-%d')
                 for name, frame in [('metrics', metrics), ('deltas', deltas), ('coverage', coverage), ('stability', stable), ('dates', dates)]}
-    products['phase4_summary.md'] = render_report(metrics, deltas, coverage, stable, metadata)
+    products['phase4_actual_stage_metrics.csv'] = metrics[metrics.dimension == 'actual_stage'].to_csv(index=False, na_rep='NaN')
+    products['phase4_readiness.json'] = json.dumps(readiness, indent=2, ensure_ascii=False)+'\n'
+    products['phase4_summary.md'] = render_report(metrics, deltas, coverage, stable, metadata, readiness)
     for period in PERIODS: products[f'phase4_deltas_{period}.svg'] = render_chart(deltas, period)
-    inputs = [Path(test_path), Path(labels_path), *metadata_paths]
+    inputs = [Path(test_path), Path(labels_path), *metadata_paths, *evidence_paths]
     inputs += [Path(predictions_dir)/f'predictions_{m}.csv' for m in MODEL_LABELS]
     inputs += [Path(__file__).with_name(f'{name}.py') for name in ['phase4', 'metrics', 'predictions', 'phenology', 'seasonal', 'compare_models']]
-    inputs += [ROOT/'src/ml/data/validation.py']
+    inputs += [Path(__file__).with_name('actual_stages.py'), ROOT/'src/ml/data/validation.py', ROOT/'src/ml/data/build_phenology.py']
     manifest = dict(protocol='saved predictions only; no training, tuning, or stage changes; small_n=30',
                     python=platform.python_version(), numpy=np.__version__, pandas=pd.__version__,
                     features=metadata, label_policy_versions=sorted(dates.policy_version.unique().tolist()),
-                    objectives_status='working mapping; exact Objective 4/5 wording not supplied',
+                    objectives_status={k: readiness[k] for k in ('objective_4', 'objective_5')},
                     sha256={str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs})
     products['phase4_manifest.json'] = json.dumps(manifest, indent=2, ensure_ascii=False)+'\n'
     validate_output_paths(inputs, [output/name for name in products])
@@ -320,10 +362,19 @@ def run(predictions_dir=DEFAULT_PREDICTIONS_DIR, test_path=DEFAULT_TEST_PATH, la
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name, default in [('predictions-dir', DEFAULT_PREDICTIONS_DIR), ('test-path', DEFAULT_TEST_PATH),
-                          ('labels-path', LABELS), ('models-dir', ROOT/'models'), ('output-dir', DEFAULT_PREDICTIONS_DIR)]:
+                          ('labels-path', LABELS), ('models-dir', ROOT/'models'), ('output-dir', DEFAULT_PREDICTIONS_DIR),
+                          ('metadata-dir', DEFAULT_METADATA)]:
         parser.add_argument('--'+name, type=Path, default=default)
-    metrics, deltas = run(**vars(parser.parse_args()))
+    parser.add_argument('--require-complete-stages', action='store_true',
+                        help='write diagnostics, then exit 2 if any test day lacks an observed actual stage')
+    args = vars(parser.parse_args())
+    require_complete = args.pop('require_complete_stages')
+    metrics, deltas = run(**args)
     print(f'Phase 4: {len(metrics)} metric rows, {len(deltas)} comparisons; report and SVGs written.')
+    readiness = json.loads((Path(args['output_dir'])/'phase4_readiness.json').read_text())
+    print(f'Actual growth-stage evidence: {readiness["actual_stage_status"]}.')
+    if require_complete and not readiness['complete_test_stage_coverage']:
+        parser.exit(2, 'Incomplete field-stage evidence. Diagnostics written; see phase4_readiness.json.\n')
 
 
 if __name__ == '__main__':
