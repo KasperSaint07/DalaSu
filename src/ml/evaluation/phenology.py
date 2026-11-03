@@ -13,6 +13,7 @@ import pandas as pd
 from .compare_models import MODEL_LABELS
 from .metrics import evaluate
 from .predictions import DEFAULT_PREDICTIONS_DIR, DEFAULT_TEST_PATH, load_canonical_predictions
+from .actual_stages import validate_stage_labels
 
 ROOT = Path(__file__).resolve().parents[3]
 LABELS = ROOT / 'data/processed/phenology/test_labels.csv'
@@ -38,6 +39,7 @@ def join_labels(frames, labels):
         raise ValueError('Missing labels or duplicate dates')
     if not labels.proxy_stage.isin(STAGES).all():
         raise ValueError('Unsupported proxy stage')
+    validate_stage_labels(labels)
     reference = next(iter(frames.values()))
     if set(labels.date) != set(reference.date):
         raise ValueError('Label dates must equal canonical prediction dates')

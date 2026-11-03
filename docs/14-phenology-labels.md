@@ -1,5 +1,20 @@
 # US-Ne2 crop-stage evidence and NDVI proxy labels
 
+## Согласованный объём фазы 4 — 03.11.2026
+
+Пользователь выбрал уже готовые NDVI-фазы. Фаза 4 включает сезонный анализ,
+анализ по приближённым спутниковым фазам растительности и сравнение RF/XGBoost.
+В этом объёме работа выполнена; получение полевых записей не требуется.
+Фактические стадии по-прежнему неизвестны. Ниже сохранены методика и материалы
+для необязательного будущего расширения по полевым наблюдениям. Указания о
+незакрытом анализе фактических стадий относятся к исходной, более строгой цели.
+
+
+Update 2026-11-03: field-stage evaluation is now implemented in phase4 for all
+seven models, separately from proxies. It reconciles daily labels with registered
+field intervals and emits an explicit readiness report. The evidence gap remains;
+see [retrieval steps and an unsent data-request draft](15-phase4-field-data.md).
+
 ## Decision and status (2026-11-02)
 
 No verifiable, year-specific planting, harvest or field-observed phenological

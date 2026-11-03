@@ -31,6 +31,22 @@ period,dimension,comparison,metric,better_groups,worse_groups,tied_groups,undefi
 2023–2024,proxy_stage,ndvi_xgb,rmse,"proxy_low_vegetation, proxy_greenup, proxy_decline, unknown",proxy_high_vegetation,none,none
 2023–2024,proxy_stage,ndvi_xgb,abs_bias,proxy_low_vegetation,"proxy_greenup, proxy_high_vegetation, proxy_decline, unknown",none,none
 2023–2024,proxy_stage,ndvi_xgb,kge,"proxy_low_vegetation, proxy_greenup, proxy_decline, unknown",proxy_high_vegetation,none,none
+2023–2024,actual_stage,algorithm_v0,mae,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023–2024,actual_stage,algorithm_v0,rmse,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023–2024,actual_stage,algorithm_v0,abs_bias,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023–2024,actual_stage,algorithm_v0,kge,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023–2024,actual_stage,algorithm_ndvi,mae,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023–2024,actual_stage,algorithm_ndvi,rmse,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023–2024,actual_stage,algorithm_ndvi,abs_bias,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023–2024,actual_stage,algorithm_ndvi,kge,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023–2024,actual_stage,ndvi_rf,mae,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023–2024,actual_stage,ndvi_rf,rmse,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023–2024,actual_stage,ndvi_rf,abs_bias,none,unknown,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023–2024,actual_stage,ndvi_rf,kge,none,unknown,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023–2024,actual_stage,ndvi_xgb,mae,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023–2024,actual_stage,ndvi_xgb,rmse,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023–2024,actual_stage,ndvi_xgb,abs_bias,none,unknown,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023–2024,actual_stage,ndvi_xgb,kge,none,unknown,none,"emergence, vegetative, reproductive, maturation, off_season"
 2023,season,algorithm_v0,mae,"DJF, MAM, JJA",SON,none,none
 2023,season,algorithm_v0,rmse,"DJF, MAM, JJA, SON",none,none,none
 2023,season,algorithm_v0,abs_bias,"DJF, MAM, JJA, SON",none,none,none
@@ -63,6 +79,22 @@ period,dimension,comparison,metric,better_groups,worse_groups,tied_groups,undefi
 2023,proxy_stage,ndvi_xgb,rmse,"proxy_greenup, proxy_decline","proxy_low_vegetation, proxy_high_vegetation, unknown",none,none
 2023,proxy_stage,ndvi_xgb,abs_bias,"proxy_low_vegetation, proxy_greenup, unknown","proxy_high_vegetation, proxy_decline",none,none
 2023,proxy_stage,ndvi_xgb,kge,"proxy_greenup, proxy_decline, unknown","proxy_low_vegetation, proxy_high_vegetation",none,none
+2023,actual_stage,algorithm_v0,mae,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023,actual_stage,algorithm_v0,rmse,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023,actual_stage,algorithm_v0,abs_bias,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023,actual_stage,algorithm_v0,kge,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023,actual_stage,algorithm_ndvi,mae,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023,actual_stage,algorithm_ndvi,rmse,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023,actual_stage,algorithm_ndvi,abs_bias,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023,actual_stage,algorithm_ndvi,kge,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023,actual_stage,ndvi_rf,mae,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023,actual_stage,ndvi_rf,rmse,none,unknown,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023,actual_stage,ndvi_rf,abs_bias,none,unknown,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023,actual_stage,ndvi_rf,kge,none,unknown,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023,actual_stage,ndvi_xgb,mae,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023,actual_stage,ndvi_xgb,rmse,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023,actual_stage,ndvi_xgb,abs_bias,none,unknown,none,"emergence, vegetative, reproductive, maturation, off_season"
+2023,actual_stage,ndvi_xgb,kge,none,unknown,none,"emergence, vegetative, reproductive, maturation, off_season"
 2024,season,algorithm_v0,mae,"MAM, JJA, SON",DJF,none,none
 2024,season,algorithm_v0,rmse,"MAM, JJA, SON",DJF,none,none
 2024,season,algorithm_v0,abs_bias,"DJF, MAM, JJA",SON,none,none
@@ -95,3 +127,19 @@ period,dimension,comparison,metric,better_groups,worse_groups,tied_groups,undefi
 2024,proxy_stage,ndvi_xgb,rmse,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, unknown",proxy_decline,none,none
 2024,proxy_stage,ndvi_xgb,abs_bias,"proxy_low_vegetation, proxy_greenup, proxy_high_vegetation, unknown",proxy_decline,none,none
 2024,proxy_stage,ndvi_xgb,kge,"proxy_low_vegetation, proxy_greenup, unknown","proxy_high_vegetation, proxy_decline",none,none
+2024,actual_stage,algorithm_v0,mae,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2024,actual_stage,algorithm_v0,rmse,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2024,actual_stage,algorithm_v0,abs_bias,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2024,actual_stage,algorithm_v0,kge,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2024,actual_stage,algorithm_ndvi,mae,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2024,actual_stage,algorithm_ndvi,rmse,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2024,actual_stage,algorithm_ndvi,abs_bias,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2024,actual_stage,algorithm_ndvi,kge,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2024,actual_stage,ndvi_rf,mae,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2024,actual_stage,ndvi_rf,rmse,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2024,actual_stage,ndvi_rf,abs_bias,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2024,actual_stage,ndvi_rf,kge,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2024,actual_stage,ndvi_xgb,mae,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2024,actual_stage,ndvi_xgb,rmse,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2024,actual_stage,ndvi_xgb,abs_bias,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"
+2024,actual_stage,ndvi_xgb,kge,unknown,none,none,"emergence, vegetative, reproductive, maturation, off_season"

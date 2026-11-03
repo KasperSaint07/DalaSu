@@ -121,3 +121,16 @@ Proposed design:
 | Field pilot | Both | After a pilot agreement is concluded |
 
 Owners follow the roles in [the proposal](01-project-proposal.md) and are to be confirmed by the team.
+
+## Phase 4 scope update — 2026-11-03
+
+The user selected the existing frozen NDVI vegetation phases instead of requiring
+field-observed growth stages. Objective 4 is “Seasonal and NDVI-derived
+vegetation-phase analysis”; Objective 5 compares RF and XGBoost residual
+correction. The original agronomic-stage objective has thus been narrowed.
+Reports: `seasonal_comparison.md`, `phenology_comparison.md`, `phase4_summary.md`.
+Four proxy phases cover 351/561 holdout dates; 210 unknown dates are retained as
+a separate group. Use pooled and per-year metrics with sample counts and small
+group flags. Proxy thresholds and model parameters remain unchanged. The phase
+is complete for this agreed descriptive scope, without claims of observed
+agronomic stages, significance, or transferability to Kazakhstan.

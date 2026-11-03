@@ -9,6 +9,12 @@ period,dimension,group,n,date_hash,small_group,crop_context,share,proxy_unknown_
 2023–2024,proxy_stage,proxy_high_vegetation,108,cc9b154457926f66a0d9e157e3d118e0957d10e1faf126c23afbb9b1d830bdc4,False,2023/maize/inferred_rotation: 65; 2024/soybean/inferred_rotation: 43,0.1925133689839572,0,108,0
 2023–2024,proxy_stage,proxy_decline,58,d09ed75f2e4102c2c82cb59093d5c78c34df8653ca4f885e86ea67563e15be11,False,2023/maize/inferred_rotation: 35; 2024/soybean/inferred_rotation: 23,0.10338680926916222,0,58,0
 2023–2024,proxy_stage,unknown,210,ef0b3acb65f575d6061d7b600bcb74aaef91917d553604bab26d76deaab0874d,False,2023/maize/inferred_rotation: 130; 2024/soybean/inferred_rotation: 80,0.37433155080213903,210,210,0
+2023–2024,actual_stage,emergence,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,True,no observations,0.0,0,0,0
+2023–2024,actual_stage,vegetative,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,True,no observations,0.0,0,0,0
+2023–2024,actual_stage,reproductive,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,True,no observations,0.0,0,0,0
+2023–2024,actual_stage,maturation,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,True,no observations,0.0,0,0,0
+2023–2024,actual_stage,off_season,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,True,no observations,0.0,0,0,0
+2023–2024,actual_stage,unknown,561,ecf7682306d5ccc72414b41655a258d323cd9870663ea6056b9e16a690f5b0e1,False,2023/maize/inferred_rotation: 279; 2024/soybean/inferred_rotation: 282,1.0,210,561,0
 2023,overall,all,279,c45886c920804ceee2d9f2d0caa97db671224c6f302bf7f86261c3d2454820aa,False,2023/maize/inferred_rotation: 279,1.0,130,279,0
 2023,season,DJF,82,f2bc89b619559bcfe264aaf7187ece9cb2218e8b9ef5df8905cbadb51a7152c3,False,2023/maize/inferred_rotation: 82,0.2939068100358423,82,82,0
 2023,season,MAM,57,b670941b22cc0126da8dde127627314a93b283d585def4dcc43d1fd10ff97fd1,False,2023/maize/inferred_rotation: 57,0.20430107526881722,27,57,0
@@ -19,6 +25,12 @@ period,dimension,group,n,date_hash,small_group,crop_context,share,proxy_unknown_
 2023,proxy_stage,proxy_high_vegetation,65,3aa88d77e09c9f812f023d712a478a209a2362ab921e9c1f749ee282113b35e7,False,2023/maize/inferred_rotation: 65,0.23297491039426524,0,65,0
 2023,proxy_stage,proxy_decline,35,387c3eacfcd376d3982191bc0214cfdf48c31e9c73499118f7350688e3ba2620,False,2023/maize/inferred_rotation: 35,0.12544802867383512,0,35,0
 2023,proxy_stage,unknown,130,28de8664ad90f0c47b72fe5509789e6ddc9ed4aa8642a31cb26b84a1dfdac6f6,False,2023/maize/inferred_rotation: 130,0.4659498207885305,130,130,0
+2023,actual_stage,emergence,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,True,no observations,0.0,0,0,0
+2023,actual_stage,vegetative,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,True,no observations,0.0,0,0,0
+2023,actual_stage,reproductive,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,True,no observations,0.0,0,0,0
+2023,actual_stage,maturation,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,True,no observations,0.0,0,0,0
+2023,actual_stage,off_season,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,True,no observations,0.0,0,0,0
+2023,actual_stage,unknown,279,c45886c920804ceee2d9f2d0caa97db671224c6f302bf7f86261c3d2454820aa,False,2023/maize/inferred_rotation: 279,1.0,130,279,0
 2024,overall,all,282,a5c7a20ca87785a9640e147020ab76fa6b10379832589f9da469c52123772d75,False,2024/soybean/inferred_rotation: 282,1.0,80,282,0
 2024,season,DJF,84,2bd2834eaeef1093bc517b20f594e9e05ad1a676922d23af2c38ae5148211d46,False,2024/soybean/inferred_rotation: 84,0.2978723404255319,16,84,0
 2024,season,MAM,62,955a81d86475df76093f9bf305f7b52563b34889340343077016977015e90f17,False,2024/soybean/inferred_rotation: 62,0.2198581560283688,18,62,0
@@ -29,3 +41,9 @@ period,dimension,group,n,date_hash,small_group,crop_context,share,proxy_unknown_
 2024,proxy_stage,proxy_high_vegetation,43,4f864f143a1a0a0489499a1c9a195949d0e2248974d75a836ac4140d98287c06,False,2024/soybean/inferred_rotation: 43,0.1524822695035461,0,43,0
 2024,proxy_stage,proxy_decline,23,8acd88af2e2bd8545195dcdd45c6adfd9913587705d38003e8dd5f6ed0ba9510,True,2024/soybean/inferred_rotation: 23,0.08156028368794327,0,23,0
 2024,proxy_stage,unknown,80,f0f4423728af02f3814a26c3977e5b5c6c947b6642774be0b85cded7bd7ee122,False,2024/soybean/inferred_rotation: 80,0.28368794326241137,80,80,0
+2024,actual_stage,emergence,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,True,no observations,0.0,0,0,0
+2024,actual_stage,vegetative,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,True,no observations,0.0,0,0,0
+2024,actual_stage,reproductive,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,True,no observations,0.0,0,0,0
+2024,actual_stage,maturation,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,True,no observations,0.0,0,0,0
+2024,actual_stage,off_season,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,True,no observations,0.0,0,0,0
+2024,actual_stage,unknown,282,a5c7a20ca87785a9640e147020ab76fa6b10379832589f9da469c52123772d75,False,2024/soybean/inferred_rotation: 282,1.0,80,282,0
