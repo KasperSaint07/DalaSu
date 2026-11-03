@@ -1,0 +1,16 @@
+period,stage,n,share,crop_context,small_group,date_hash,actual_unknown_n
+2023–2024,proxy_low_vegetation,149,0.26559714795008915,2023/maize/inferred_rotation: 30; 2024/soybean/inferred_rotation: 119,False,ead86d688d53abe153e7ec3168dbf806c7349d408f52cebfda8d1380d321ade2,149
+2023–2024,proxy_greenup,36,0.06417112299465241,2023/maize/inferred_rotation: 19; 2024/soybean/inferred_rotation: 17,False,9941ed4df9fee2c1077010da4030be25b7878d36554790d7fc770220859db69b,36
+2023–2024,proxy_high_vegetation,108,0.1925133689839572,2023/maize/inferred_rotation: 65; 2024/soybean/inferred_rotation: 43,False,cc9b154457926f66a0d9e157e3d118e0957d10e1faf126c23afbb9b1d830bdc4,108
+2023–2024,proxy_decline,58,0.10338680926916222,2023/maize/inferred_rotation: 35; 2024/soybean/inferred_rotation: 23,False,d09ed75f2e4102c2c82cb59093d5c78c34df8653ca4f885e86ea67563e15be11,58
+2023–2024,unknown,210,0.37433155080213903,2023/maize/inferred_rotation: 130; 2024/soybean/inferred_rotation: 80,False,ef0b3acb65f575d6061d7b600bcb74aaef91917d553604bab26d76deaab0874d,210
+2023,proxy_low_vegetation,30,0.10752688172043011,2023/maize/inferred_rotation: 30,False,b793b75a5570d61610f667e847b3914a282f59a7b66d6c0c7b545a9e8abe752e,30
+2023,proxy_greenup,19,0.06810035842293907,2023/maize/inferred_rotation: 19,True,d92eaa96cf718de6fa386822f381a4054aeb70a71d6f5fbed521a5e720a71d3c,19
+2023,proxy_high_vegetation,65,0.23297491039426524,2023/maize/inferred_rotation: 65,False,3aa88d77e09c9f812f023d712a478a209a2362ab921e9c1f749ee282113b35e7,65
+2023,proxy_decline,35,0.12544802867383512,2023/maize/inferred_rotation: 35,False,387c3eacfcd376d3982191bc0214cfdf48c31e9c73499118f7350688e3ba2620,35
+2023,unknown,130,0.4659498207885305,2023/maize/inferred_rotation: 130,False,28de8664ad90f0c47b72fe5509789e6ddc9ed4aa8642a31cb26b84a1dfdac6f6,130
+2024,proxy_low_vegetation,119,0.4219858156028369,2024/soybean/inferred_rotation: 119,False,1450db48b3cd020577e21236f75f56ecb3942f78770dc34474791880d1921856,119
+2024,proxy_greenup,17,0.06028368794326241,2024/soybean/inferred_rotation: 17,True,fe36ff5b8bcdb7125d09f70edf5fa51e0c481263d0a3b9a36715b26284e0b219,17
+2024,proxy_high_vegetation,43,0.1524822695035461,2024/soybean/inferred_rotation: 43,False,4f864f143a1a0a0489499a1c9a195949d0e2248974d75a836ac4140d98287c06,43
+2024,proxy_decline,23,0.08156028368794327,2024/soybean/inferred_rotation: 23,True,8acd88af2e2bd8545195dcdd45c6adfd9913587705d38003e8dd5f6ed0ba9510,23
+2024,unknown,80,0.28368794326241137,2024/soybean/inferred_rotation: 80,False,f0f4423728af02f3814a26c3977e5b5c6c947b6642774be0b85cded7bd7ee122,80

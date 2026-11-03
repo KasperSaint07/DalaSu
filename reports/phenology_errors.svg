@@ -1,0 +1,388 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1700" viewBox="0 0 1500 1700">
+<title>NDVI proxy errors and paired differences</title><rect width="100%" height="100%" fill="white"/>
+<text x="25" y="30" font-family="Arial" font-size="20" fill="#15324b">NDVI vegetation proxies · errors in mm/day · * n &lt; 30 · N/A = undefined</text>
+<text x="25" y="70" font-family="Arial" font-size="19" fill="#15324b">2023–2024 · mixed crops — MAE (shared colour scale)</text>
+<text x="340" y="98" font-family="Arial" font-size="14" fill="#15324b">low_vegetation</text>
+<text x="565" y="98" font-family="Arial" font-size="14" fill="#15324b">greenup</text>
+<text x="790" y="98" font-family="Arial" font-size="14" fill="#15324b">high_vegetation</text>
+<text x="1015" y="98" font-family="Arial" font-size="14" fill="#15324b">decline</text>
+<text x="1240" y="98" font-family="Arial" font-size="14" fill="#15324b">unknown</text>
+<text x="25" y="137" font-family="Arial" font-size="13" fill="#15324b">FAO-56 ET0</text>
+<rect x="330" y="115" width="215" height="32" fill="hsl(205,65%,75.57957846705978%)"/>
+<text x="340" y="137" font-family="Arial" font-size="13" fill="#15324b">1.310  n=149</text>
+<rect x="555" y="115" width="215" height="32" fill="hsl(205,65%,81.32760148792433%)"/>
+<text x="565" y="137" font-family="Arial" font-size="13" fill="#15324b">0.941  n=36</text>
+<rect x="780" y="115" width="215" height="32" fill="hsl(205,65%,82.87540122147621%)"/>
+<text x="790" y="137" font-family="Arial" font-size="13" fill="#15324b">0.842  n=108</text>
+<rect x="1005" y="115" width="215" height="32" fill="hsl(205,65%,66.68338040119693%)"/>
+<text x="1015" y="137" font-family="Arial" font-size="13" fill="#15324b">1.880  n=58</text>
+<rect x="1230" y="115" width="215" height="32" fill="hsl(205,65%,81.48601252939466%)"/>
+<text x="1240" y="137" font-family="Arial" font-size="13" fill="#15324b">0.931  n=210</text>
+<text x="25" y="173" font-family="Arial" font-size="13" fill="#15324b">Random Forest ML-only</text>
+<rect x="330" y="151" width="215" height="32" fill="hsl(205,65%,91.2820821029811%)"/>
+<text x="340" y="173" font-family="Arial" font-size="13" fill="#15324b">0.303  n=149</text>
+<rect x="555" y="151" width="215" height="32" fill="hsl(205,65%,83.51421943471394%)"/>
+<text x="565" y="173" font-family="Arial" font-size="13" fill="#15324b">0.801  n=36</text>
+<rect x="780" y="151" width="215" height="32" fill="hsl(205,65%,87.26382956090039%)"/>
+<text x="790" y="173" font-family="Arial" font-size="13" fill="#15324b">0.560  n=108</text>
+<rect x="1005" y="151" width="215" height="32" fill="hsl(205,65%,91.33423469082533%)"/>
+<text x="1015" y="173" font-family="Arial" font-size="13" fill="#15324b">0.299  n=58</text>
+<rect x="1230" y="151" width="215" height="32" fill="hsl(205,65%,90.12600376252114%)"/>
+<text x="1240" y="173" font-family="Arial" font-size="13" fill="#15324b">0.377  n=210</text>
+<text x="25" y="209" font-family="Arial" font-size="13" fill="#15324b">XGBoost ML-only</text>
+<rect x="330" y="187" width="215" height="32" fill="hsl(205,65%,91.76571639146107%)"/>
+<text x="340" y="209" font-family="Arial" font-size="13" fill="#15324b">0.272  n=149</text>
+<rect x="555" y="187" width="215" height="32" fill="hsl(205,65%,83.1660843788805%)"/>
+<text x="565" y="209" font-family="Arial" font-size="13" fill="#15324b">0.823  n=36</text>
+<rect x="780" y="187" width="215" height="32" fill="hsl(205,65%,87.00963148034792%)"/>
+<text x="790" y="209" font-family="Arial" font-size="13" fill="#15324b">0.577  n=108</text>
+<rect x="1005" y="187" width="215" height="32" fill="hsl(205,65%,91.79125036070404%)"/>
+<text x="1015" y="209" font-family="Arial" font-size="13" fill="#15324b">0.270  n=58</text>
+<rect x="1230" y="187" width="215" height="32" fill="hsl(205,65%,90.39418083787936%)"/>
+<text x="1240" y="209" font-family="Arial" font-size="13" fill="#15324b">0.360  n=210</text>
+<text x="25" y="245" font-family="Arial" font-size="13" fill="#15324b">Hybrid v0 RF</text>
+<rect x="330" y="223" width="215" height="32" fill="hsl(205,65%,91.24433046952149%)"/>
+<text x="340" y="245" font-family="Arial" font-size="13" fill="#15324b">0.305  n=149</text>
+<rect x="555" y="223" width="215" height="32" fill="hsl(205,65%,81.65448760636826%)"/>
+<text x="565" y="245" font-family="Arial" font-size="13" fill="#15324b">0.920  n=36</text>
+<rect x="780" y="223" width="215" height="32" fill="hsl(205,65%,86.88431310306233%)"/>
+<text x="790" y="245" font-family="Arial" font-size="13" fill="#15324b">0.585  n=108</text>
+<rect x="1005" y="223" width="215" height="32" fill="hsl(205,65%,90.05851689456796%)"/>
+<text x="1015" y="245" font-family="Arial" font-size="13" fill="#15324b">0.381  n=58</text>
+<rect x="1230" y="223" width="215" height="32" fill="hsl(205,65%,90.18791355790606%)"/>
+<text x="1240" y="245" font-family="Arial" font-size="13" fill="#15324b">0.373  n=210</text>
+<text x="25" y="281" font-family="Arial" font-size="13" fill="#15324b">Hybrid v0 XGBoost</text>
+<rect x="330" y="259" width="215" height="32" fill="hsl(205,65%,91.60831492874338%)"/>
+<text x="340" y="281" font-family="Arial" font-size="13" fill="#15324b">0.282  n=149</text>
+<rect x="555" y="259" width="215" height="32" fill="hsl(205,65%,81.88686237218026%)"/>
+<text x="565" y="281" font-family="Arial" font-size="13" fill="#15324b">0.905  n=36</text>
+<rect x="780" y="259" width="215" height="32" fill="hsl(205,65%,87.20676655629947%)"/>
+<text x="790" y="281" font-family="Arial" font-size="13" fill="#15324b">0.564  n=108</text>
+<rect x="1005" y="259" width="215" height="32" fill="hsl(205,65%,90.60698088888287%)"/>
+<text x="1015" y="281" font-family="Arial" font-size="13" fill="#15324b">0.346  n=58</text>
+<rect x="1230" y="259" width="215" height="32" fill="hsl(205,65%,90.369874073591%)"/>
+<text x="1240" y="281" font-family="Arial" font-size="13" fill="#15324b">0.361  n=210</text>
+<text x="25" y="317" font-family="Arial" font-size="13" fill="#15324b">Hybrid + NDVI RF</text>
+<rect x="330" y="295" width="215" height="32" fill="hsl(205,65%,91.34508970020958%)"/>
+<text x="340" y="317" font-family="Arial" font-size="13" fill="#15324b">0.299  n=149</text>
+<rect x="555" y="295" width="215" height="32" fill="hsl(205,65%,85.10401035231563%)"/>
+<text x="565" y="317" font-family="Arial" font-size="13" fill="#15324b">0.699  n=36</text>
+<rect x="780" y="295" width="215" height="32" fill="hsl(205,65%,87.1003374978321%)"/>
+<text x="790" y="317" font-family="Arial" font-size="13" fill="#15324b">0.571  n=108</text>
+<rect x="1005" y="295" width="215" height="32" fill="hsl(205,65%,89.81718456446154%)"/>
+<text x="1015" y="317" font-family="Arial" font-size="13" fill="#15324b">0.397  n=58</text>
+<rect x="1230" y="295" width="215" height="32" fill="hsl(205,65%,90.19398866974286%)"/>
+<text x="1240" y="317" font-family="Arial" font-size="13" fill="#15324b">0.372  n=210</text>
+<text x="25" y="353" font-family="Arial" font-size="13" fill="#15324b">Hybrid + NDVI XGBoost</text>
+<rect x="330" y="331" width="215" height="32" fill="hsl(205,65%,91.9169501836814%)"/>
+<text x="340" y="353" font-family="Arial" font-size="13" fill="#15324b">0.262  n=149</text>
+<rect x="555" y="331" width="215" height="32" fill="hsl(205,65%,85.51895444894924%)"/>
+<text x="565" y="353" font-family="Arial" font-size="13" fill="#15324b">0.672  n=36</text>
+<rect x="780" y="331" width="215" height="32" fill="hsl(205,65%,87.22464484579326%)"/>
+<text x="790" y="353" font-family="Arial" font-size="13" fill="#15324b">0.563  n=108</text>
+<rect x="1005" y="331" width="215" height="32" fill="hsl(205,65%,90.98214041399126%)"/>
+<text x="1015" y="353" font-family="Arial" font-size="13" fill="#15324b">0.322  n=58</text>
+<rect x="1230" y="331" width="215" height="32" fill="hsl(205,65%,90.44364998116097%)"/>
+<text x="1240" y="353" font-family="Arial" font-size="13" fill="#15324b">0.356  n=210</text>
+<text x="25" y="390" font-family="Arial" font-size="16" fill="#15324b">NDVI minus reference: ΔMAE / ΔRMSE. Blue = lower MAE; orange = higher MAE.</text>
+<text x="25" y="428" font-family="Arial" font-size="13" fill="#15324b">NDVI rf vs hybrid_rf</text>
+<rect x="330" y="405" width="215" height="33" fill="hsl(205,65%,95.50208257295787%)"/>
+<text x="340" y="428" font-family="Arial" font-size="13" fill="#15324b">-0.006 / +0.002</text>
+<rect x="555" y="405" width="215" height="33" fill="hsl(205,65%,78.95364624704087%)"/>
+<text x="565" y="428" font-family="Arial" font-size="13" fill="#15324b">-0.221 / -0.264</text>
+<rect x="780" y="405" width="215" height="33" fill="hsl(205,65%,94.93248181742219%)"/>
+<text x="790" y="428" font-family="Arial" font-size="13" fill="#15324b">-0.014 / +0.014</text>
+<rect x="1005" y="405" width="215" height="33" fill="hsl(25,65%,94.807418714414%)"/>
+<text x="1015" y="428" font-family="Arial" font-size="13" fill="#15324b">+0.015 / +0.039</text>
+<rect x="1230" y="405" width="215" height="33" fill="hsl(205,65%,95.9699788889403%)"/>
+<text x="1240" y="428" font-family="Arial" font-size="13" fill="#15324b">-0.000 / -0.007</text>
+<text x="25" y="465" font-family="Arial" font-size="13" fill="#15324b">NDVI rf vs random_forest</text>
+<rect x="330" y="442" width="215" height="33" fill="hsl(205,65%,95.68863814777198%)"/>
+<text x="340" y="465" font-family="Arial" font-size="13" fill="#15324b">-0.004 / +0.025</text>
+<rect x="555" y="442" width="215" height="33" fill="hsl(205,65%,88.14380064415626%)"/>
+<text x="565" y="465" font-family="Arial" font-size="13" fill="#15324b">-0.102 / -0.123</text>
+<rect x="780" y="442" width="215" height="33" fill="hsl(25,65%,95.1920785140097%)"/>
+<text x="790" y="465" font-family="Arial" font-size="13" fill="#15324b">+0.010 / +0.053</text>
+<rect x="1005" y="442" width="215" height="33" fill="hsl(25,65%,88.50326059007723%)"/>
+<text x="1015" y="465" font-family="Arial" font-size="13" fill="#15324b">+0.097 / +0.180</text>
+<rect x="1230" y="442" width="215" height="33" fill="hsl(205,65%,95.6640419954542%)"/>
+<text x="1240" y="465" font-family="Arial" font-size="13" fill="#15324b">-0.004 / -0.019</text>
+<text x="25" y="502" font-family="Arial" font-size="13" fill="#15324b">NDVI xgb vs hybrid_xgb</text>
+<rect x="330" y="479" width="215" height="33" fill="hsl(205,65%,94.4748308320364%)"/>
+<text x="340" y="502" font-family="Arial" font-size="13" fill="#15324b">-0.020 / -0.020</text>
+<rect x="555" y="479" width="215" height="33" fill="hsl(205,65%,78.05145147204405%)"/>
+<text x="565" y="502" font-family="Arial" font-size="13" fill="#15324b">-0.233 / -0.342</text>
+<rect x="780" y="479" width="215" height="33" fill="hsl(205,65%,95.91165164874856%)"/>
+<text x="790" y="502" font-family="Arial" font-size="13" fill="#15324b">-0.001 / +0.022</text>
+<rect x="1005" y="479" width="215" height="33" fill="hsl(205,65%,94.14609079290668%)"/>
+<text x="1015" y="502" font-family="Arial" font-size="13" fill="#15324b">-0.024 / -0.013</text>
+<rect x="1230" y="479" width="215" height="33" fill="hsl(205,65%,95.63542486555251%)"/>
+<text x="1240" y="502" font-family="Arial" font-size="13" fill="#15324b">-0.005 / -0.018</text>
+<text x="25" y="539" font-family="Arial" font-size="13" fill="#15324b">NDVI xgb vs xgboost</text>
+<rect x="330" y="516" width="215" height="33" fill="hsl(205,65%,95.2526546680645%)"/>
+<text x="340" y="539" font-family="Arial" font-size="13" fill="#15324b">-0.010 / -0.005</text>
+<rect x="555" y="516" width="215" height="33" fill="hsl(205,65%,84.3729261979032%)"/>
+<text x="565" y="539" font-family="Arial" font-size="13" fill="#15324b">-0.151 / -0.234</text>
+<rect x="780" y="516" width="215" height="33" fill="hsl(205,65%,94.93747797625001%)"/>
+<text x="790" y="539" font-family="Arial" font-size="13" fill="#15324b">-0.014 / -0.035</text>
+<rect x="1005" y="516" width="215" height="33" fill="hsl(25,65%,92.00165721681124%)"/>
+<text x="1015" y="539" font-family="Arial" font-size="13" fill="#15324b">+0.052 / +0.087</text>
+<rect x="1230" y="516" width="215" height="33" fill="hsl(205,65%,95.75554052593941%)"/>
+<text x="1240" y="539" font-family="Arial" font-size="13" fill="#15324b">-0.003 / -0.028</text>
+<text x="25" y="605" font-family="Arial" font-size="19" fill="#15324b">2023 · maize (inferred) — MAE (shared colour scale)</text>
+<text x="340" y="633" font-family="Arial" font-size="14" fill="#15324b">low_vegetation</text>
+<text x="565" y="633" font-family="Arial" font-size="14" fill="#15324b">greenup</text>
+<text x="790" y="633" font-family="Arial" font-size="14" fill="#15324b">high_vegetation</text>
+<text x="1015" y="633" font-family="Arial" font-size="14" fill="#15324b">decline</text>
+<text x="1240" y="633" font-family="Arial" font-size="14" fill="#15324b">unknown</text>
+<text x="25" y="672" font-family="Arial" font-size="13" fill="#15324b">FAO-56 ET0</text>
+<rect x="330" y="650" width="215" height="32" fill="hsl(205,65%,59.865685313404285%)"/>
+<text x="340" y="672" font-family="Arial" font-size="13" fill="#15324b">2.318  n=30</text>
+<rect x="555" y="650" width="215" height="32" fill="hsl(205,65%,82.86634814698404%)"/>
+<text x="565" y="672" font-family="Arial" font-size="13" fill="#15324b">0.842  n=19*</text>
+<rect x="780" y="650" width="215" height="32" fill="hsl(205,65%,80.80919600002166%)"/>
+<text x="790" y="672" font-family="Arial" font-size="13" fill="#15324b">0.974  n=65</text>
+<rect x="1005" y="650" width="215" height="32" fill="hsl(205,65%,76.98960180769775%)"/>
+<text x="1015" y="672" font-family="Arial" font-size="13" fill="#15324b">1.219  n=35</text>
+<rect x="1230" y="650" width="215" height="32" fill="hsl(205,65%,85.19777129152614%)"/>
+<text x="1240" y="672" font-family="Arial" font-size="13" fill="#15324b">0.693  n=130</text>
+<text x="25" y="708" font-family="Arial" font-size="13" fill="#15324b">Random Forest ML-only</text>
+<rect x="330" y="686" width="215" height="32" fill="hsl(205,65%,89.42795518065068%)"/>
+<text x="340" y="708" font-family="Arial" font-size="13" fill="#15324b">0.422  n=30</text>
+<rect x="555" y="686" width="215" height="32" fill="hsl(205,65%,84.95528776996954%)"/>
+<text x="565" y="708" font-family="Arial" font-size="13" fill="#15324b">0.708  n=19*</text>
+<rect x="780" y="686" width="215" height="32" fill="hsl(205,65%,85.82833435864995%)"/>
+<text x="790" y="708" font-family="Arial" font-size="13" fill="#15324b">0.652  n=65</text>
+<rect x="1005" y="686" width="215" height="32" fill="hsl(205,65%,92.17772122130843%)"/>
+<text x="1015" y="708" font-family="Arial" font-size="13" fill="#15324b">0.245  n=35</text>
+<rect x="1230" y="686" width="215" height="32" fill="hsl(205,65%,90.85650714507348%)"/>
+<text x="1240" y="708" font-family="Arial" font-size="13" fill="#15324b">0.330  n=130</text>
+<text x="25" y="744" font-family="Arial" font-size="13" fill="#15324b">XGBoost ML-only</text>
+<rect x="330" y="722" width="215" height="32" fill="hsl(205,65%,90.49908210147635%)"/>
+<text x="340" y="744" font-family="Arial" font-size="13" fill="#15324b">0.353  n=30</text>
+<rect x="555" y="722" width="215" height="32" fill="hsl(205,65%,84.61472463391598%)"/>
+<text x="565" y="744" font-family="Arial" font-size="13" fill="#15324b">0.730  n=19*</text>
+<rect x="780" y="722" width="215" height="32" fill="hsl(205,65%,84.76304279672691%)"/>
+<text x="790" y="744" font-family="Arial" font-size="13" fill="#15324b">0.721  n=65</text>
+<rect x="1005" y="722" width="215" height="32" fill="hsl(205,65%,92.29047769720874%)"/>
+<text x="1015" y="744" font-family="Arial" font-size="13" fill="#15324b">0.238  n=35</text>
+<rect x="1230" y="722" width="215" height="32" fill="hsl(205,65%,90.95648869681101%)"/>
+<text x="1240" y="744" font-family="Arial" font-size="13" fill="#15324b">0.324  n=130</text>
+<text x="25" y="780" font-family="Arial" font-size="13" fill="#15324b">Hybrid v0 RF</text>
+<rect x="330" y="758" width="215" height="32" fill="hsl(205,65%,88.99723731857347%)"/>
+<text x="340" y="780" font-family="Arial" font-size="13" fill="#15324b">0.449  n=30</text>
+<rect x="555" y="758" width="215" height="32" fill="hsl(205,65%,81.71734284633075%)"/>
+<text x="565" y="780" font-family="Arial" font-size="13" fill="#15324b">0.916  n=19*</text>
+<rect x="780" y="758" width="215" height="32" fill="hsl(205,65%,85.33070001906614%)"/>
+<text x="790" y="780" font-family="Arial" font-size="13" fill="#15324b">0.684  n=65</text>
+<rect x="1005" y="758" width="215" height="32" fill="hsl(205,65%,91.38067686963247%)"/>
+<text x="1015" y="780" font-family="Arial" font-size="13" fill="#15324b">0.296  n=35</text>
+<rect x="1230" y="758" width="215" height="32" fill="hsl(205,65%,90.91376189454533%)"/>
+<text x="1240" y="780" font-family="Arial" font-size="13" fill="#15324b">0.326  n=130</text>
+<text x="25" y="816" font-family="Arial" font-size="13" fill="#15324b">Hybrid v0 XGBoost</text>
+<rect x="330" y="794" width="215" height="32" fill="hsl(205,65%,89.74378681066361%)"/>
+<text x="340" y="816" font-family="Arial" font-size="13" fill="#15324b">0.401  n=30</text>
+<rect x="555" y="794" width="215" height="32" fill="hsl(205,65%,81.86534111078842%)"/>
+<text x="565" y="816" font-family="Arial" font-size="13" fill="#15324b">0.907  n=19*</text>
+<rect x="780" y="794" width="215" height="32" fill="hsl(205,65%,85.29983968606777%)"/>
+<text x="790" y="816" font-family="Arial" font-size="13" fill="#15324b">0.686  n=65</text>
+<rect x="1005" y="794" width="215" height="32" fill="hsl(205,65%,91.2564046438316%)"/>
+<text x="1015" y="816" font-family="Arial" font-size="13" fill="#15324b">0.304  n=35</text>
+<rect x="1230" y="794" width="215" height="32" fill="hsl(205,65%,91.14685144849774%)"/>
+<text x="1240" y="816" font-family="Arial" font-size="13" fill="#15324b">0.311  n=130</text>
+<text x="25" y="852" font-family="Arial" font-size="13" fill="#15324b">Hybrid + NDVI RF</text>
+<rect x="330" y="830" width="215" height="32" fill="hsl(205,65%,88.72589213686985%)"/>
+<text x="340" y="852" font-family="Arial" font-size="13" fill="#15324b">0.467  n=30</text>
+<rect x="555" y="830" width="215" height="32" fill="hsl(205,65%,86.19006149201547%)"/>
+<text x="565" y="852" font-family="Arial" font-size="13" fill="#15324b">0.629  n=19*</text>
+<rect x="780" y="830" width="215" height="32" fill="hsl(205,65%,84.69827352534772%)"/>
+<text x="790" y="852" font-family="Arial" font-size="13" fill="#15324b">0.725  n=65</text>
+<rect x="1005" y="830" width="215" height="32" fill="hsl(205,65%,91.51081622219387%)"/>
+<text x="1015" y="852" font-family="Arial" font-size="13" fill="#15324b">0.288  n=35</text>
+<rect x="1230" y="830" width="215" height="32" fill="hsl(205,65%,90.80164119806822%)"/>
+<text x="1240" y="852" font-family="Arial" font-size="13" fill="#15324b">0.333  n=130</text>
+<text x="25" y="888" font-family="Arial" font-size="13" fill="#15324b">Hybrid + NDVI XGBoost</text>
+<rect x="330" y="866" width="215" height="32" fill="hsl(205,65%,89.9370396538295%)"/>
+<text x="340" y="888" font-family="Arial" font-size="13" fill="#15324b">0.389  n=30</text>
+<rect x="555" y="866" width="215" height="32" fill="hsl(205,65%,87.58121193999291%)"/>
+<text x="565" y="888" font-family="Arial" font-size="13" fill="#15324b">0.540  n=19*</text>
+<rect x="780" y="866" width="215" height="32" fill="hsl(205,65%,85.14035607697565%)"/>
+<text x="790" y="888" font-family="Arial" font-size="13" fill="#15324b">0.697  n=65</text>
+<rect x="1005" y="866" width="215" height="32" fill="hsl(205,65%,91.65363782512665%)"/>
+<text x="1015" y="888" font-family="Arial" font-size="13" fill="#15324b">0.279  n=35</text>
+<rect x="1230" y="866" width="215" height="32" fill="hsl(205,65%,91.08799711722128%)"/>
+<text x="1240" y="888" font-family="Arial" font-size="13" fill="#15324b">0.315  n=130</text>
+<text x="25" y="925" font-family="Arial" font-size="16" fill="#15324b">NDVI minus reference: ΔMAE / ΔRMSE. Blue = lower MAE; orange = higher MAE.</text>
+<text x="25" y="963" font-family="Arial" font-size="13" fill="#15324b">NDVI rf vs hybrid_rf</text>
+<rect x="330" y="940" width="215" height="33" fill="hsl(25,65%,94.6591055351309%)"/>
+<text x="340" y="963" font-family="Arial" font-size="13" fill="#15324b">+0.017 / +0.026</text>
+<rect x="555" y="940" width="215" height="33" fill="hsl(205,65%,73.89736439298096%)"/>
+<text x="565" y="963" font-family="Arial" font-size="13" fill="#15324b">-0.287 / -0.351</text>
+<rect x="780" y="940" width="215" height="33" fill="hsl(25,65%,92.87476601007103%)"/>
+<text x="790" y="963" font-family="Arial" font-size="13" fill="#15324b">+0.041 / +0.075</text>
+<rect x="1005" y="940" width="215" height="33" fill="hsl(205,65%,95.35689612612384%)"/>
+<text x="1015" y="963" font-family="Arial" font-size="13" fill="#15324b">-0.008 / +0.006</text>
+<rect x="1230" y="940" width="215" height="33" fill="hsl(25,65%,95.44593812073792%)"/>
+<text x="1240" y="963" font-family="Arial" font-size="13" fill="#15324b">+0.007 / +0.029</text>
+<text x="25" y="1000" font-family="Arial" font-size="13" fill="#15324b">NDVI rf vs random_forest</text>
+<rect x="330" y="977" width="215" height="33" fill="hsl(25,65%,92.53064615526085%)"/>
+<text x="340" y="1000" font-family="Arial" font-size="13" fill="#15324b">+0.045 / +0.047</text>
+<rect x="555" y="977" width="215" height="33" fill="hsl(205,65%,89.89817339352768%)"/>
+<text x="565" y="1000" font-family="Arial" font-size="13" fill="#15324b">-0.079 / -0.100</text>
+<rect x="780" y="977" width="215" height="33" fill="hsl(25,65%,90.41562843745125%)"/>
+<text x="790" y="1000" font-family="Arial" font-size="13" fill="#15324b">+0.072 / +0.117</text>
+<rect x="1005" y="977" width="215" height="33" fill="hsl(25,65%,92.7043851072211%)"/>
+<text x="1015" y="1000" font-family="Arial" font-size="13" fill="#15324b">+0.043 / +0.076</text>
+<rect x="1230" y="977" width="215" height="33" fill="hsl(25,65%,95.72887138003615%)"/>
+<text x="1240" y="1000" font-family="Arial" font-size="13" fill="#15324b">+0.004 / +0.015</text>
+<text x="25" y="1037" font-family="Arial" font-size="13" fill="#15324b">NDVI xgb vs hybrid_xgb</text>
+<rect x="330" y="1014" width="215" height="33" fill="hsl(205,65%,95.04501098529025%)"/>
+<text x="340" y="1037" font-family="Arial" font-size="13" fill="#15324b">-0.012 / +0.003</text>
+<rect x="555" y="1014" width="215" height="33" fill="hsl(205,65%,67.75413431457723%)"/>
+<text x="565" y="1037" font-family="Arial" font-size="13" fill="#15324b">-0.367 / -0.519</text>
+<rect x="780" y="1014" width="215" height="33" fill="hsl(25,65%,95.21188691346457%)"/>
+<text x="790" y="1037" font-family="Arial" font-size="13" fill="#15324b">+0.010 / +0.053</text>
+<rect x="1005" y="1014" width="215" height="33" fill="hsl(205,65%,94.03701038390773%)"/>
+<text x="1015" y="1037" font-family="Arial" font-size="13" fill="#15324b">-0.025 / -0.029</text>
+<rect x="1230" y="1014" width="215" height="33" fill="hsl(25,65%,95.7091621581533%)"/>
+<text x="1240" y="1037" font-family="Arial" font-size="13" fill="#15324b">+0.004 / +0.001</text>
+<text x="25" y="1074" font-family="Arial" font-size="13" fill="#15324b">NDVI xgb vs xgboost</text>
+<rect x="330" y="1051" width="215" height="33" fill="hsl(25,65%,93.22257973279841%)"/>
+<text x="340" y="1074" font-family="Arial" font-size="13" fill="#15324b">+0.036 / +0.026</text>
+<rect x="555" y="1051" width="215" height="33" fill="hsl(205,65%,81.3406410836226%)"/>
+<text x="565" y="1074" font-family="Arial" font-size="13" fill="#15324b">-0.190 / -0.268</text>
+<rect x="780" y="1051" width="215" height="33" fill="hsl(205,65%,94.13544767653265%)"/>
+<text x="790" y="1074" font-family="Arial" font-size="13" fill="#15324b">-0.024 / -0.036</text>
+<rect x="1005" y="1051" width="215" height="33" fill="hsl(25,65%,92.85295661370711%)"/>
+<text x="1015" y="1074" font-family="Arial" font-size="13" fill="#15324b">+0.041 / +0.070</text>
+<rect x="1230" y="1051" width="215" height="33" fill="hsl(205,65%,95.35013066417956%)"/>
+<text x="1240" y="1074" font-family="Arial" font-size="13" fill="#15324b">-0.008 / -0.017</text>
+<text x="25" y="1140" font-family="Arial" font-size="19" fill="#15324b">2024 · soybean (inferred) — MAE (shared colour scale)</text>
+<text x="340" y="1168" font-family="Arial" font-size="14" fill="#15324b">low_vegetation</text>
+<text x="565" y="1168" font-family="Arial" font-size="14" fill="#15324b">greenup</text>
+<text x="790" y="1168" font-family="Arial" font-size="14" fill="#15324b">high_vegetation</text>
+<text x="1015" y="1168" font-family="Arial" font-size="14" fill="#15324b">decline</text>
+<text x="1240" y="1168" font-family="Arial" font-size="14" fill="#15324b">unknown</text>
+<text x="25" y="1207" font-family="Arial" font-size="13" fill="#15324b">FAO-56 ET0</text>
+<rect x="330" y="1185" width="215" height="32" fill="hsl(205,65%,79.54106413604856%)"/>
+<text x="340" y="1207" font-family="Arial" font-size="13" fill="#15324b">1.056  n=119</text>
+<rect x="555" y="1185" width="215" height="32" fill="hsl(205,65%,79.60782581015171%)"/>
+<text x="565" y="1207" font-family="Arial" font-size="13" fill="#15324b">1.051  n=17*</text>
+<rect x="780" y="1185" width="215" height="32" fill="hsl(205,65%,85.99873469576798%)"/>
+<text x="790" y="1207" font-family="Arial" font-size="13" fill="#15324b">0.642  n=43</text>
+<rect x="1005" y="1185" width="215" height="32" fill="hsl(205,65%,51.0%)"/>
+<text x="1015" y="1207" font-family="Arial" font-size="13" fill="#15324b">2.886  n=23*</text>
+<rect x="1230" y="1185" width="215" height="32" fill="hsl(205,65%,75.45440454093101%)"/>
+<text x="1240" y="1207" font-family="Arial" font-size="13" fill="#15324b">1.318  n=80</text>
+<text x="25" y="1243" font-family="Arial" font-size="13" fill="#15324b">Random Forest ML-only</text>
+<rect x="330" y="1221" width="215" height="32" fill="hsl(205,65%,91.74950905819044%)"/>
+<text x="340" y="1243" font-family="Arial" font-size="13" fill="#15324b">0.273  n=119</text>
+<rect x="555" y="1221" width="215" height="32" fill="hsl(205,65%,81.90361364825178%)"/>
+<text x="565" y="1243" font-family="Arial" font-size="13" fill="#15324b">0.904  n=17*</text>
+<rect x="780" y="1221" width="215" height="32" fill="hsl(205,65%,89.43376416895339%)"/>
+<text x="790" y="1243" font-family="Arial" font-size="13" fill="#15324b">0.421  n=43</text>
+<rect x="1005" y="1221" width="215" height="32" fill="hsl(205,65%,90.05066823139452%)"/>
+<text x="1015" y="1243" font-family="Arial" font-size="13" fill="#15324b">0.382  n=23*</text>
+<rect x="1230" y="1221" width="215" height="32" fill="hsl(205,65%,88.93893576587357%)"/>
+<text x="1240" y="1243" font-family="Arial" font-size="13" fill="#15324b">0.453  n=80</text>
+<text x="25" y="1279" font-family="Arial" font-size="13" fill="#15324b">XGBoost ML-only</text>
+<rect x="330" y="1257" width="215" height="32" fill="hsl(205,65%,92.08503596036478%)"/>
+<text x="340" y="1279" font-family="Arial" font-size="13" fill="#15324b">0.251  n=119</text>
+<rect x="555" y="1257" width="215" height="32" fill="hsl(205,65%,81.54701585854671%)"/>
+<text x="565" y="1279" font-family="Arial" font-size="13" fill="#15324b">0.927  n=17*</text>
+<rect x="780" y="1257" width="215" height="32" fill="hsl(205,65%,90.40563763000758%)"/>
+<text x="790" y="1279" font-family="Arial" font-size="13" fill="#15324b">0.359  n=43</text>
+<rect x="1005" y="1257" width="215" height="32" fill="hsl(205,65%,91.0315565877621%)"/>
+<text x="1015" y="1279" font-family="Arial" font-size="13" fill="#15324b">0.319  n=23*</text>
+<rect x="1230" y="1257" width="215" height="32" fill="hsl(205,65%,89.48043056711542%)"/>
+<text x="1240" y="1279" font-family="Arial" font-size="13" fill="#15324b">0.418  n=80</text>
+<text x="25" y="1315" font-family="Arial" font-size="13" fill="#15324b">Hybrid v0 RF</text>
+<rect x="330" y="1293" width="215" height="32" fill="hsl(205,65%,91.81082454118906%)"/>
+<text x="340" y="1315" font-family="Arial" font-size="13" fill="#15324b">0.269  n=119</text>
+<rect x="555" y="1293" width="215" height="32" fill="hsl(205,65%,81.58423763229257%)"/>
+<text x="565" y="1315" font-family="Arial" font-size="13" fill="#15324b">0.925  n=17*</text>
+<rect x="780" y="1293" width="215" height="32" fill="hsl(205,65%,89.23279799747515%)"/>
+<text x="790" y="1315" font-family="Arial" font-size="13" fill="#15324b">0.434  n=43</text>
+<rect x="1005" y="1293" width="215" height="32" fill="hsl(205,65%,88.04653432381762%)"/>
+<text x="1015" y="1315" font-family="Arial" font-size="13" fill="#15324b">0.510  n=23*</text>
+<rect x="1230" y="1293" width="215" height="32" fill="hsl(205,65%,89.00841001086724%)"/>
+<text x="1240" y="1315" font-family="Arial" font-size="13" fill="#15324b">0.448  n=80</text>
+<text x="25" y="1351" font-family="Arial" font-size="13" fill="#15324b">Hybrid v0 XGBoost</text>
+<rect x="330" y="1329" width="215" height="32" fill="hsl(205,65%,92.07836403414164%)"/>
+<text x="340" y="1351" font-family="Arial" font-size="13" fill="#15324b">0.252  n=119</text>
+<rect x="555" y="1329" width="215" height="32" fill="hsl(205,65%,81.91091554667705%)"/>
+<text x="565" y="1351" font-family="Arial" font-size="13" fill="#15324b">0.904  n=17*</text>
+<rect x="780" y="1329" width="215" height="32" fill="hsl(205,65%,90.08933042990556%)"/>
+<text x="790" y="1351" font-family="Arial" font-size="13" fill="#15324b">0.379  n=43</text>
+<rect x="1005" y="1329" width="215" height="32" fill="hsl(205,65%,89.6187273487435%)"/>
+<text x="1015" y="1351" font-family="Arial" font-size="13" fill="#15324b">0.409  n=23*</text>
+<rect x="1230" y="1329" width="215" height="32" fill="hsl(205,65%,89.10728583936755%)"/>
+<text x="1240" y="1351" font-family="Arial" font-size="13" fill="#15324b">0.442  n=80</text>
+<text x="25" y="1387" font-family="Arial" font-size="13" fill="#15324b">Hybrid + NDVI RF</text>
+<rect x="330" y="1365" width="215" height="32" fill="hsl(205,65%,92.0053916069339%)"/>
+<text x="340" y="1387" font-family="Arial" font-size="13" fill="#15324b">0.256  n=119</text>
+<rect x="555" y="1365" width="215" height="32" fill="hsl(205,65%,83.89018849029814%)"/>
+<text x="565" y="1387" font-family="Arial" font-size="13" fill="#15324b">0.777  n=17*</text>
+<rect x="780" y="1365" width="215" height="32" fill="hsl(205,65%,90.7313644329829%)"/>
+<text x="790" y="1387" font-family="Arial" font-size="13" fill="#15324b">0.338  n=43</text>
+<rect x="1005" y="1365" width="215" height="32" fill="hsl(205,65%,87.23991899834712%)"/>
+<text x="1015" y="1387" font-family="Arial" font-size="13" fill="#15324b">0.562  n=23*</text>
+<rect x="1230" y="1365" width="215" height="32" fill="hsl(205,65%,89.20655331121415%)"/>
+<text x="1240" y="1387" font-family="Arial" font-size="13" fill="#15324b">0.436  n=80</text>
+<text x="25" y="1423" font-family="Arial" font-size="13" fill="#15324b">Hybrid + NDVI XGBoost</text>
+<rect x="330" y="1401" width="215" height="32" fill="hsl(205,65%,92.41608729204741%)"/>
+<text x="340" y="1423" font-family="Arial" font-size="13" fill="#15324b">0.230  n=119</text>
+<rect x="555" y="1401" width="215" height="32" fill="hsl(205,65%,83.21407842954748%)"/>
+<text x="565" y="1423" font-family="Arial" font-size="13" fill="#15324b">0.820  n=17*</text>
+<rect x="780" y="1401" width="215" height="32" fill="hsl(205,65%,90.37531391493616%)"/>
+<text x="790" y="1423" font-family="Arial" font-size="13" fill="#15324b">0.361  n=43</text>
+<rect x="1005" y="1401" width="215" height="32" fill="hsl(205,65%,89.96029652748086%)"/>
+<text x="1015" y="1423" font-family="Arial" font-size="13" fill="#15324b">0.387  n=23*</text>
+<rect x="1230" y="1401" width="215" height="32" fill="hsl(205,65%,89.39658588506299%)"/>
+<text x="1240" y="1423" font-family="Arial" font-size="13" fill="#15324b">0.424  n=80</text>
+<text x="25" y="1460" font-family="Arial" font-size="16" fill="#15324b">NDVI minus reference: ΔMAE / ΔRMSE. Blue = lower MAE; orange = higher MAE.</text>
+<text x="25" y="1498" font-family="Arial" font-size="13" fill="#15324b">NDVI rf vs hybrid_rf</text>
+<rect x="330" y="1475" width="215" height="33" fill="hsl(205,65%,95.03851654978699%)"/>
+<text x="340" y="1498" font-family="Arial" font-size="13" fill="#15324b">-0.012 / -0.008</text>
+<rect x="555" y="1475" width="215" height="33" fill="hsl(205,65%,84.60478478981373%)"/>
+<text x="565" y="1498" font-family="Arial" font-size="13" fill="#15324b">-0.148 / -0.178</text>
+<rect x="780" y="1475" width="215" height="33" fill="hsl(205,65%,88.59460062642357%)"/>
+<text x="790" y="1498" font-family="Arial" font-size="13" fill="#15324b">-0.096 / -0.151</text>
+<rect x="1005" y="1475" width="215" height="33" fill="hsl(25,65%,92.01398477610203%)"/>
+<text x="1015" y="1498" font-family="Arial" font-size="13" fill="#15324b">+0.052 / +0.072</text>
+<rect x="1230" y="1475" width="215" height="33" fill="hsl(205,65%,95.02084402966742%)"/>
+<text x="1240" y="1498" font-family="Arial" font-size="13" fill="#15324b">-0.013 / -0.051</text>
+<text x="25" y="1535" font-family="Arial" font-size="13" fill="#15324b">NDVI rf vs random_forest</text>
+<rect x="330" y="1512" width="215" height="33" fill="hsl(205,65%,94.73551654349454%)"/>
+<text x="340" y="1535" font-family="Arial" font-size="13" fill="#15324b">-0.016 / +0.017</text>
+<rect x="555" y="1512" width="215" height="33" fill="hsl(205,65%,86.18303110074112%)"/>
+<text x="565" y="1535" font-family="Arial" font-size="13" fill="#15324b">-0.127 / -0.144</text>
+<rect x="780" y="1512" width="215" height="33" fill="hsl(205,65%,89.58770625398337%)"/>
+<text x="790" y="1535" font-family="Arial" font-size="13" fill="#15324b">-0.083 / -0.117</text>
+<rect x="1005" y="1512" width="215" height="33" fill="hsl(25,65%,82.11024502051049%)"/>
+<text x="1015" y="1535" font-family="Arial" font-size="13" fill="#15324b">+0.180 / +0.289</text>
+<rect x="1230" y="1512" width="215" height="33" fill="hsl(205,65%,94.67752623062604%)"/>
+<text x="1240" y="1535" font-family="Arial" font-size="13" fill="#15324b">-0.017 / -0.061</text>
+<text x="25" y="1572" font-family="Arial" font-size="13" fill="#15324b">NDVI xgb vs hybrid_xgb</text>
+<rect x="330" y="1549" width="215" height="33" fill="hsl(205,65%,94.33108793625811%)"/>
+<text x="340" y="1572" font-family="Arial" font-size="13" fill="#15324b">-0.022 / -0.030</text>
+<rect x="555" y="1549" width="215" height="33" fill="hsl(205,65%,89.56021770685994%)"/>
+<text x="565" y="1572" font-family="Arial" font-size="13" fill="#15324b">-0.084 / -0.168</text>
+<rect x="780" y="1549" width="215" height="33" fill="hsl(205,65%,94.58676808000095%)"/>
+<text x="790" y="1572" font-family="Arial" font-size="13" fill="#15324b">-0.018 / -0.065</text>
+<rect x="1005" y="1549" width="215" height="33" fill="hsl(205,65%,94.31208271964424%)"/>
+<text x="1015" y="1572" font-family="Arial" font-size="13" fill="#15324b">-0.022 / +0.007</text>
+<rect x="1230" y="1549" width="215" height="33" fill="hsl(205,65%,94.57037877907445%)"/>
+<text x="1240" y="1572" font-family="Arial" font-size="13" fill="#15324b">-0.019 / -0.041</text>
+<text x="25" y="1609" font-family="Arial" font-size="13" fill="#15324b">NDVI xgb vs xgboost</text>
+<rect x="330" y="1586" width="215" height="33" fill="hsl(205,65%,94.36405829853413%)"/>
+<text x="340" y="1609" font-family="Arial" font-size="13" fill="#15324b">-0.021 / -0.017</text>
+<rect x="555" y="1586" width="215" height="33" fill="hsl(205,65%,87.76195073739325%)"/>
+<text x="565" y="1609" font-family="Arial" font-size="13" fill="#15324b">-0.107 / -0.210</text>
+<rect x="780" y="1586" width="215" height="33" fill="hsl(25,65%,95.85015064045635%)"/>
+<text x="790" y="1609" font-family="Arial" font-size="13" fill="#15324b">+0.002 / -0.042</text>
+<rect x="1005" y="1586" width="215" height="33" fill="hsl(25,65%,90.7062016128393%)"/>
+<text x="1015" y="1609" font-family="Arial" font-size="13" fill="#15324b">+0.069 / +0.109</text>
+<rect x="1230" y="1586" width="215" height="33" fill="hsl(25,65%,95.58566844870082%)"/>
+<text x="1240" y="1609" font-family="Arial" font-size="13" fill="#15324b">+0.005 / -0.042</text>
+</svg>
