@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="1120">
+<title>Phase 4 paired errors</title><rect width="100%" height="100%" fill="white"/>
+<text x="25" y="30" font-family="Arial" font-size="22" fill="#17344c">US-Ne2 · 2023–2024 · paired ΔMAE / ΔRMSE (mm/day)</text>
+<text x="25" y="56" font-family="Arial" font-size="13" fill="#17344c">Algorithm: XGBoost − RF. NDVI: with NDVI − v0. Negative = lower error; * n &lt; 30.</text>
+<text x="25" y="90" font-family="Arial" font-size="18" fill="#17344c">algorithm_v0</text>
+<text x="25" y="125" font-family="Arial" font-size="13" fill="#17344c">all · n=561</text>
+<rect x="25" y="135" width="240" height="42" fill="hsl(205,60%,94.3406464960124%)"/>
+<text x="37" y="161" font-family="Arial" font-size="16" fill="#17344c">-0.0191 / -0.0244</text>
+<text x="280" y="125" font-family="Arial" font-size="13" fill="#17344c">DJF · n=166</text>
+<rect x="280" y="135" width="240" height="42" fill="hsl(205,60%,95.60686072456194%)"/>
+<text x="292" y="161" font-family="Arial" font-size="16" fill="#17344c">-0.0045 / -0.0009</text>
+<text x="535" y="125" font-family="Arial" font-size="13" fill="#17344c">MAM · n=119</text>
+<rect x="535" y="135" width="240" height="42" fill="hsl(205,60%,92.13907450266306%)"/>
+<text x="547" y="161" font-family="Arial" font-size="16" fill="#17344c">-0.0445 / -0.0444</text>
+<text x="790" y="125" font-family="Arial" font-size="13" fill="#17344c">JJA · n=105</text>
+<rect x="790" y="135" width="240" height="42" fill="hsl(205,60%,93.57812638485545%)"/>
+<text x="802" y="161" font-family="Arial" font-size="16" fill="#17344c">-0.0279 / -0.0154</text>
+<text x="1045" y="125" font-family="Arial" font-size="13" fill="#17344c">SON · n=171</text>
+<rect x="1045" y="135" width="240" height="42" fill="hsl(205,60%,95.11175829098804%)"/>
+<text x="1057" y="161" font-family="Arial" font-size="16" fill="#17344c">-0.0102 / -0.0326</text>
+<text x="25" y="217" font-family="Arial" font-size="13" fill="#17344c">low_vegetation · n=149</text>
+<rect x="25" y="227" width="240" height="42" fill="hsl(205,60%,93.97647838610834%)"/>
+<text x="37" y="253" font-family="Arial" font-size="16" fill="#17344c">-0.0233 / -0.0359</text>
+<text x="280" y="217" font-family="Arial" font-size="13" fill="#17344c">greenup · n=36</text>
+<rect x="280" y="227" width="240" height="42" fill="hsl(205,60%,94.70814440223961%)"/>
+<text x="292" y="253" font-family="Arial" font-size="16" fill="#17344c">-0.0149 / +0.0198</text>
+<text x="535" y="217" font-family="Arial" font-size="13" fill="#17344c">high_vegetation · n=108</text>
+<rect x="535" y="227" width="240" height="42" fill="hsl(205,60%,94.2073643102943%)"/>
+<text x="547" y="253" font-family="Arial" font-size="16" fill="#17344c">-0.0207 / -0.0413</text>
+<text x="790" y="217" font-family="Arial" font-size="13" fill="#17344c">decline · n=58</text>
+<rect x="790" y="227" width="240" height="42" fill="hsl(205,60%,92.95088974592456%)"/>
+<text x="802" y="253" font-family="Arial" font-size="16" fill="#17344c">-0.0352 / -0.0582</text>
+<text x="1045" y="217" font-family="Arial" font-size="13" fill="#17344c">unknown · n=210</text>
+<rect x="1045" y="227" width="240" height="42" fill="hsl(205,60%,94.9884155022704%)"/>
+<text x="1057" y="253" font-family="Arial" font-size="16" fill="#17344c">-0.0117 / -0.0182</text>
+<text x="25" y="340" font-family="Arial" font-size="18" fill="#17344c">algorithm_ndvi</text>
+<text x="25" y="375" font-family="Arial" font-size="13" fill="#17344c">all · n=561</text>
+<rect x="25" y="385" width="240" height="42" fill="hsl(205,60%,93.68541526673279%)"/>
+<text x="37" y="411" font-family="Arial" font-size="16" fill="#17344c">-0.0267 / -0.0441</text>
+<text x="280" y="375" font-family="Arial" font-size="13" fill="#17344c">DJF · n=166</text>
+<rect x="280" y="385" width="240" height="42" fill="hsl(25,60%,95.60952033835989%)"/>
+<text x="292" y="411" font-family="Arial" font-size="16" fill="#17344c">+0.0045 / +0.0042</text>
+<text x="535" y="375" font-family="Arial" font-size="13" fill="#17344c">MAM · n=119</text>
+<rect x="535" y="385" width="240" height="42" fill="hsl(205,60%,90.29825013075282%)"/>
+<text x="547" y="411" font-family="Arial" font-size="16" fill="#17344c">-0.0658 / -0.0613</text>
+<text x="790" y="375" font-family="Arial" font-size="13" fill="#17344c">JJA · n=105</text>
+<rect x="790" y="385" width="240" height="42" fill="hsl(205,60%,93.16257302094678%)"/>
+<text x="802" y="411" font-family="Arial" font-size="16" fill="#17344c">-0.0327 / -0.0569</text>
+<text x="1045" y="375" font-family="Arial" font-size="13" fill="#17344c">SON · n=171</text>
+<rect x="1045" y="385" width="240" height="42" fill="hsl(205,60%,93.73763981313353%)"/>
+<text x="1057" y="411" font-family="Arial" font-size="16" fill="#17344c">-0.0261 / -0.0497</text>
+<text x="25" y="467" font-family="Arial" font-size="13" fill="#17344c">low_vegetation · n=149</text>
+<rect x="25" y="477" width="240" height="42" fill="hsl(205,60%,92.82082017757168%)"/>
+<text x="37" y="503" font-family="Arial" font-size="16" fill="#17344c">-0.0367 / -0.0583</text>
+<text x="280" y="467" font-family="Arial" font-size="13" fill="#17344c">greenup · n=36</text>
+<rect x="280" y="477" width="240" height="42" fill="hsl(205,60%,93.6931752803682%)"/>
+<text x="292" y="503" font-family="Arial" font-size="16" fill="#17344c">-0.0266 / -0.0573</text>
+<text x="535" y="467" font-family="Arial" font-size="13" fill="#17344c">high_vegetation · n=108</text>
+<rect x="535" y="477" width="240" height="42" fill="hsl(205,60%,95.30893037053647%)"/>
+<text x="547" y="503" font-family="Arial" font-size="16" fill="#17344c">-0.0080 / -0.0333</text>
+<text x="790" y="467" font-family="Arial" font-size="13" fill="#17344c">decline · n=58</text>
+<rect x="790" y="477" width="240" height="42" fill="hsl(205,60%,89.52358794166031%)"/>
+<text x="802" y="503" font-family="Arial" font-size="16" fill="#17344c">-0.0747 / -0.1104</text>
+<text x="1045" y="467" font-family="Arial" font-size="13" fill="#17344c">unknown · n=210</text>
+<rect x="1045" y="477" width="240" height="42" fill="hsl(205,60%,94.61204222595913%)"/>
+<text x="1057" y="503" font-family="Arial" font-size="16" fill="#17344c">-0.0160 / -0.0290</text>
+<text x="25" y="590" font-family="Arial" font-size="18" fill="#17344c">ndvi_rf</text>
+<text x="25" y="625" font-family="Arial" font-size="13" fill="#17344c">all · n=561</text>
+<rect x="25" y="635" width="240" height="42" fill="hsl(205,60%,94.5154710276482%)"/>
+<text x="37" y="661" font-family="Arial" font-size="16" fill="#17344c">-0.0171 / -0.0234</text>
+<text x="280" y="625" font-family="Arial" font-size="13" fill="#17344c">DJF · n=166</text>
+<rect x="280" y="635" width="240" height="42" fill="hsl(205,60%,94.46534240150511%)"/>
+<text x="292" y="661" font-family="Arial" font-size="16" fill="#17344c">-0.0177 / -0.0127</text>
+<text x="535" y="625" font-family="Arial" font-size="13" fill="#17344c">MAM · n=119</text>
+<rect x="535" y="635" width="240" height="42" fill="hsl(25,60%,94.58718575230763%)"/>
+<text x="547" y="661" font-family="Arial" font-size="16" fill="#17344c">+0.0163 / +0.0190</text>
+<text x="790" y="625" font-family="Arial" font-size="13" fill="#17344c">JJA · n=105</text>
+<rect x="790" y="635" width="240" height="42" fill="hsl(205,60%,86.41347549119399%)"/>
+<text x="802" y="661" font-family="Arial" font-size="16" fill="#17344c">-0.1106 / -0.1596</text>
+<text x="1045" y="625" font-family="Arial" font-size="13" fill="#17344c">SON · n=171</text>
+<rect x="1045" y="635" width="240" height="42" fill="hsl(25,60%,94.4772363402922%)"/>
+<text x="1057" y="661" font-family="Arial" font-size="16" fill="#17344c">+0.0176 / +0.0380</text>
+<text x="25" y="717" font-family="Arial" font-size="13" fill="#17344c">low_vegetation · n=149</text>
+<rect x="25" y="727" width="240" height="42" fill="hsl(205,60%,95.43984289457761%)"/>
+<text x="37" y="753" font-family="Arial" font-size="16" fill="#17344c">-0.0065 / +0.0019</text>
+<text x="280" y="717" font-family="Arial" font-size="13" fill="#17344c">greenup · n=36</text>
+<rect x="280" y="727" width="240" height="42" fill="hsl(205,60%,76.82285202792097%)"/>
+<text x="292" y="753" font-family="Arial" font-size="16" fill="#17344c">-0.2213 / -0.2645</text>
+<text x="535" y="717" font-family="Arial" font-size="13" fill="#17344c">high_vegetation · n=108</text>
+<rect x="535" y="727" width="240" height="42" fill="hsl(205,60%,94.79904204459996%)"/>
+<text x="547" y="753" font-family="Arial" font-size="16" fill="#17344c">-0.0139 / +0.0139</text>
+<text x="790" y="717" font-family="Arial" font-size="13" fill="#17344c">decline · n=58</text>
+<rect x="790" y="727" width="240" height="42" fill="hsl(25,60%,94.65834605371575%)"/>
+<text x="802" y="753" font-family="Arial" font-size="16" fill="#17344c">+0.0155 / +0.0395</text>
+<text x="1045" y="717" font-family="Arial" font-size="13" fill="#17344c">unknown · n=210</text>
+<rect x="1045" y="727" width="240" height="42" fill="hsl(205,60%,95.96622625005784%)"/>
+<text x="1057" y="753" font-family="Arial" font-size="16" fill="#17344c">-0.0004 / -0.0068</text>
+<text x="25" y="840" font-family="Arial" font-size="18" fill="#17344c">ndvi_xgb</text>
+<text x="25" y="875" font-family="Arial" font-size="13" fill="#17344c">all · n=561</text>
+<rect x="25" y="885" width="240" height="42" fill="hsl(205,60%,93.8602397983686%)"/>
+<text x="37" y="911" font-family="Arial" font-size="16" fill="#17344c">-0.0247 / -0.0431</text>
+<text x="280" y="875" font-family="Arial" font-size="13" fill="#17344c">DJF · n=166</text>
+<rect x="280" y="885" width="240" height="42" fill="hsl(205,60%,95.2489613385833%)"/>
+<text x="292" y="911" font-family="Arial" font-size="16" fill="#17344c">-0.0087 / -0.0076</text>
+<text x="535" y="875" font-family="Arial" font-size="13" fill="#17344c">MAM · n=119</text>
+<rect x="535" y="885" width="240" height="42" fill="hsl(205,60%,95.57198987578212%)"/>
+<text x="547" y="911" font-family="Arial" font-size="16" fill="#17344c">-0.0049 / +0.0021</text>
+<text x="790" y="875" font-family="Arial" font-size="13" fill="#17344c">JJA · n=105</text>
+<rect x="790" y="885" width="240" height="42" fill="hsl(205,60%,85.99792212728534%)"/>
+<text x="802" y="911" font-family="Arial" font-size="16" fill="#17344c">-0.1154 / -0.2011</text>
+<text x="1045" y="875" font-family="Arial" font-size="13" fill="#17344c">SON · n=171</text>
+<rect x="1045" y="885" width="240" height="42" fill="hsl(25,60%,95.85135481814669%)"/>
+<text x="1057" y="911" font-family="Arial" font-size="16" fill="#17344c">+0.0017 / +0.0209</text>
+<text x="25" y="967" font-family="Arial" font-size="13" fill="#17344c">low_vegetation · n=149</text>
+<rect x="25" y="977" width="240" height="42" fill="hsl(205,60%,94.28418468604094%)"/>
+<text x="37" y="1003" font-family="Arial" font-size="16" fill="#17344c">-0.0198 / -0.0205</text>
+<text x="280" y="967" font-family="Arial" font-size="13" fill="#17344c">greenup · n=36</text>
+<rect x="280" y="977" width="240" height="42" fill="hsl(205,60%,75.80788290604956%)"/>
+<text x="292" y="1003" font-family="Arial" font-size="16" fill="#17344c">-0.2330 / -0.3416</text>
+<text x="535" y="967" font-family="Arial" font-size="13" fill="#17344c">high_vegetation · n=108</text>
+<rect x="535" y="977" width="240" height="42" fill="hsl(205,60%,95.90060810484212%)"/>
+<text x="547" y="1003" font-family="Arial" font-size="16" fill="#17344c">-0.0011 / +0.0219</text>
+<text x="790" y="967" font-family="Arial" font-size="13" fill="#17344c">decline · n=58</text>
+<rect x="790" y="977" width="240" height="42" fill="hsl(205,60%,93.91435214202001%)"/>
+<text x="802" y="1003" font-family="Arial" font-size="16" fill="#17344c">-0.0241 / -0.0128</text>
+<text x="1045" y="967" font-family="Arial" font-size="13" fill="#17344c">unknown · n=210</text>
+<rect x="1045" y="977" width="240" height="42" fill="hsl(205,60%,95.58985297374657%)"/>
+<text x="1057" y="1003" font-family="Arial" font-size="16" fill="#17344c">-0.0047 / -0.0177</text>
+<text x="25" y="1090" font-family="Arial" font-size="13" fill="#17344c">Colour encodes ΔMAE only; common scale across years. NDVI proxies are not observed crop stages.</text>
+</svg>

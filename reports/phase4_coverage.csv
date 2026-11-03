@@ -1,0 +1,31 @@
+period,dimension,group,n,date_hash,small_group,crop_context,share,proxy_unknown_n,actual_unknown_n,actual_observed_n
+2023–2024,overall,all,561,ecf7682306d5ccc72414b41655a258d323cd9870663ea6056b9e16a690f5b0e1,False,2023/maize/inferred_rotation: 279; 2024/soybean/inferred_rotation: 282,1.0,210,561,0
+2023–2024,season,DJF,166,f7b5253f38762f7bf1eb5a155253c04d9bea7ac1ae132a81c88d728b2c1093d7,False,2023/maize/inferred_rotation: 82; 2024/soybean/inferred_rotation: 84,0.29590017825311943,98,166,0
+2023–2024,season,MAM,119,bf2d9e17d94ce2151a041932e052619114c900e225edd73e8cea5a18975a1541,False,2023/maize/inferred_rotation: 57; 2024/soybean/inferred_rotation: 62,0.21212121212121213,45,119,0
+2023–2024,season,JJA,105,8fac8d82b32bdf4262bedbdb0d0f32fea496e377c2c4e690f3b60267b82acb39,False,2023/maize/inferred_rotation: 57; 2024/soybean/inferred_rotation: 48,0.18716577540106952,18,105,0
+2023–2024,season,SON,171,b46e2bf409d778d22f5969feaace33ce1034a73a49cf625a8e9c7ebd98a26efc,False,2023/maize/inferred_rotation: 83; 2024/soybean/inferred_rotation: 88,0.3048128342245989,49,171,0
+2023–2024,proxy_stage,proxy_low_vegetation,149,ead86d688d53abe153e7ec3168dbf806c7349d408f52cebfda8d1380d321ade2,False,2023/maize/inferred_rotation: 30; 2024/soybean/inferred_rotation: 119,0.26559714795008915,0,149,0
+2023–2024,proxy_stage,proxy_greenup,36,9941ed4df9fee2c1077010da4030be25b7878d36554790d7fc770220859db69b,False,2023/maize/inferred_rotation: 19; 2024/soybean/inferred_rotation: 17,0.06417112299465241,0,36,0
+2023–2024,proxy_stage,proxy_high_vegetation,108,cc9b154457926f66a0d9e157e3d118e0957d10e1faf126c23afbb9b1d830bdc4,False,2023/maize/inferred_rotation: 65; 2024/soybean/inferred_rotation: 43,0.1925133689839572,0,108,0
+2023–2024,proxy_stage,proxy_decline,58,d09ed75f2e4102c2c82cb59093d5c78c34df8653ca4f885e86ea67563e15be11,False,2023/maize/inferred_rotation: 35; 2024/soybean/inferred_rotation: 23,0.10338680926916222,0,58,0
+2023–2024,proxy_stage,unknown,210,ef0b3acb65f575d6061d7b600bcb74aaef91917d553604bab26d76deaab0874d,False,2023/maize/inferred_rotation: 130; 2024/soybean/inferred_rotation: 80,0.37433155080213903,210,210,0
+2023,overall,all,279,c45886c920804ceee2d9f2d0caa97db671224c6f302bf7f86261c3d2454820aa,False,2023/maize/inferred_rotation: 279,1.0,130,279,0
+2023,season,DJF,82,f2bc89b619559bcfe264aaf7187ece9cb2218e8b9ef5df8905cbadb51a7152c3,False,2023/maize/inferred_rotation: 82,0.2939068100358423,82,82,0
+2023,season,MAM,57,b670941b22cc0126da8dde127627314a93b283d585def4dcc43d1fd10ff97fd1,False,2023/maize/inferred_rotation: 57,0.20430107526881722,27,57,0
+2023,season,JJA,57,31c09b06617b3e59b9490f9903285aeea9deff6cbb158d61391a9cc8c6ed9898,False,2023/maize/inferred_rotation: 57,0.20430107526881722,4,57,0
+2023,season,SON,83,0abbe13e1ed436c074cfcdf99e4eba62bb5e13daad788a5c9c579c9b678337e0,False,2023/maize/inferred_rotation: 83,0.2974910394265233,17,83,0
+2023,proxy_stage,proxy_low_vegetation,30,b793b75a5570d61610f667e847b3914a282f59a7b66d6c0c7b545a9e8abe752e,False,2023/maize/inferred_rotation: 30,0.10752688172043011,0,30,0
+2023,proxy_stage,proxy_greenup,19,d92eaa96cf718de6fa386822f381a4054aeb70a71d6f5fbed521a5e720a71d3c,True,2023/maize/inferred_rotation: 19,0.06810035842293907,0,19,0
+2023,proxy_stage,proxy_high_vegetation,65,3aa88d77e09c9f812f023d712a478a209a2362ab921e9c1f749ee282113b35e7,False,2023/maize/inferred_rotation: 65,0.23297491039426524,0,65,0
+2023,proxy_stage,proxy_decline,35,387c3eacfcd376d3982191bc0214cfdf48c31e9c73499118f7350688e3ba2620,False,2023/maize/inferred_rotation: 35,0.12544802867383512,0,35,0
+2023,proxy_stage,unknown,130,28de8664ad90f0c47b72fe5509789e6ddc9ed4aa8642a31cb26b84a1dfdac6f6,False,2023/maize/inferred_rotation: 130,0.4659498207885305,130,130,0
+2024,overall,all,282,a5c7a20ca87785a9640e147020ab76fa6b10379832589f9da469c52123772d75,False,2024/soybean/inferred_rotation: 282,1.0,80,282,0
+2024,season,DJF,84,2bd2834eaeef1093bc517b20f594e9e05ad1a676922d23af2c38ae5148211d46,False,2024/soybean/inferred_rotation: 84,0.2978723404255319,16,84,0
+2024,season,MAM,62,955a81d86475df76093f9bf305f7b52563b34889340343077016977015e90f17,False,2024/soybean/inferred_rotation: 62,0.2198581560283688,18,62,0
+2024,season,JJA,48,d0b278e775da60698bcb04c73f938df84a6d3e881d7564a0c2315fa5511572ea,False,2024/soybean/inferred_rotation: 48,0.1702127659574468,14,48,0
+2024,season,SON,88,4675b755bad060dc38734e36b5382239c1195e5125a9a2387ed8fa1cec166edd,False,2024/soybean/inferred_rotation: 88,0.3120567375886525,32,88,0
+2024,proxy_stage,proxy_low_vegetation,119,1450db48b3cd020577e21236f75f56ecb3942f78770dc34474791880d1921856,False,2024/soybean/inferred_rotation: 119,0.4219858156028369,0,119,0
+2024,proxy_stage,proxy_greenup,17,fe36ff5b8bcdb7125d09f70edf5fa51e0c481263d0a3b9a36715b26284e0b219,True,2024/soybean/inferred_rotation: 17,0.06028368794326241,0,17,0
+2024,proxy_stage,proxy_high_vegetation,43,4f864f143a1a0a0489499a1c9a195949d0e2248974d75a836ac4140d98287c06,False,2024/soybean/inferred_rotation: 43,0.1524822695035461,0,43,0
+2024,proxy_stage,proxy_decline,23,8acd88af2e2bd8545195dcdd45c6adfd9913587705d38003e8dd5f6ed0ba9510,True,2024/soybean/inferred_rotation: 23,0.08156028368794327,0,23,0
+2024,proxy_stage,unknown,80,f0f4423728af02f3814a26c3977e5b5c6c947b6642774be0b85cded7bd7ee122,False,2024/soybean/inferred_rotation: 80,0.28368794326241137,80,80,0

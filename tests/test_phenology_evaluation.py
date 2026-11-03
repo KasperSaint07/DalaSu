@@ -85,3 +85,17 @@ def test_real_data_reconciles_and_repeats(tmp_path, monkeypatch):
     run(output_dir=tmp_path)
     assert before == {p.name: p.read_bytes() for p in tmp_path.iterdir()}
     assert original == [hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs]
+
+
+def test_crop_titles_follow_custom_labels(tmp_path):
+    from ml.evaluation.phenology import LABELS
+    labels = pd.read_csv(LABELS)
+    labels['crop'] = 'custom_crop'
+    labels['crop_status'] = 'observed'
+    path = tmp_path/'labels.csv'
+    labels.to_csv(path, index=False)
+    run(labels_path=path, output_dir=tmp_path/'output')
+    for name in ['phenology_comparison.md', 'phenology_errors.svg']:
+        text = (tmp_path/'output'/name).read_text()
+        assert 'custom_crop (observed)' in text
+        assert 'maize' not in text and 'soybean' not in text

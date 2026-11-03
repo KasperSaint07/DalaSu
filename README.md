@@ -370,3 +370,27 @@ fail validation instead of silently reducing the cohort.
 ```bash
 PYTHONPATH=src python -m pytest tests/test_phenology_evaluation.py -q
 ```
+
+## Phase 4: RF versus XGBoost residual correction
+
+```bash
+PYTHONPATH=src python -m ml.evaluation.phase4
+```
+
+Creates [the phase-4 synthesis](reports/phase4_summary.md), full-precision
+`phase4_metrics.csv`, `phase4_deltas.csv`, `phase4_stability.csv`, coverage/date
+audits, three SVGs (pooled and individual years), and an input/code hash manifest.
+Compares RF versus XGBoost within v0 and NDVI feature sets, and NDVI versus v0
+within each algorithm. Saved metadata contracts and common observed dates are
+validated; no training, inference, or label adjustment is performed. All metrics
+are recalculated from prediction files rather than rounded report tables.
+Bias magnitude and KGE components expose tradeoffs hidden by MAE/RMSE alone.
+
+The report uses a **provisional mapping** to Objectives 4 and 5 because their exact
+wording has not been supplied. Actual growth-stage evaluation remains an open
+part of Objective 4; NDVI proxy evaluation is explicitly separate. Results apply
+only to US-Ne2, 2023–2024, without statistical-significance claims.
+
+```bash
+PYTHONPATH=src python -m pytest tests/test_phase4.py tests/test_phenology_evaluation.py -q
+```
